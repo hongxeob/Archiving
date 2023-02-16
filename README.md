@@ -18,4 +18,5 @@
 
 ## JAVA
 - [체크 예외 vs 언체크 예외](https://github.com/hongxeob/TIL/blob/main/JAVA/CheckedException%20VS%20UncheckedException.md)
+- [불변 객체란? (feat. final)](https://github.com/hongxeob/TIL/blob/main/JAVA/%EB%B6%88%EB%B3%80%EA%B0%9D%EC%B2%B4%EB%9E%80%3F.md)
 
