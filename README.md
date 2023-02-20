@@ -25,6 +25,9 @@
 - [체크 예외 vs 언체크 예외](https://github.com/hongxeob/TIL/blob/main/JAVA/CheckedException%20VS%20UncheckedException.md)
 - [불변 객체란? (feat. final)](https://github.com/hongxeob/TIL/blob/main/JAVA/%EB%B6%88%EB%B3%80%EA%B0%9D%EC%B2%B4%EB%9E%80%3F.md)
 
+## Spring
+- [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Spring/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
+
 ## JPA
 - [영속성 컨텍스트란](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%20%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%9E%80.md)
 
@@ -40,5 +43,3 @@
 - [정규화](https://hongseob.tistory.com/28)
 - [SQL 1. 데이터 정의어(DDL)](https://github.com/hongxeob/TIL/blob/main/DB/SQL%201.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%95%EC%9D%98%EC%96%B4(DDL).md)
 
-## Project
-- [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Project/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
