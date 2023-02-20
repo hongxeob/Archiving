@@ -16,10 +16,27 @@
 
 ## 운영체제(OS)
 - [운영체제란?(OS : operating system)](https://github.com/hongxeob/TIL/blob/main/OS/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EB%9E%80%3F(OS%20:%20operating%20system).md)
+- [운영체제의 역할과 컴퓨터 구조](https://github.com/hongxeob/TIL/blob/main/OS/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%9D%98%20%EC%97%AD%ED%95%A0%EA%B3%BC%20%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0.md)
 - [프로세스의 개요](https://github.com/hongxeob/TIL/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%9D%98%20%EA%B0%9C%EC%9A%94.md)
 - [프로세스 상태와 계층구조](https://github.com/hongxeob/TIL/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EC%83%81%ED%83%9C%EC%99%80%20%EA%B3%84%EC%B8%B5%EA%B5%AC%EC%A1%B0.md)
 - [스레드 : 멀티프로세스와 멀티 스레드](https://github.com/hongxeob/TIL/blob/main/OS/%EC%8A%A4%EB%A0%88%EB%93%9C%20:%20%EB%A9%80%ED%8B%B0%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EB%A9%80%ED%8B%B0%20%EC%8A%A4%EB%A0%88%EB%93%9C.md)
 - [CPU 스케줄링 및 알고리즘](https://github.com/hongxeob/TIL/blob/main/OS/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81%20%EB%B0%8F%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
+
+## 컴퓨터 구조
+- [입출력 장치](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EC%9E%85%EC%B6%9C%EB%A0%A5%EC%9E%A5%EC%B9%98.md)
+- [RAID](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/RAID.md)
+- [보조 기억 장치](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EB%B3%B4%EC%A1%B0%20%EA%B8%B0%EC%96%B5%20%EC%9E%A5%EC%B9%98.md)
+- [캐시 메모리](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EC%BA%90%EC%8B%9C%20%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
+- [메모리의 주소 공간](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%9D%98%20%EC%A3%BC%EC%86%8C%20%EA%B3%B5%EA%B0%84.md)
+- [메모리 & 캐시 메모리 - RAM의 특징과 종류](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EB%A9%94%EB%AA%A8%EB%A6%AC%20%26%20%EC%BA%90%EC%8B%9C%20%EB%A9%94%EB%AA%A8%EB%A6%AC%20-%20RAM%EC%9D%98%20%ED%8A%B9%EC%A7%95%EA%B3%BC%20%EC%A2%85%EB%A5%98.md)
+- [빠른 CPU를 만드는 법(3) : CISC & RISC](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EB%B9%A0%EB%A5%B8%20CPU%EB%A5%BC%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EB%B2%95(3)%20:%20CISC%20%26%20RISC.md)
+- [빠른 CPU를 만드는 법(2) : 명령어 병렬 처리 기법](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EB%B9%A0%EB%A5%B8%20CPU%EB%A5%BC%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EB%B2%95(2)%20:%20%EB%AA%85%EB%A0%B9%EC%96%B4%20%EB%B3%91%EB%A0%AC%20%EC%B2%98%EB%A6%AC%20%EA%B8%B0%EB%B2%95.md)
+- [빠른 CPU를 만드는 법(3) : CISC & RISC](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EB%B9%A0%EB%A5%B8%20CPU%EB%A5%BC%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EB%B2%95(3)%20:%20CISC%20%26%20RISC.md)
+- [명령어 사이클과 인터럽트](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EB%AA%85%EB%A0%B9%EC%96%B4%20%EC%82%AC%EC%9D%B4%ED%81%B4%EA%B3%BC%20%EC%9D%B8%ED%84%B0%EB%9F%BD%ED%8A%B8.md)
+- [CPU안의 ALU & 제어장치 & 레지스터](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/CPU%EC%95%88%EC%9D%98%20ALU%20%26%20%EC%A0%9C%EC%96%B4%EC%9E%A5%EC%B9%98%20%26%20%EB%A0%88%EC%A7%80%EC%8A%A4%ED%84%B0.md)
+- [소스 코드와 명령어](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EC%86%8C%EC%8A%A4%20%EC%BD%94%EB%93%9C%EC%99%80%20%EB%AA%85%EB%A0%B9%EC%96%B4.md)
+- [0과 1로 숫자와 문자를 표현하는 방법](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/0%EA%B3%BC%201%EB%A1%9C%20%EC%88%AB%EC%9E%90%EC%99%80%20%EB%AC%B8%EC%9E%90%EB%A5%BC%20%ED%91%9C%ED%98%84%ED%95%98%EB%8A%94%20%EB%B0%A9%EB%B2%95.md)
+- [컴퓨터속 4가지 핵심 부품](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EC%BB%B4%ED%93%A8%ED%84%B0%EC%86%8D%204%EA%B0%80%EC%A7%80%20%ED%95%B5%EC%8B%AC%20%EB%B6%80%ED%92%88.md)
 
 ## JAVA
 - [체크 예외 vs 언체크 예외](https://github.com/hongxeob/TIL/blob/main/JAVA/CheckedException%20VS%20UncheckedException.md)
