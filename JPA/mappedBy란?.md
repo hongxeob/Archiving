@@ -21,16 +21,17 @@
 ## 양방향 연관관계의 주의
 
 - 순수 객체 상태를 고려해서 항상 양쪽에 값을 설정하다
-- 연관관계 편의 메소드를 생성하자
+- 연관관계 **편의 메소드**를 생성하자
     - ex) setter를 이름을 바꿔서? -> 정확하게 알수있게,그냥 단순 set 메서드가 아닌 의미를 알 수 있게!
         
-        (member 클래스라면)
+        ```java
+      // (member 클래스라면)
+       public void changeTeam(Team team){
         
-        public void changeTeam(Team team){
-        
-        [this.team](http://this.team/) =team;
+        this.team=team;
         
         team.getMembers().add(this);
-        
-    - 결국 주인과 주인이 아닌쪽 중 하나를 정해 그 메서드 안에서 주인과,주인이 아닌 값을 둘다 넣어준다
+      }
+        ```
+- 결국 주인과 주인이 아닌쪽 중 하나를 정해 그 메서드 안에서 주인과,주인이 아닌 값을 둘다 넣어준다
 - 양방항 매핑시에 무한 루프를 조심하자
