@@ -17,10 +17,10 @@
 ## 운영체제(OS)
 - [운영체제란?(OS : operating system)](https://github.com/hongxeob/TIL/blob/main/OS/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EB%9E%80%3F(OS%20:%20operating%20system).md)
 - [운영체제의 역할과 컴퓨터 구조](https://github.com/hongxeob/TIL/blob/main/OS/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%9D%98%20%EC%97%AD%ED%95%A0%EA%B3%BC%20%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0.md)
-- [프로세스와 스레드](https://github.com/hongxeob/TIL/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%9D%98%20%EA%B0%9C%EC%9A%94.md)
 - [프로세스 상태와 계층구조](https://github.com/hongxeob/TIL/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EC%83%81%ED%83%9C%EC%99%80%20%EA%B3%84%EC%B8%B5%EA%B5%AC%EC%A1%B0.md)
+- [프로세스와 스레드](https://github.com/hongxeob/TIL/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EC%8A%A4%EB%A0%88%EB%93%9C.md)
 - [멀티프로세싱과 IPC](https://github.com/hongxeob/TIL/blob/main/OS/%EB%A9%80%ED%8B%B0%ED%94%84%EB%A1%9C%EC%84%B8%EC%8B%B1%EA%B3%BC%20IPC.md)
-- [스레드 : 멀티프로세스와 멀티 스레드](https://github.com/hongxeob/TIL/blob/main/OS/%EC%8A%A4%EB%A0%88%EB%93%9C%20:%20%EB%A9%80%ED%8B%B0%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EB%A9%80%ED%8B%B0%20%EC%8A%A4%EB%A0%88%EB%93%9C.md)
+- [스레드 : 멀티프로세스와 멀티 스레드](https://github.com/hongxeob/TIL/blob/main/OS/%EC%8A%A4%EB%A0%88%EB%93%9C%20:%20%EB%A9%80%ED%8B%B0%20%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80%20%EB%A9%80%ED%8B%B0%20%EC%8A%A4%EB%A0%88%EB%93%9C.md)
 - [프로세스 동기화와 동시성](https://github.com/hongxeob/TIL/blob/main/OS/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%20%EB%8F%99%EA%B8%B0%ED%99%94%EC%99%80%20%EB%8F%99%EC%8B%9C%EC%84%B1.md)
 - [CPU 스케줄링 및 알고리즘](https://github.com/hongxeob/TIL/blob/main/OS/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81%20%EB%B0%8F%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.md)
 
@@ -53,7 +53,7 @@
 - [mappedBy란?](https://github.com/hongxeob/TIL/blob/main/JPA/mappedBy%EB%9E%80%3F.md)
 - [프록시](https://github.com/hongxeob/TIL/blob/main/JPA/%ED%94%84%EB%A1%9D%EC%8B%9C.md)
 - [즉시 로딩과 지연 로딩](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%A6%89%EC%8B%9C%20%EB%A1%9C%EB%94%A9%EA%B3%BC%20%EC%A7%80%EC%97%B0%20%EB%A1%9C%EB%94%A9.md)
-- [영속성 전이(CASCADE),고아 객체](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%20%EC%A0%84%EC%9D%B4(CASCADE)%2C%EC%99%80%20%EA%B3%A0%EC%95%84%20%EA%B0%9D%EC%B2%B4.md)
+- [영속성 전이(CASCADE),고아 객체](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%20%EC%A0%84%EC%9D%B4(CASCADE)%2C%EA%B3%A0%EC%95%84%20%EA%B0%9D%EC%B2%B4.md)
 ## DB
 - [데이터베이스의 필요성](https://github.com/hongxeob/TIL/blob/main/DB/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%9D%98%20%ED%95%84%EC%9A%94%EC%84%B1.md)
 - [DB 관리 시스템의 등장 배경](https://github.com/hongxeob/TIL/blob/main/DB/DB%20%EA%B4%80%EB%A6%AC%20%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98%20%EB%93%B1%EC%9E%A5%20%EB%B0%B0%EA%B2%BD.md)
