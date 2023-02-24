@@ -57,6 +57,8 @@
 - [즉시 로딩과 지연 로딩](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%A6%89%EC%8B%9C%20%EB%A1%9C%EB%94%A9%EA%B3%BC%20%EC%A7%80%EC%97%B0%20%EB%A1%9C%EB%94%A9.md)
 - [영속성 전이(CASCADE),고아 객체](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%20%EC%A0%84%EC%9D%B4(CASCADE)%2C%EA%B3%A0%EC%95%84%20%EA%B0%9D%EC%B2%B4.md)
 - [JPA에서의 값 타입](https://github.com/hongxeob/TIL/blob/main/JPA/JPA%EC%97%90%EC%84%9C%EC%9D%98%20%EA%B0%92%20%ED%83%80%EC%9E%85.md)
+- [객체지향 쿼리 언어들](https://github.com/hongxeob/TIL/blob/main/JPA/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%EC%BF%BC%EB%A6%AC%20%EC%96%B8%EC%96%B4%EB%93%A4.md)
+- [JPQL 기본 문법](https://github.com/hongxeob/TIL/blob/main/JPA/JPQL%20%EA%B8%B0%EB%B3%B8%20%EB%AC%B8%EB%B2%95.md)
 ## DB
 - [데이터베이스의 필요성](https://github.com/hongxeob/TIL/blob/main/DB/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%9D%98%20%ED%95%84%EC%9A%94%EC%84%B1.md)
 - [DB 관리 시스템의 등장 배경](https://github.com/hongxeob/TIL/blob/main/DB/DB%20%EA%B4%80%EB%A6%AC%20%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98%20%EB%93%B1%EC%9E%A5%20%EB%B0%B0%EA%B2%BD.md)
