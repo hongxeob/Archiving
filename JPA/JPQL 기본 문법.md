@@ -16,14 +16,14 @@
 
 - `TypeQuery` : 반환 타입이 명확할 때 사용
 
-```jpaql
+```java
 TypedQuery<Member> query =
 		em.createQuery("SELECT m FROM Member m", Member.class);
 ```
 
 - `Query` : 반환 타입이 명확하지 않을 때 사용
 
-```jpaql
+```java
 Query query =
         em.createQuery("SELECT m.username, m.age from Member m");
 ```
@@ -39,13 +39,13 @@ Query query =
 
 ## 3. 파라미터 바인딩 - 이름 기준, 위치 기준
 
-```jpaql
+```sql
 //이름 기준
 SELECT m FROM Member m where m.username=:**username** 
 query.setParameter("**username**", usernameParam);
 ```
 
-```jpaql
+```sql
 //위치 기준 -> 잘 쓰이지 않는다 
 SELECT m FROM Member m where m.username=**?1** 
 query.setParameter(**1**, usernameParam);
@@ -77,7 +77,7 @@ query.setParameter(**1**, usernameParam);
     2. 패키지 명을 포함한 전체 클래스 명 입력
     3. **순서와 타입이 일치**하는 생성자 필요
     
-    ```jpaql
+    ```sql
     SELECT **new** jpabook.jpql.UserDTO(m.username, m.age) 
     FROM Member m
     ```
@@ -89,7 +89,7 @@ query.setParameter(**1**, usernameParam);
 - `**setFirstResult**(int startPosition)` : 조회 시작 위치 (0부터 시작)
 - `**setMaxResults**(int maxResult)` : 조회할 데이터 수
     
-    ```jpaql
+    ```java
     // 페이징 쿼리
     String jpql = "select m from Member m order by m.name desc"; 
     List<Member> resultList = em.createQuery(jpql, Member.class)
@@ -106,7 +106,7 @@ query.setParameter(**1**, usernameParam);
 - 내부 조인은 외부 조인과 달리 연관관계가 있어야 조인이 가능하다
 - JPQL에서는 `JOIN` 키워드를 사용하여 내부 조인을 표현할 수 있다
 
-```jpaql
+```sql
 // 내부 조인
 SELECT m FROM Member m (INNER)JOIN m.team t
 ```
@@ -123,7 +123,7 @@ SELECT m FROM Member m (INNER)JOIN m.team t
     - `LEFT JOIN` : 왼쪽에 위치한 엔티티를 기준으로 우측의 엔티티와 조인한다
     - `RIGHT JOIN` : 오른쪽에 위치한 엔티티를 기준으로 왼쪽의 엔티티와 조인한다
 
-```jpaql
+```sql
 // 외부 조인
 SELECT m FROM Member m LEFT(OUTER) JOIN m.team t
 ```
@@ -140,7 +140,7 @@ SELECT m FROM Member m LEFT(OUTER) JOIN m.team t
 - 세타 조인은 연관 관계가 없는 엔티티를 조인할 때 사용하는 방식이다
 - `FROM` 절에 여러 엔티티를 나열하고, `WHERE` 절에서 연관 관계가 없는 필드를 이용하여 조인한다
 
-```jpaql
+```sql
 SELECT m, t FROM Member m, Team t WHERE m.username = t.name
 ```
 
@@ -154,12 +154,12 @@ SELECT m, t FROM Member m, Team t WHERE m.username = t.name
 1. **조인 대상 필터링**
 - ex) 회원과 팀을 조인 하면서, 팀 이름이 A인 팀만 조회
 
-```jpaql
+```sql
 //JPQL
 SELECT m,t FROM Member m LEFT JOIN m.team t ON t.name = 'A'
 ```
 
-```jpaql
+```sql
 //실제 나가는 SQL
 SELECT m.*, t.*
 FROM Member m 
@@ -169,13 +169,13 @@ LEFT JOIN Team t ON m.TEAM_ID=t.id AND t.name='A'
 1. **연관관계 없는 엔티티 외부 조인**
 - ex) 회원의 이름과 팀의 이름이 같은 대상 외부 조인
 
-```jpaql
+```sql
 //JPQL
 SELECT m,t
 FROM Member m LEFT JOIN Team t ON m.username = t.name
 ```
 
-```jpaql
+```sql
 //실제 나가는 SQL
 SELECT m.*, t.*
 FROM Member m LEFT JOIN Team t ON m.username = t.name
@@ -185,7 +185,7 @@ FROM Member m LEFT JOIN Team t ON m.username = t.name
 
 - 나이가 평균보다 많은 회원
 
-```jpaql
+```sql
 select m from Member m
 where m.age > **(select avg(m2.age) from Member m2)**
 ```
@@ -205,7 +205,7 @@ where **(select count(o) from Order o where m = o.member)** > 0
         - ANY,SOME : 같은 의미 조건을 하나라도 만족하면 **참**
 - `[NOT] IN` (subquery) : 서브 쿼리의 결과 중 하나라도 같은 것이 있으면 참
 
-```jpaql
+```sql
 //팀A 소속인 회원
 select m from Member m
 where **exists** (select t from m.team t where t.name = ‘팀A')
@@ -245,7 +245,7 @@ where m.team = **ANY** (select t from Team t)
 
 - 기본 CASE 식
     
-    ```jpaql
+    ```sql
     select
         case when m.age <= 10 then '학생요금' 
  			 when m.age >= 60 then '경로요금'
@@ -256,7 +256,7 @@ where m.team = **ANY** (select t from Team t)
     
 - 단순 CASE 식
     
-    ```jpaql
+    ```sql
     select
         case t.name 
     	when '팀A' then '인센티브110%' 
