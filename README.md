@@ -73,5 +73,6 @@
 - [데이터 베이스(DB) 설계 - 개념적 데이터 모델링](https://github.com/hongxeob/TIL/blob/main/DB/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%B2%A0%EC%9D%B4%EC%8A%A4(DB)%20%EC%84%A4%EA%B3%84%20-%20%EA%B0%9C%EB%85%90%EC%A0%81%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%AA%A8%EB%8D%B8%EB%A7%81.md)
 - [관계 데이터 모델의 기본 개념](https://github.com/hongxeob/TIL/blob/main/DB/%EA%B4%80%EA%B3%84%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EB%AA%A8%EB%8D%B8%EC%9D%98%20%EA%B8%B0%EB%B3%B8%20%EA%B0%9C%EB%85%90.md)
 - [정규화](https://hongseob.tistory.com/28)
+- [트랜잭션과 무결성](https://github.com/hongxeob/TIL/blob/main/DB/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC%20%EB%AC%B4%EA%B2%B0%EC%84%B1.md)
 - [SQL 1. 데이터 정의어(DDL)](https://github.com/hongxeob/TIL/blob/main/DB/SQL%201.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%95%EC%9D%98%EC%96%B4(DDL).md)
 
