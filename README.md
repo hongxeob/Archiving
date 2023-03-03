@@ -49,6 +49,7 @@
 - [스프링 프레임워크란?](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC%EB%9E%80.md)
 - [스프링 DI (의존성 주입,Dependency Injection)](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%9D%98%EC%A1%B4%EC%84%B1%20%EC%A3%BC%EC%9E%85(Dependency%20Injection%2C%20DI).md)
 - [IoC와 컨테이너](https://github.com/hongxeob/TIL/blob/main/Spring/IoC%EC%99%80%20%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88.md)
+- [웹 서버와 웹 애플리케이션 서버](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%9B%B9%20%EC%84%9C%EB%B2%84%EC%99%80%20%EC%9B%B9%20%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%20%EC%84%9C%EB%B2%84.md)
 - [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Spring/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
 
 ## JPA
