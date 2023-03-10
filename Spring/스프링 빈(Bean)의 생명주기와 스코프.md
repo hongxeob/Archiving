@@ -89,11 +89,8 @@ public class ExampleBean {
 
 @Configuration
 class LifeCycleConfig {
- 
-    
+    
     @Bean(initMethod = "init", destroyMethod = "close")
-    
-
     public ExampleBean exampleBean() {
         // 생략
     }
