@@ -50,6 +50,7 @@
 - [스프링 DI (의존성 주입,Dependency Injection)](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%9D%98%EC%A1%B4%EC%84%B1%20%EC%A3%BC%EC%9E%85(Dependency%20Injection%2C%20DI).md)
 - [IoC와 스프링 컨테이너](https://github.com/hongxeob/TIL/blob/main/Spring/IoC%EC%99%80%20%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88.md)
 - [스프링 빈(Bean)의 생명주기와 스코프](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B9%88(Bean)%EC%9D%98%20%EC%83%9D%EB%AA%85%EC%A3%BC%EA%B8%B0%EC%99%80%20%EC%8A%A4%EC%BD%94%ED%94%84.md)
+- [싱글톤 vs 스프링 싱글톤](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%8B%B1%EA%B8%80%ED%86%A4%20vs%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EC%8B%B1%EA%B8%80%ED%86%A4.md)
 - [웹 서버와 웹 애플리케이션 서버](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%9B%B9%20%EC%84%9C%EB%B2%84%EC%99%80%20%EC%9B%B9%20%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%20%EC%84%9C%EB%B2%84.md)
 - [서블릿과 서블릿 컨테이너](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%84%9C%EB%B8%94%EB%A6%BF%EA%B3%BC%20%EC%84%9C%EB%B8%94%EB%A6%BF%20%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88.md)
 - [AOP (Filter,Interceptor)](https://github.com/hongxeob/TIL/blob/main/Spring/AOP%20(feat.%20Filter%2C%20Interceptor).md)
