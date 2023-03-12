@@ -25,19 +25,17 @@
 - Bill Pugh 구현법 : 클래스 내부에 `static class` 선언
     
     ```java
-    public class JavaSingleton  
-    { 
+    public class JavaSingleton { 
       
-      private JavaSingleton()
+      private JavaSingleton {
+      } //private 생성자
       
-      private static class BillPughSingleton 
-      { 
-        private static final JavaSingleton instance = new JavaSingleton(); 
+      private static class BillPughSingleton { 
+          private static final JavaSingleton instance = new JavaSingleton(); 
       } 
       
-      public static JavaSingleton getInstance()  
-      { 
-        return BillPughSingleton.instance; 
+      public static JavaSingleton getInstance() { 
+          return BillPughSingleton.instance; 
       } 
     }
     ```
