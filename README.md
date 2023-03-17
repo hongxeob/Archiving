@@ -54,6 +54,7 @@
 - [웹 서버와 웹 애플리케이션 서버](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%9B%B9%20%EC%84%9C%EB%B2%84%EC%99%80%20%EC%9B%B9%20%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%20%EC%84%9C%EB%B2%84.md)
 - [서블릿과 서블릿 컨테이너](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%84%9C%EB%B8%94%EB%A6%BF%EA%B3%BC%20%EC%84%9C%EB%B8%94%EB%A6%BF%20%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88.md)
 - [AOP (Filter,Interceptor)](https://github.com/hongxeob/TIL/blob/main/Spring/AOP%20(feat.%20Filter%2C%20Interceptor).md)
+- [POJO](https://github.com/hongxeob/TIL/blob/main/Spring/POJO.md)
 - [스프링 어노테이션](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%8A%A4%ED%94%84%EB%A7%81%20%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98.md)
 - [레이어드 아키텍처](https://github.com/hongxeob/TIL/blob/main/Spring/%EB%A0%88%EC%9D%B4%EC%96%B4%EB%93%9C%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.md)
 - [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Spring/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
