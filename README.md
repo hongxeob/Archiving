@@ -62,6 +62,7 @@
 
 ## JPA
 - [영속성 컨텍스트란](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%20%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%9E%80.md)
+- [ORM](https://github.com/hongxeob/TIL/blob/main/JPA/ORM.md)
 - [상속관계 매핑과 조인(join)전략](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%83%81%EC%86%8D%EA%B4%80%EA%B3%84%20%EB%A7%A4%ED%95%91%EA%B3%BC%20%EC%A1%B0%EC%9D%B8(join)%EC%A0%84%EB%9E%B5.md)
 - [mappedBy란?](https://github.com/hongxeob/TIL/blob/main/JPA/mappedBy%EB%9E%80%3F.md)
 - [프록시](https://github.com/hongxeob/TIL/blob/main/JPA/%ED%94%84%EB%A1%9D%EC%8B%9C.md)
