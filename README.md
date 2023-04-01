@@ -60,6 +60,7 @@
 - [레이어드 아키텍처](https://github.com/hongxeob/TIL/blob/main/Spring/%EB%A0%88%EC%9D%B4%EC%96%B4%EB%93%9C%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.md)
 - [커넥션 풀](https://github.com/hongxeob/TIL/blob/main/Spring/Connection%20Pool.md)
 - [DataSource](https://github.com/hongxeob/TIL/blob/main/Spring/DataSource.md)
+- [트랜잭션을 추상화 하는 이유](https://github.com/hongxeob/TIL/blob/main/Spring/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EC%9D%84%20%EC%B6%94%EC%83%81%ED%99%94%20%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0.md)
 - [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Spring/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
 
 ## JPA
