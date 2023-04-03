@@ -61,6 +61,7 @@
 - [커넥션 풀](https://github.com/hongxeob/TIL/blob/main/Spring/Connection%20Pool.md)
 - [DataSource](https://github.com/hongxeob/TIL/blob/main/Spring/DataSource.md)
 - [트랜잭션을 추상화 하는 이유](https://github.com/hongxeob/TIL/blob/main/Spring/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EC%9D%84%20%EC%B6%94%EC%83%81%ED%99%94%20%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0.md)
+- [선언적 트랜잭션 vs 프로그래밍 방식 트랜잭션](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%84%A0%EC%96%B8%EC%A0%81%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20vs%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%B0%A9%EC%8B%9D%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98.md)
 - [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Spring/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
 
 ## JPA
