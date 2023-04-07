@@ -66,6 +66,7 @@
 - [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Spring/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
 
 ## JPA
+- [JPA란](https://github.com/hongxeob/TIL/blob/main/JPA/JPA.md)
 - [영속성 컨텍스트란](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%98%81%EC%86%8D%EC%84%B1%20%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EB%9E%80.md)
 - [ORM](https://github.com/hongxeob/TIL/blob/main/JPA/ORM.md)
 - [상속관계 매핑과 조인(join)전략](https://github.com/hongxeob/TIL/blob/main/JPA/%EC%83%81%EC%86%8D%EA%B4%80%EA%B3%84%20%EB%A7%A4%ED%95%91%EA%B3%BC%20%EC%A1%B0%EC%9D%B8(join)%EC%A0%84%EB%9E%B5.md)
