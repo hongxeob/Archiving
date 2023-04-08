@@ -79,6 +79,7 @@
 - [JPQL 기본 문법](https://github.com/hongxeob/TIL/blob/main/JPA/JPQL%20%EA%B8%B0%EB%B3%B8%20%EB%AC%B8%EB%B2%95.md)
 - [JPQL 경로 표현식](https://github.com/hongxeob/TIL/blob/main/JPA/JPQL%20%EA%B2%BD%EB%A1%9C%20%ED%91%9C%ED%98%84%EC%8B%9D.md)
 - [JPQL 페치조인](https://github.com/hongxeob/TIL/blob/main/JPA/JPQL%20%ED%8E%98%EC%B9%98%EC%A1%B0%EC%9D%B8.md)
+- [N+1 문제](https://github.com/hongxeob/TIL/blob/main/JPA/N%2B1%20%EB%AC%B8%EC%A0%9C.md)
 - [OSIV](https://github.com/hongxeob/TIL/blob/main/JPA/OSIV.md)
 ## DB
 - [데이터베이스의 필요성](https://github.com/hongxeob/TIL/blob/main/DB/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%9D%98%20%ED%95%84%EC%9A%94%EC%84%B1.md)
