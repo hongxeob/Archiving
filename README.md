@@ -1,7 +1,7 @@
 # TIL (Today I Learned With Planner) 
 
 [![Blog](https://img.shields.io/badge/Blog-Be_Water,_My_Friend-blue.svg)](https://hongseob.tistory.com)
-[![Planner](https://img.shields.io/badge/Planner-Notion_TIL_Planner-yellow.svg)](https://quiver-myrtle-07f.notion.site/d5d8c03e5933481bb478e771558a2859?v=c5a4293726df4b8ab1b2d3e2db256df1)
+[![Planner](https://img.shields.io/badge/Planner-Notion_TIL_Planner-yellow.svg)](https://me2.kr/ciBBS)
 
 ## CS
 - [여러 디자인 패턴들](https://github.com/hongxeob/TIL/blob/main/CS/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4.md)
