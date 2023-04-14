@@ -63,6 +63,7 @@
 - [트랜잭션을 추상화 하는 이유](https://github.com/hongxeob/TIL/blob/main/Spring/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EC%9D%84%20%EC%B6%94%EC%83%81%ED%99%94%20%ED%95%98%EB%8A%94%20%EC%9D%B4%EC%9C%A0.md)
 - [트랜잭션 동기화 매니저](https://github.com/hongxeob/TIL/blob/main/Spring/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20%EB%8F%99%EA%B8%B0%ED%99%94%20%EB%A7%A4%EB%8B%88%EC%A0%80.md)
 - [선언적 트랜잭션 vs 프로그래밍 방식 트랜잭션](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%84%A0%EC%96%B8%EC%A0%81%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%20vs%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%B0%A9%EC%8B%9D%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98.md)
+- [스프링 배치](https://github.com/hongxeob/TIL/blob/main/Spring/%EC%8A%A4%ED%94%84%EB%A7%81%20%EB%B0%B0%EC%B9%98.md)
 - [Setter를 지양하고 Builder 패턴 적용기](https://github.com/hongxeob/TIL/blob/main/Spring/Setter%EB%A5%BC%20%EC%A7%80%EC%96%91%ED%95%98%EA%B3%A0%20Builder%ED%8C%A8%ED%84%B4%20%EC%A0%81%EC%9A%A9%EA%B8%B0.md)
 
 ## JPA
@@ -83,6 +84,7 @@
 - [N+1 문제](https://github.com/hongxeob/TIL/blob/main/JPA/N%2B1%20%EB%AC%B8%EC%A0%9C.md)
 - [OSIV](https://github.com/hongxeob/TIL/blob/main/JPA/OSIV.md)
 - [OneToOne 양방향 관계 Lazy 로딩](https://github.com/hongxeob/TIL/blob/main/JPA/%40OneToOne%20%EC%96%91%EB%B0%A9%ED%96%A5%20%EA%B4%80%EA%B3%84%20Lazy%20%EB%A1%9C%EB%94%A9.md)
+- [QueryDsl](https://github.com/hongxeob/TIL/blob/main/JPA/QueryDsl.md)
 ## DB
 - [데이터베이스의 필요성](https://github.com/hongxeob/TIL/blob/main/DB/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%9D%98%20%ED%95%84%EC%9A%94%EC%84%B1.md)
 - [DB 관리 시스템의 등장 배경](https://github.com/hongxeob/TIL/blob/main/DB/DB%20%EA%B4%80%EB%A6%AC%20%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%98%20%EB%93%B1%EC%9E%A5%20%EB%B0%B0%EA%B2%BD.md)
@@ -95,4 +97,6 @@
 - [정규화](https://hongseob.tistory.com/28)
 - [트랜잭션과 무결성](https://github.com/hongxeob/TIL/blob/main/DB/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC%20%EB%AC%B4%EA%B2%B0%EC%84%B1.md)
 - [SQL 1. 데이터 정의어(DDL)](https://github.com/hongxeob/TIL/blob/main/DB/SQL%201.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%95%EC%9D%98%EC%96%B4(DDL).md)
+## ETC.
+- [Monolithic vs MSA](https://github.com/hongxeob/TIL/blob/main/ETC./Monolithic%20vs%20MSA.md)
 
