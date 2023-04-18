@@ -41,6 +41,7 @@
 - [입출력 장치](https://github.com/hongxeob/TIL/blob/main/%EC%BB%B4%ED%93%A8%ED%84%B0%20%EA%B5%AC%EC%A1%B0/%EC%9E%85%EC%B6%9C%EB%A0%A5%EC%9E%A5%EC%B9%98.md)
 
 ## JAVA
+- [Static, Heap, Stack](https://github.com/hongxeob/TIL/blob/main/JAVA/Static%2C%20Heap%2C%20Stack.md)
 - [체크 예외 vs 언체크 예외](https://github.com/hongxeob/TIL/blob/main/JAVA/CheckedException%20VS%20UncheckedException.md)
 - [불변 객체란? (feat. final)](https://github.com/hongxeob/TIL/blob/main/JAVA/%EB%B6%88%EB%B3%80%EA%B0%9D%EC%B2%B4%EB%9E%80%3F.md)
 
