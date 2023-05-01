@@ -16,24 +16,23 @@ public class BinarySearch {
         System.out.println("count = " + answer);
     }
 
-    private static void binarySearch(int goal) {
+    private static int binarySearch(int goal) {
         int low = 0;
         int high = arr.length - 1;
 
         while (high >= low) {
-            System.out.println("low = " + low + " high = " + high);
             int mid = (low + high) / 2;
-            answer++;
-            System.out.println("count = " + answer);
+
             if (goal == arr[mid]) {
-                System.out.println("find!");
-                break;
+                return mid;
             } else if (goal > arr[mid]) {
                 low = mid + 1;
             } else {
                 high = mid - 1;
             }
         }
+        //원하는 값 찾지 못함
+        return -1;
     }
 }
 ```
