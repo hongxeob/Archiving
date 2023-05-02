@@ -100,6 +100,8 @@
 - [SQL 1. 데이터 정의어(DDL)](https://github.com/hongxeob/TIL/blob/main/DB/SQL%201.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A0%95%EC%9D%98%EC%96%B4(DDL).md)
 ## 알고리즘
 - [정렬 알고리즘](https://github.com/hongxeob/TIL/blob/main/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/%EC%A0%95%EB%A0%AC%20%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98(Sorting).md)
+- [이분 탐색 (BinarySearch)](https://github.com/hongxeob/TIL/blob/main/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/%EC%9D%B4%EB%B6%84%20%ED%83%90%EC%83%89%20(Binary%20Search).md)
+- [이진 탐색 트리 (BinarySearchTree)](https://github.com/hongxeob/TIL/blob/main/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/%EC%9D%B4%EC%A7%84%20%ED%83%90%EC%83%89%20%ED%8A%B8%EB%A6%AC%20(BinarySearchTree).md)
 ## ETC.
 - [Monolithic vs MSA](https://github.com/hongxeob/TIL/blob/main/ETC./Monolithic%20vs%20MSA.md)
 - [DDD (Domain-Driven Design)](https://github.com/hongxeob/TIL/blob/main/ETC./DDD(Domain-Driven%20Design).md)
