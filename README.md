@@ -105,7 +105,7 @@
 - [BFS (Breadth First Search)](https://github.com/hongxeob/TIL/blob/main/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/BFS%20(Breadth%20First%20Search).md)
 - [DFS (Depth First Search)](https://github.com/hongxeob/TIL/blob/main/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/DFS%20(Depth%20First%20Search).md)
 ## 디자인 패턴
-- [팩토리 메서드 패턴](https://github.com/hongxeob/TIL/blob/main/%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/%ED%8C%A9%ED%86%A0%EB%A6%AC%20%ED%8C%A8%ED%84%B4.md)
+- [팩토리 메서드 패턴](https://github.com/hongxeob/TIL/blob/main/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4/%ED%8C%A9%ED%86%A0%EB%A6%AC%20%ED%8C%A8%ED%84%B4.md)
 ## ETC.
 - [Monolithic vs MSA](https://github.com/hongxeob/TIL/blob/main/ETC./Monolithic%20vs%20MSA.md)
 - [DDD (Domain-Driven Design)](https://github.com/hongxeob/TIL/blob/main/ETC./DDD(Domain-Driven%20Design).md)
