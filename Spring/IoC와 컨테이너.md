@@ -45,7 +45,7 @@
 - 보통은 BeanFactory를 바로 사용하지 않고, 이를 확장한 `ApplicationContext`를 사용한다
 
 ### ApplicationContext
-- 스프링 컨테이너의 최상위 인터페이스이다.
+- 빈 팩토리를 확장한 IoC 컨테이너다
 - Bean을 등록,생성,조회,반환 관리 하는 기능은 `BeanFactory`와 같다
 - `BeanFactory`를 상속한 인터페이스로 `BeanFactory`의 기능외에 추가적으로 AOP와 같이 대규모 웹 프로젝트에 필요한 여러 확장기능들을 포함하고 있다
 - 스프링의 각종 부가 기능을 추가로 제공해 준다
