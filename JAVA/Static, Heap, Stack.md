@@ -1,6 +1,7 @@
 프로그램은 메모리를 메모리에 떠있는 시간에 따라 Static, Heap, Stack 영역으로 구분해서 사용한다.
 
-`Stack` → `Heap` → `Static` 순으로 시간이 짧다.
+프로그램에 떠 있는 시간<br>
+`Stack` < `Heap` <`Static`
 
 ## Static
 
