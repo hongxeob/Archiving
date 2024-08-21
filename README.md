@@ -3,6 +3,12 @@
 [![Blog](https://img.shields.io/badge/Blog-Be_Water,_My_Friend-blue.svg)](https://hongseob.tistory.com)
 [![Planner](https://img.shields.io/badge/Planner-Notion_TIL_Planner-yellow.svg)](https://me2.kr/ciBBS)
 
+## Issues & Idea
+- [JPA 사용시 update 후 save 호출?](https://github.com/hongxeob/Archiving/blob/main/Issues/JPA%20%EC%82%AC%EC%9A%A9%EC%8B%9C%20update%20%ED%9B%84%20save%20%ED%98%B8%EC%B6%9C%3F.md)
+- [비동기 사용시 왜 한 트랜잭션에서 적용이 안될까?](https://github.com/hongxeob/Archiving/blob/main/Issues/%EB%B9%84%EB%8F%99%EA%B8%B0%20%EC%82%AC%EC%9A%A9%EC%8B%9C%20%EC%99%9C%20%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EC%97%90%EC%84%9C%20%EC%A0%81%EC%9A%A9%EC%9D%B4%20%EC%95%88%EB%90%A0%EA%B9%8C%3F.md)
+- [Hibernate JPA 성능 튜닝 간단 방법들 아카이빙](https://github.com/hongxeob/Archiving/blob/main/Issues/Hibernate%20JPA%20%EC%84%B1%EB%8A%A5%20%ED%8A%9C%EB%8B%9D%20%EA%B0%84%EB%8B%A8%20%EB%B0%A9%EB%B2%95%EB%93%A4.md)
+- [OuterService / InnerService에서의 @Tx 롤백 여부 (Checked Exception / UnChecked Exception)](https://github.com/hongxeob/Archiving/blob/main/Issues/Outer%26InnerService%EC%97%90%EC%84%9C%EC%9D%98%20%40Tx%20%EB%A1%A4%EB%B0%B1%20%EC%97%AC%EB%B6%80.md)
+
 ## CS
 - [여러 디자인 패턴들](https://github.com/hongxeob/TIL/blob/main/CS/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4.md)
 - [선언,함수형/객체지향/절차형 프로그래밍](https://github.com/hongxeob/TIL/blob/main/CS/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84.md)
