@@ -11,6 +11,7 @@ public class User {
     private List<Order> orders;
 }
 
+// @Transactional
 public class UserService {
     public void processUserOrders(Long userId) {
         User user = userRepository.findById(userId).orElseThrow();
