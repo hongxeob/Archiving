@@ -65,3 +65,11 @@ fun updateBy(a,b) {
 2. noRollbackFor 속성 사용
 - @Tx 메소드에는 `noRollbackFor` 속성이 있다. 이 속성을 사용하면 예외가 발생해도 롤백하지 않을 예외 클래스를 지정할 수 있다. 단, 이 속성에 들어갈 클래스는 Throwable 의 서브클래스여야 한다.
 `@Transactional(noRollbackFor = RuntimeException::class)`
+
+---
+
+### 참조
+- https://keencho.github.io/posts/transaction-rollback/
+- https://brunch.co.kr/@purpledev/8
+- https://techblog.woowahan.com/2606/
+- https://leezzangmin.tistory.com/25
