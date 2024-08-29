@@ -10,3 +10,8 @@ Spring Data JPA를 사용하면 하이버네이트 구현체를 사용하게 되
 그래서 도메인 로직등을 이용하여 엔티티 update를 해준뒤, 명시적으로 `save()`를 호출하는 방법을 쓴다. 그러면 다른 repository 구현체로 교체해도 호환성에 문제가 없을 것이다!
 
 참고로 JPA [hypersistence-utils-hibernate](https://github.com/vladmihalcea/hypersistence-utils)의 HibernateRepository를 사용한다면 `update()` 메서드를 사용할 수 있다!
+
+---
+
+### 참조
+- https://devs0n.tistory.com/113
