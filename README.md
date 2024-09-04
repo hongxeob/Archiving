@@ -120,4 +120,5 @@
 ## ETC.
 - [Monolithic vs MSA](https://github.com/hongxeob/TIL/blob/main/ETC./Monolithic%20vs%20MSA.md)
 - [DDD (Domain-Driven Design)](https://github.com/hongxeob/TIL/blob/main/ETC./DDD(Domain-Driven%20Design).md)
+- [공통적으로 적용해 볼 만한 코드 컨벤션](https://github.com/hongxeob/Archiving/blob/main/ETC./Code%20Convention.md)
 
