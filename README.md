@@ -9,6 +9,7 @@
 - [Hibernate JPA 성능 튜닝 간단 방법들 아카이빙](https://github.com/hongxeob/Archiving/blob/main/Issues/Hibernate%20JPA%20%EC%84%B1%EB%8A%A5%20%ED%8A%9C%EB%8B%9D%20%EA%B0%84%EB%8B%A8%20%EB%B0%A9%EB%B2%95%EB%93%A4.md)
 - [OuterService / InnerService에서의 @Tx 롤백 여부 (Checked Exception / UnChecked Exception)](https://github.com/hongxeob/Archiving/blob/main/Issues/Outer%26InnerService%EC%97%90%EC%84%9C%EC%9D%98%20%40Tx%20%EB%A1%A4%EB%B0%B1%20%EC%97%AC%EB%B6%80.md)
 - [연관 관계가 Lazy Loading일 때, 해당 엔티티를 사용하는 메서드에 @Tx가 없다면?](https://github.com/hongxeob/Archiving/blob/main/Issues/%EC%97%B0%EA%B4%80%20%EA%B4%80%EA%B3%84%EA%B0%80%20Lazy%20Loading%EC%9D%BC%20%EB%95%8C%2C%20%ED%95%B4%EB%8B%B9%20%EC%97%94%ED%8B%B0%ED%8B%B0%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%20%EB%A9%94%EC%84%9C%EB%93%9C%EC%97%90%20%40Tx%EA%B0%80%20%EC%97%86%EB%8B%A4%EB%A9%B4%3F.md)
+- [JPA/DDD 관점에서의 직접 참조/간접 참조](https://github.com/hongxeob/Archiving/blob/main/Issues/JPA%2CDDD%20%EA%B4%80%EC%A0%90%EC%97%90%EC%84%9C%EC%9D%98%20%EC%A7%81%EC%A0%91%20%EC%B0%B8%EC%A1%B0%EC%99%80%20%EA%B0%84%EC%A0%91%20%EC%B0%B8%EC%A1%B0.md)
 
 ## CS
 - [여러 디자인 패턴들](https://github.com/hongxeob/TIL/blob/main/CS/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4.md)
