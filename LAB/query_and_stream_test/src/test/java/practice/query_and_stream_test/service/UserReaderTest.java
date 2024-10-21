@@ -71,7 +71,7 @@ class UserReaderTest {
 		System.out.println("============ findAllByEmails() ============");
 
 		//when
-		List<User> foundByEmails = userReader.getUsersByEmails(emails);
+		List<User> foundByEmails = userReader.getUsersByNames(emails);
 
 		//then
 		assertThat(foundByEmails.size()).isEqualTo(COUNT);
@@ -83,7 +83,7 @@ class UserReaderTest {
 		System.out.println("============ findAllByName() ============");
 
 		//when
-		userReader.getUsersByName("이메일");
+		userReader.getUsersByEmail("이메일");
 
 		//then
 

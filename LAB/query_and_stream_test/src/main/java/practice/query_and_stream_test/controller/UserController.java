@@ -29,11 +29,11 @@ public class UserController {
 		return String.format("=== getUsers 실행 시간: %.3f ms ===", durationInMs);
 	}
 
-	@GetMapping("/db/emails")
-	public String getUsersByEmailsUseDB() {
+	@GetMapping("/db/names")
+	public String getUsersByNamesUseDB() {
 		long startTime = System.nanoTime();
 
-		userReader.getUsersByEmails(List.of("이메일"));
+		userReader.getUsersByNames(List.of("이름"));
 
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
@@ -43,11 +43,11 @@ public class UserController {
 		return String.format("getUsers 실행 시간: %.3f ms", durationInMs);
 	}
 
-	@GetMapping("/db/name")
-	public String getUsersByNameUseDB() {
+	@GetMapping("/db/email")
+	public String getUsersByEmailUseDB() {
 		long startTime = System.nanoTime();
 
-		userReader.getUsersByName("이메일");
+		userReader.getUsersByEmail("이메일");
 
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
@@ -58,11 +58,11 @@ public class UserController {
 	}
 
 
-	@GetMapping("/stream/emails")
-	public String getUsersByEmailsUseFilter() {
+	@GetMapping("/stream/names")
+	public String getUsersByNamesUseFilter() {
 		long startTime = System.nanoTime();
 
-		userReader.getUsersByEmailsUseFilter(List.of("이메일"));
+		userReader.getUsersByNamesUseFilter(List.of("이름"));
 
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
@@ -73,11 +73,11 @@ public class UserController {
 	}
 
 
-	@GetMapping("/stream/name")
-	public String getUsersByNameUseFilter() {
+	@GetMapping("/stream/email")
+	public String getUsersByEmailUseFilter() {
 		long startTime = System.nanoTime();
 
-		userReader.getUsersByNameUseDB("이메일");
+		userReader.getUsersByEmailUseDB("이메일");
 
 		long endTime = System.nanoTime();
 		long duration = endTime - startTime;
