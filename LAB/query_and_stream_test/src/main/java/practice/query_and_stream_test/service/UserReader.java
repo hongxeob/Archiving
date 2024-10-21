@@ -23,12 +23,12 @@ public class UserReader {
 
 	@Timer
 	public List<User> getUsersByNames(List<String> names) {
-		return userRepository.findByNameIn(names);
+		return userRepository.findAllByNameIn(names);
 	}
 
 	@Timer
 	public List<User> getUsersByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return userRepository.findAllByEmail(email);
 	}
 
 	@Timer
