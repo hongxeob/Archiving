@@ -22,28 +22,28 @@ public class UserReader {
 	}
 
 	@Timer
-	public List<User> getUsersByEmails(List<String> emails) {
-		return userRepository.findByEmailIn(emails);
+	public List<User> getUsersByNames(List<String> names) {
+		return userRepository.findByNameIn(names);
 	}
 
 	@Timer
-	public List<User> getUsersByName(String name) {
-		return userRepository.findByName(name);
+	public List<User> getUsersByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 
 	@Timer
-	public List<User> getUsersByEmailsUseFilter(List<String> names) {
+	public List<User> getUsersByNamesUseFilter(List<String> names) {
 		return userRepository.findAll()
 			.stream()
-			.filter(user -> user.getEmail().equals("이메일"))
+			.filter(user -> names.contains(user.getName()))
 			.toList();
 	}
 
 	@Timer
-	public List<User> getUsersByNameUseDB(String name) {
+	public List<User> getUsersByEmailUseDB(String email) {
 		return userRepository.findAll()
 			.stream()
-			.filter(user -> user.getName().equals("이름"))
+			.filter(user -> user.getEmail().equals(email))
 			.toList();
 	}
 }
