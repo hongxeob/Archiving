@@ -1,7 +1,6 @@
-# TIL (Today I Learned With Planner) 
+# 💾Archiving
 
 [![Blog](https://img.shields.io/badge/Blog-Be_Water,_My_Friend-blue.svg)](https://hongseob.tistory.com)
-[![Planner](https://img.shields.io/badge/Planner-Notion_TIL_Planner-yellow.svg)](https://me2.kr/ciBBS)
 
 ## Issues & Idea
 - [JPA 사용시 update 후 save 호출?](https://github.com/hongxeob/Archiving/blob/main/Issues/JPA%20%EC%82%AC%EC%9A%A9%EC%8B%9C%20update%20%ED%9B%84%20save%20%ED%98%B8%EC%B6%9C%3F.md)
@@ -122,4 +121,3 @@
 - [Monolithic vs MSA](https://github.com/hongxeob/TIL/blob/main/ETC./Monolithic%20vs%20MSA.md)
 - [DDD (Domain-Driven Design)](https://github.com/hongxeob/TIL/blob/main/ETC./DDD(Domain-Driven%20Design).md)
 - [공통적으로 적용해 볼 만한 코드 컨벤션](https://github.com/hongxeob/Archiving/blob/main/ETC./Code%20Convention.md)
-
