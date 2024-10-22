@@ -53,7 +53,7 @@ public class UserController {
 	public String getUsersByEmailUseDB() {
 		long startTime = System.nanoTime();
 
-		List<Long> userIds = userReader.getUsersByEmail("이메일")
+		List<Long> userIds = userReader.getUsersByEmail("target@email.com")
 			.stream()
 			.map(User::getId)
 			.collect(Collectors.toList());
@@ -85,7 +85,7 @@ public class UserController {
 	public String getUsersByEmailUseFilter() {
 		long startTime = System.nanoTime();
 
-		List<Long> userIds = userReader.getUsersByEmailUseDB("이메일")
+		List<Long> userIds = userReader.getUsersByEmailUseDB("target@email.com")
 			.stream()
 			.map(User::getId)
 			.collect(Collectors.toList());
