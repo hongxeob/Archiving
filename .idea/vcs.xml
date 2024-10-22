@@ -2,6 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/LAB/payment-saga-pattern" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LAB/coupon-system-redis" vcs="Git" />
   </component>
 </project>
