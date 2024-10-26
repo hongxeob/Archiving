@@ -3,7 +3,7 @@ package trhead.control.join;
 import static util.MyLogger.log;
 import static util.ThreadUtils.sleep;
 
-public class JoinMainV0 {
+public class JoinMainV2 {
 	public static void main(String[] args) {
 		log("start");
 		SumTask task1 = new SumTask(1, 50);
@@ -14,6 +14,10 @@ public class JoinMainV0 {
 
 		thread1.start();
 		thread2.start();
+
+		log("main 스레드 sleep()");
+		sleep(3000);
+		log("main 스레드 깨어남");
 
 		log("task1.result => " + task1.result);
 		log("task2.result => " + task2.result);
