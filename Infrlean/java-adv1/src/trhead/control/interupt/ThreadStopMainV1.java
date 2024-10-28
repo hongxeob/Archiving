@@ -16,6 +16,7 @@ public class ThreadStopMainV1 {
 	}
 
 	static class MyTask implements Runnable {
+		// 특정 스레드의 작업을 중단하는 가장 쉬운 방법은 변수를 사용하는 것이다.
 		volatile boolean runFlag = true;
 
 		@Override
