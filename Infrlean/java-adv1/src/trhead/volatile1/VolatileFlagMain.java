@@ -18,7 +18,8 @@ public class VolatileFlagMain {
 	}
 
 	static class MyTask implements Runnable {
-		boolean flag = true;
+		// volatile은 값을 읽거나 쓸 때 캐시에 접근하는게 아니라 항상 메인 메모리에 접근한다 -> 그래서 성능이 느려진다.
+		volatile boolean flag = true;
 
 		@Override
 		public void run() {
