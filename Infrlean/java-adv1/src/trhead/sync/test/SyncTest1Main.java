@@ -28,7 +28,7 @@ public class SyncTest1Main {
 			count = count + 1;
 		}
 
-		public int getCount() {
+		public synchronized int getCount() {
 			return count;
 		}
 	}
