@@ -83,3 +83,11 @@
 3. **Blocked/Waiting/Timed Waiting → Runnable**: 스레드가 락을 얻거나, 기다림이 완료되면 다시
 `Runnable` 상태로 돌아간다.
 4. **Runnable → Terminated**: 스레드의 `run()` 메서드가 완료되면 스레드는 `Terminated` 상태가 된다.
+
+## `synchronized` 단점
+- **무한 대기** : `BLOCKED` 상태의 스레드는 락이 풀릴 때까지 무한 대기한다.
+  - 특정 시간까지만 대기하는 타임아웃X => `parkNanos()`를 사용하면 특정 시간까지만 대기할 수 있음
+  - 중간에 인터럽트X => `park()`,`parkNanos()`는 인터럽트를 걸 수 있음
+- 이처럼 LockSupport를 활용하면 무한 대기하지 않는 락 기능을 만들 수 있다. 물론 그냥은 안되고, LockSupport를 활용해야한다.
+  - **하지만 이런 기능을 직접 구현하기는 어렵고, `LockSupport`는 너무 저수준이다! `synchronized`같은 더 고수준의 기능이 필요하다.**
+  - 하지만 자바에서는 Lock 인터페이스와 ReentrantLock이라는 구현체로 이런 기능들을 이미 다 구현해 두었다.
