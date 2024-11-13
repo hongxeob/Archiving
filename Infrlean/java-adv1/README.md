@@ -91,3 +91,9 @@
 - 이처럼 LockSupport를 활용하면 무한 대기하지 않는 락 기능을 만들 수 있다. 물론 그냥은 안되고, LockSupport를 활용해야한다.
   - **하지만 이런 기능을 직접 구현하기는 어렵고, `LockSupport`는 너무 저수준이다! `synchronized`같은 더 고수준의 기능이 필요하다.**
   - 하지만 자바에서는 Lock 인터페이스와 ReentrantLock이라는 구현체로 이런 기능들을 이미 다 구현해 두었다.
+
+### Lock 사용시 주의점
+- `lock()` `unlock()` 까지는 안전한 임계 영역이 된다.
+- 임계 영역이 끝나면 반드시! 락을 반납해야 한다. 그렇지 않으면 대기하는 스레드가 락을 얻지 못한다.
+  - `lock()` 메서드 사용시 try-catch-finally등을 이용하여 finally 영역에 `lock.unlock()`을 선언해 주어야한다!
+  - 이렇게 해야 검증에 실패해서 중간에 return or exception이 일어나도 `lock.unlock()`을 호출한다.
