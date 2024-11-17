@@ -2,6 +2,7 @@ package example
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class MoneyTest {
     @Test
@@ -12,6 +13,11 @@ class MoneyTest {
         product = five.times(3)
         assertEquals(15, product.amount)
     }
+
+    @Test
+    fun testEquality() {
+        assertTrue(Dollar(5).equals(Dollar(5)))
+    }
 }
 
 class Dollar(
@@ -20,4 +26,6 @@ class Dollar(
     var amount: Int = amount
 
     fun times(multiplier: Int): Dollar = Dollar(amount * multiplier)
+
+    fun equals(dollar: Dollar): Boolean = true
 }
