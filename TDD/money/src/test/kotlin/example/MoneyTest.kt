@@ -1,8 +1,11 @@
+@file:Suppress("ktlint:standard:no-wildcard-imports")
+
 package example
 
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class MoneyTest {
     @Test
@@ -16,7 +19,8 @@ class MoneyTest {
 
     @Test
     fun testEquality() {
-        assertTrue(Dollar(5).equals(Dollar(5)))
+        assertTrue(Dollar(5).equalss(Dollar(5)))
+        assertFalse(Dollar(5).equalss(Dollar(6)))
     }
 }
 
@@ -27,5 +31,8 @@ class Dollar(
 
     fun times(multiplier: Int): Dollar = Dollar(amount * multiplier)
 
-    fun equals(dollar: Dollar): Boolean = true
+    fun equalss(obj: Any): Boolean {
+        val dollar: Dollar = obj as Dollar
+        return amount == dollar.amount
+    }
 }
