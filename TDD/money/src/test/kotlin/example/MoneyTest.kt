@@ -26,27 +26,30 @@ class MoneyTest {
     fun testEquality() {
         assertTrue(Dollar(5).equals(Dollar(5)))
         assertFalse(Dollar(5).equals(Dollar(6)))
+        assertTrue(Franc(5).equals(Franc(5)))
+        assertFalse(Franc(5).equals(Franc(6)))
+    }
+}
+
+open class Money(
+    amount: Int,
+) {
+    val amount = amount
+
+    override fun equals(obj: Any?): Boolean {
+        val money: Money = obj as Money
+        return amount == money.amount
     }
 }
 
 class Franc(
-    private var amount: Int,
-) {
+    amount: Int,
+) : Money(amount) {
     fun times(multiplier: Int): Franc = Franc(amount * multiplier)
-
-    override fun equals(obj: Any?): Boolean {
-        val franc: Franc = obj as Franc
-        return amount == franc.amount
-    }
 }
 
 class Dollar(
-    private var amount: Int,
-) {
+    amount: Int,
+) : Money(amount) {
     fun times(multiplier: Int): Dollar = Dollar(amount * multiplier)
-
-    override fun equals(obj: Any?): Boolean {
-        val dollar: Dollar = obj as Dollar
-        return amount == dollar.amount
-    }
 }
