@@ -1,5 +1,3 @@
-@file:Suppress("ktlint:standard:no-wildcard-imports")
-
 package example
 
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -30,12 +28,20 @@ class MoneyTest {
         assertFalse(Money.franc(5) == Money.franc(6))
         assertFalse(Money.franc(5).equals(Money.dollar(5)))
     }
+
+    @Test
+    fun testCurrency() {
+        assertEquals("USD", Money.dollar(5).currency)
+        assertEquals("CHF", Money.franc(5).currency)
+    }
 }
 
 abstract class Money(
     amount: Int,
+    currency: String,
 ) {
     val amount = amount
+    val currency = currency
 
     override fun equals(obj: Any?): Boolean {
         val money: Money = obj as Money
@@ -46,20 +52,22 @@ abstract class Money(
     abstract fun times(multiplier: Int): Money
 
     companion object {
-        fun dollar(amount: Int): Dollar = Dollar(amount)
+        fun dollar(amount: Int): Dollar = Dollar(amount, "USD")
 
-        fun franc(amount: Int): Franc = Franc(amount)
+        fun franc(amount: Int): Franc = Franc(amount, "CHF")
     }
 }
 
 class Franc(
     amount: Int,
-) : Money(amount) {
-    override fun times(multiplier: Int): Franc = Franc(amount * multiplier)
+    currency: String,
+) : Money(amount, currency) {
+    override fun times(multiplier: Int): Money = franc(amount * multiplier)
 }
 
 class Dollar(
     amount: Int,
-) : Money(amount) {
-    override fun times(multiplier: Int): Dollar = Dollar(amount * multiplier)
+    currency: String,
+) : Money(amount, currency) {
+    override fun times(multiplier: Int): Money = dollar(amount * multiplier)
 }
