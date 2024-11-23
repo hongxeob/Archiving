@@ -1,6 +1,5 @@
 package example
 
-import org.example.example.Franc
 import org.example.example.Money
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -35,12 +34,5 @@ class MoneyTest {
     fun testCurrency() {
         assertEquals("USD", Money.dollar(5).currency)
         assertEquals("CHF", Money.franc(5).currency)
-    }
-
-    @Test
-    fun testDifferentClassEquality() {
-        val money = Money(10, "CHF")
-        val franc = Franc(10, "CHF")
-        assertTrue(money == franc)
     }
 }

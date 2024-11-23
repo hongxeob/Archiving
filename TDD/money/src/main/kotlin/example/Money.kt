@@ -18,8 +18,8 @@ open class Money(
     override fun toString(): String = "Money(amount=$amount, currency='$currency')"
 
     companion object {
-        fun dollar(amount: Int): Dollar = Dollar(amount, "USD")
+        fun dollar(amount: Int): Money = Money(amount, "USD")
 
-        fun franc(amount: Int): Franc = Franc(amount, "CHF")
+        fun franc(amount: Int): Money = Money(amount, "CHF")
     }
 }
