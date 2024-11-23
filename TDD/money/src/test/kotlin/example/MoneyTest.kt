@@ -1,5 +1,7 @@
 package example
 
+import org.example.example.Franc
+import org.example.example.Money
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -42,37 +44,3 @@ class MoneyTest {
         assertTrue(money == franc)
     }
 }
-
-open class Money(
-    amount: Int,
-    currency: String,
-) {
-    val amount = amount
-    val currency = currency
-
-    override fun equals(obj: Any?): Boolean {
-        val money: Money = obj as Money
-        return amount == money.amount &&
-            currency == money.currency
-    }
-
-    fun times(multiplier: Int): Money = Money(multiplier * amount, currency)
-
-    override fun toString(): String = "Money(amount=$amount, currency='$currency')"
-
-    companion object {
-        fun dollar(amount: Int): Dollar = Dollar(amount, "USD")
-
-        fun franc(amount: Int): Franc = Franc(amount, "CHF")
-    }
-}
-
-class Franc(
-    amount: Int,
-    currency: String,
-) : Money(amount, currency)
-
-class Dollar(
-    amount: Int,
-    currency: String,
-) : Money(amount, currency)
