@@ -34,9 +34,16 @@ class MoneyTest {
         assertEquals("USD", Money.dollar(5).currency)
         assertEquals("CHF", Money.franc(5).currency)
     }
+
+    @Test
+    fun testDifferentClassEquality() {
+        val money = Money(10, "CHF")
+        val franc = Franc(10, "CHF")
+        assertTrue(money == franc)
+    }
 }
 
-abstract class Money(
+open class Money(
     amount: Int,
     currency: String,
 ) {
@@ -46,10 +53,12 @@ abstract class Money(
     override fun equals(obj: Any?): Boolean {
         val money: Money = obj as Money
         return amount == money.amount &&
-            javaClass == money.javaClass
+            currency == money.currency
     }
 
-    abstract fun times(multiplier: Int): Money
+    fun times(multiplier: Int): Money = Money(multiplier * amount, currency)
+
+    override fun toString(): String = "Money(amount=$amount, currency='$currency')"
 
     companion object {
         fun dollar(amount: Int): Dollar = Dollar(amount, "USD")
@@ -61,13 +70,9 @@ abstract class Money(
 class Franc(
     amount: Int,
     currency: String,
-) : Money(amount, currency) {
-    override fun times(multiplier: Int): Money = franc(amount * multiplier)
-}
+) : Money(amount, currency)
 
 class Dollar(
     amount: Int,
     currency: String,
-) : Money(amount, currency) {
-    override fun times(multiplier: Int): Money = dollar(amount * multiplier)
-}
+) : Money(amount, currency)
