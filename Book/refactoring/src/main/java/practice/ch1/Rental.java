@@ -1,19 +1,19 @@
 package practice.ch1;
 
 public class Rental {
-    private Movie _movie;
-    private int _daysRented;
+    private Movie movie;
+    private int daysRented;
 
     public Rental(Movie movie, int daysRented) {
-        this._movie = movie;
-        this._daysRented = daysRented;
+        this.movie = movie;
+        this.daysRented = daysRented;
     }
 
     public Movie getMovie() {
-        return _movie;
+        return movie;
     }
 
     public int getDaysRented() {
-        return _daysRented;
+        return daysRented;
     }
 }
