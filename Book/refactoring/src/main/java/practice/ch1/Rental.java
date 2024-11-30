@@ -37,4 +37,12 @@ public class Rental {
         }
         return result;
     }
+
+    public int getFrequentRenterPoints() {
+        //최신물을 2일이상 대여하면 보너스 포인트 지급
+        if ((getMovie().getPriceCode() == Movie.NEW_RELEASE) && getDaysRented() > 1) {
+            return 2;
+        }
+        return 1;
+    }
 }

@@ -21,19 +21,13 @@ public class Customer {
 
     public String statement() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
         String result = getName() + " 고객님의 대여기록 \n";
-
+        int frequentRenterPoints = 0;
         for (int i = 0; i < rentals.size(); i++) {
             Rental rental = rentals.get(i);
 
             // 적립 포인트 1 증가
-            frequentRenterPoints++;
-
-            //최신물을 2일이상 대여하면 보너스 포인트 지금
-            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && rental.getDaysRented() > 1) {
-                frequentRenterPoints++;
-            }
+            frequentRenterPoints += rental.getFrequentRenterPoints();
 
             // 대여하는 비디오 정보와 대여료 출력
             result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rental.getCharge()) + "\n";
