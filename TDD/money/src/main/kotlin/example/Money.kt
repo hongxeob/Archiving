@@ -7,6 +7,8 @@ open class Money(
     val amount = amount
     val currency = currency
 
+    override fun reduce(to: String): Money = this
+
     override fun equals(obj: Any?): Boolean {
         val money: Money = obj as Money
         return amount == money.amount &&
@@ -17,7 +19,7 @@ open class Money(
 
     override fun toString(): String = "Money(amount=$amount, currency='$currency')"
 
-    fun plus(addend: Money): Expression = Money(amount + addend.amount, currency)
+    fun plus(addend: Money): Expression = Sum(this, addend)
 
     companion object {
         fun dollar(amount: Int): Money = Money(amount, "USD")

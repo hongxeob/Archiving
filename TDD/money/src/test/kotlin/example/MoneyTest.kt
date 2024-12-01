@@ -3,6 +3,7 @@ package example
 import org.example.example.Bank
 import org.example.example.Expression
 import org.example.example.Money
+import org.example.example.Sum
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -43,8 +44,34 @@ class MoneyTest {
         val five = Money.dollar(5)
         val sum: Expression = five.plus(five)
         val bank = Bank()
-        val reduced: Money = bank.reduce(sum, "USD")!!
+        val reduced: Money = bank.reduce(sum, "USD")
 
-        assertEquals(10, reduced)
+        assertEquals(10, reduced.amount)
+    }
+
+    @Test
+    fun testPlusReturnSum() {
+        val five = Money.dollar(5)
+        val result: Expression = five.plus(five)
+        val sum = result as Sum
+
+        assertEquals(five, sum.augend)
+        assertEquals(five, sum.addend)
+    }
+
+    @Test
+    fun testReduceSum() {
+        val sum = Sum(Money.dollar(4), Money.dollar(3))
+        val bank = Bank()
+        val result = bank.reduce(sum, "USD")
+
+        assertEquals(Money.dollar(7), result)
+    }
+
+    @Test
+    fun testReduceMoney() {
+        val bank = Bank()
+        val result = bank.reduce(Money.dollar(1), "USD")
+        assertEquals(Money.dollar(1), result)
     }
 }

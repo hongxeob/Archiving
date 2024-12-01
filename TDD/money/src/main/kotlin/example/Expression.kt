@@ -1,3 +1,5 @@
 package org.example.example
 
-interface Expression
+interface Expression {
+    fun reduce(to: String): Money
+}
