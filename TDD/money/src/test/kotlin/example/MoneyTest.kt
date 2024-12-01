@@ -1,5 +1,7 @@
 package example
 
+import org.example.example.Bank
+import org.example.example.Expression
 import org.example.example.Money
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
@@ -34,5 +36,15 @@ class MoneyTest {
     fun testCurrency() {
         assertEquals("USD", Money.dollar(5).currency)
         assertEquals("CHF", Money.franc(5).currency)
+    }
+
+    @Test
+    fun testSimpleAddition() {
+        val five = Money.dollar(5)
+        val sum: Expression = five.plus(five)
+        val bank = Bank()
+        val reduced: Money = bank.reduce(sum, "USD")!!
+
+        assertEquals(10, reduced)
     }
 }
