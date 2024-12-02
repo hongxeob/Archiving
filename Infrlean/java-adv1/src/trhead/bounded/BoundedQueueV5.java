@@ -35,7 +35,7 @@ public class BoundedQueueV5 implements BoundedQueue {
             }
             queue.offer(data);
             log("[put] 생산자 데이터 저장, consumerCondition.signal() 호출");
-            consumerCondition.signal();
+            consumerCondition.signal(); //소비자를 깨운다.
         } finally {
             lock.unlock();
         }
@@ -57,7 +57,7 @@ public class BoundedQueueV5 implements BoundedQueue {
             }
             String data = queue.poll();
             log("[take] 소비자 데이터 획득, producerCondition.signal() 호출");
-            producerCondition.signal();
+            producerCondition.signal(); // 생성자 깨어남.
             return data;
         } finally {
             lock.unlock();
