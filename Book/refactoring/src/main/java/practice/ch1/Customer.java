@@ -26,8 +26,6 @@ public class Customer {
 
             // 대여하는 비디오 정보와 대여료 출력
             result += "\t" + rental.getMovie().getTitle() + "\t" + String.valueOf(rental.getCharge()) + "\n";
-            //현재까지 누적된 총 대여료
-
         }
 
         // 푸터 행 추가
