@@ -8,6 +8,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static util.MyLogger.log;
 
+/**
+ * Object.notify() vs Condition.signal()
+ * Object.notify() - synchronized 블록 내에서 모니터 락을 가지고 있는 스레드가 호출해야 한다.
+ * Condition.signal() - ReentrantLock을 가지고 있는 스레드가 호출해야 한다.
+ * */
 public class BoundedQueueV5 implements BoundedQueue {
     private final Lock lock = new ReentrantLock();
     private final Condition producerCondition = lock.newCondition();
@@ -39,7 +44,6 @@ public class BoundedQueueV5 implements BoundedQueue {
         } finally {
             lock.unlock();
         }
-
     }
 
     @Override
