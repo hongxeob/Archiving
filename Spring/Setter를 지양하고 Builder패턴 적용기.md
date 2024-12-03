@@ -31,14 +31,14 @@ Setter라 하면 lombok에서 제공해주는 @Setter, @Data 등을 사용하는
 나는 위의 방법들 중 **Builder 패턴**을 중점으로 사용해서 리팩토링을 진행하였다  
 우선 기존의 코드들이다
 
-```
+```java
 // Board.java 리팩토링 전
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity // User 클래스가 MySQL에 자동으로 테이블 생성
+@Entity
 public class Board {
 
     @Id
@@ -75,7 +75,7 @@ public class Board {
 
 보이는 코드와 같이, lombok의 @Data 어노테이션을 사용하여 getter,setter를 사용할 수 있게 구현하였다
 
-```
+```java
 // BoardService.java 리팩토링 전
 
 @Service
@@ -109,14 +109,14 @@ BoardService. 즉 서비스단의 코드들이다
 
 ---
 
-또한, 나는 **DTO(Data Transfer Object)** 를 사용하지 않고 구현한 점을 볼 수 있다  
+또한, 나는 write() 메서드에서 **DTO(Data Transfer Object)** 를 사용하지 않고 구현한 점을 볼 수 있다  
 이는 Entity를 바로 호출하여 값을 변경해 주고 있는데, 굉장히 위험한 행위(?)라고 볼 수 있다  
 이러한 문제점들을 가지고 리팩토링을 진행했다  
   
 이제 **Builder 패턴**을 사용하여 리팩토링한 코드를 보자면  
 우선 Entity로 데이터를 주고 받는게 아닌, 계층 간의 데이터 교환만을 하기 위해 BoardDto를 만들어 주었다
 
-```
+```java
 // BoardDto.java
 
 @Data
@@ -145,7 +145,7 @@ public class BoardDto {
 순수Entity가 아닌 BoardDto로 다른 곳에서 데이터를 주고 받을 것이다  
 또한 파라미터의 갯수가 많다고 느껴 Builder 패턴을 이용하여 Dto <-> Entity를 변환해주는 `toEntity()` 메서드를 만들었다
 
-```
+```java
 // Board.java 리팩토링 후
 
 //@Data
@@ -199,7 +199,7 @@ Board 도메인에서 @Data 어노테이션을 제거하여 Setter를 사용하�
   
 사용하는 코드로 자세히 보자
 
-```
+```java
 // BoardSerivce.java 리팩토링 후
 
 @Service
@@ -252,7 +252,7 @@ public class BoardService {
 또 나는 Dto의 toEntity() 메서드에 User객체도 함께 필드로 넣어줬기에, 서비스단의 write() 메서드에서 toEntity로 호출하면 지정한 필드가 모두 같이 들어갈 줄 알았다  
 하지만 앞서 말한 설계대로 적용되지 않고, user가 null인채로 DB에 들어가게 되었다
 
-```
+```java
    // 처음 작성한 로직 => DB에 user가 같이 저장되지 않았다
    @Transactional
     public void write(BoardDto boardDto, User user) {
@@ -272,7 +272,7 @@ public class BoardService {
 toEntity()로직에 User 필드도 있으니 당연히 들어갈 줄 알고 삽질을 많이 했다......  
 위의 두번째 로직대로 boardDto.setUser(user) 로 user객체를 따로 넣어주고, 나머지 필드를 toEntity()로 변환시켜주니 user 객체도 함께 DB에 저장이 되었다
 
-```
+```java
 @RequiredArgsConstructor
 @RestController
 public class BoardApiController {
