@@ -1,6 +1,10 @@
-package org.example.example
+package org.example.exampleopen
 
-open class Money(
+import org.example.example.Bank
+import org.example.example.Expression
+import org.example.example.Sum
+
+class Money(
     amount: Int,
     currency: String,
 ) : Expression {
@@ -21,11 +25,11 @@ open class Money(
             currency == money.currency
     }
 
-    fun times(multiplier: Int): Money = Money(multiplier * amount, currency)
+    fun times(multiplier: Int): Expression = Money(multiplier * amount, currency)
 
     override fun toString(): String = "Money(amount=$amount, currency='$currency')"
 
-    fun plus(addend: Money): Expression = Sum(this, addend)
+    override fun plus(addend: Expression): Expression = Sum(this, addend)
 
     companion object {
         fun dollar(amount: Int): Money = Money(amount, "USD")

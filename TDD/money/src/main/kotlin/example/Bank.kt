@@ -2,6 +2,7 @@
 
 package org.example.example
 
+import org.example.exampleopen.Money
 import java.util.*
 
 class Bank {
