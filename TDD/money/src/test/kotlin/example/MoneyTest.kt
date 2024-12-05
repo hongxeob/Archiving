@@ -2,8 +2,8 @@ package example
 
 import org.example.example.Bank
 import org.example.example.Expression
-import org.example.example.Money
 import org.example.example.Sum
+import org.example.exampleopen.Money
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -86,5 +86,16 @@ class MoneyTest {
     @Test
     fun testIdentityRate() {
         assertEquals(1, Bank().rate("USD", "USD"))
+    }
+
+    @Test
+    fun testMixedAddition() {
+        val fiveBucks: Expression = Money.dollar(5)
+        val tenFrancs: Expression = Money.franc(10)
+        val bank = Bank()
+        bank.addRate("CHF", "USD", 2)
+        val source = fiveBucks.plus(tenFrancs)
+        val money = bank.reduce(source, "USD")
+        assertEquals(Money.dollar(10), money)
     }
 }
