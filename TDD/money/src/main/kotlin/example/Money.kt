@@ -25,7 +25,7 @@ class Money(
             currency == money.currency
     }
 
-    fun times(multiplier: Int): Expression = Money(multiplier * amount, currency)
+    override fun times(multiplier: Int): Expression = Money(amount * multiplier, currency)
 
     override fun toString(): String = "Money(amount=$amount, currency='$currency')"
 
