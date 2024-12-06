@@ -23,3 +23,4 @@
 - [x] ~~Franc과 Dollar 비교하기~~
 - [x] ~~통화?~~
 - [ ] `testFrancMultiplication()` 제거
+- [x] ~~Sum.plus~~
