@@ -24,3 +24,4 @@
 - [x] ~~통화?~~
 - [ ] `testFrancMultiplication()` 제거
 - [x] ~~Sum.plus~~
+- [x] ~~Expression.times~~
