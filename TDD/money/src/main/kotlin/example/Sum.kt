@@ -15,4 +15,6 @@ class Sum(
     }
 
     override fun plus(addend: Expression): Expression = Sum(this, addend)
+
+    override fun times(multiplier: Int): Expression = Sum(augend.times(multiplier), addend.times(multiplier))
 }
