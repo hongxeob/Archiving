@@ -1,5 +1,8 @@
 package practice.behavioral.strategy;
 
+import practice.behavioral.strategy.details.PayPalDetails;
+import practice.behavioral.strategy.details.PaymentDetails;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -24,8 +27,13 @@ public class PayByPayPal implements PayStrategy {
     }
 
     @Override
-    public void collectPaymentDetails(String email, String password) {
-        if (verify(email, password)) {
+    public void collectPaymentDetails(PaymentDetails paymentDetails) {
+        if (!(paymentDetails instanceof PayPalDetails)) {
+            throw new IllegalArgumentException("PayPal payment requires PayPal details");
+        }
+
+        PayPalDetails payPalDetails = (PayPalDetails) paymentDetails;
+        if (verify(payPalDetails.getEmail(), payPalDetails.getPassword())) {
             logger.info("정보 확인에 성공했습니다.");
         } else {
             logger.warning("잘못된 이메일 or 비밀번호 입니다!");
