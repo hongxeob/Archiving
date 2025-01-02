@@ -25,6 +25,21 @@ public class PizzaFactoryTest {
         assertThat(pizza.getName()).isEqualTo("cheese");
     }
 
+    @Test
+    @DisplayName("페페로니 피자를 만들수 있다.")
+    void createPeperoniPizza() throws Exception {
+
+        //given
+        String type = "peperoni";
+
+        //when
+        Pizza pizza = pizzaFactory.createPizza(type);
+
+        //then
+        assertThat(pizza.getPrice()).isEqualTo(20000);
+        assertThat(pizza.getName()).isEqualTo("peperoni");
+    }
+
 
     private interface Pizza {
 
