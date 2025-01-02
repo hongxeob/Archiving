@@ -1,12 +1,6 @@
 package practice.creational.factory;
 
 class PizzaFactory {
-    private final PizzaFactoryTest pizzaFactoryTest;
-
-    public PizzaFactory(PizzaFactoryTest pizzaFactoryTest) {
-        this.pizzaFactoryTest = pizzaFactoryTest;
-    }
-
     public Pizza createPizza(String type) {
         switch (type) {
             case "cheese":

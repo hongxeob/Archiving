@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PizzaFactoryTest {
 
-    private PizzaFactory pizzaFactory = new PizzaFactory(this);
+    private PizzaFactory pizzaFactory = new PizzaFactory();
 
     @Test
     @DisplayName("치즈 피자를 만들 수 있다.")
