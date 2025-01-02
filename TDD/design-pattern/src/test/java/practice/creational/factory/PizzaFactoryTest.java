@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PizzaFactoryTest {
 
-    private PizzaFactory pizzaFactory = new PizzaFactory();
+    private PizzaFactory pizzaFactory = new PizzaFactory(this);
 
     @Test
     @DisplayName("치즈 피자를 만들 수 있다.")
@@ -41,48 +41,4 @@ public class PizzaFactoryTest {
     }
 
 
-    private interface Pizza {
-
-        double getPrice();
-
-        String getName();
-    }
-
-    private class CheesePizza implements Pizza {
-        @Override
-        public double getPrice() {
-            return 10000;
-        }
-
-        @Override
-        public String getName() {
-            return "cheese";
-        }
-    }
-
-    private class PizzaFactory {
-        public Pizza createPizza(String type) {
-            switch (type) {
-                case "cheese":
-                    return new CheesePizza();
-                case "peperoni":
-                    return new PeperoniPizza();
-                default:
-                    throw new IllegalArgumentException("알 수 없는 피자 종류입니다.");
-            }
-
-        }
-    }
-
-    private class PeperoniPizza implements Pizza {
-        @Override
-        public double getPrice() {
-            return 20000;
-        }
-
-        @Override
-        public String getName() {
-            return "peperoni";
-        }
-    }
 }
