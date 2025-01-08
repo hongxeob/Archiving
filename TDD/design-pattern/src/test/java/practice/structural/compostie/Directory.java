@@ -43,4 +43,8 @@ public class Directory implements FileSystemComponent {
     public void addComponent(FileSystemComponent component) {
         components.add(component);
     }
+
+    public void removeComponent(FileSystemComponent component) {
+        components.remove(component);
+    }
 }
