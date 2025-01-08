@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class DirectoryTest {
     @DisplayName("디렉토리를 생성할 수 있다.")
@@ -71,5 +72,55 @@ public class DirectoryTest {
 
         //then
         assertThat(parenDirectory.getSize()).isEqualTo(300);
+    }
+
+    @Test
+    @DisplayName("중첩 디렉토리의 전체 크기가 계산된다.")
+    void nestedDirectorySizeTest() throws Exception {
+
+        //given
+        Directory parenDirectory = new Directory("parent");
+        Directory childDirectory = new Directory("child");
+        File file1 = new File("file1", 100);
+        File file2 = new File("file2", 100);
+
+        //when
+        childDirectory.addComponent(file1);
+        childDirectory.addComponent(file2);
+        parenDirectory.addComponent(childDirectory);
+
+        //then
+        assertThat(parenDirectory.getSize()).isEqualTo(200);
+    }
+
+    @Test
+    @DisplayName("파일 삭제시 디렉토리에서 정상적으로 삭제 된다.")
+    void removeComponentTest() throws Exception {
+
+        //given
+        Directory directory = new Directory("directory");
+        File file = new File("file1", 100);
+        directory.addComponent(file);
+
+        //when
+        directory.removeComponent(file);
+
+        //then
+        assertThat(directory.getSize()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("디렉토리 이름이 null이거나 비어있으면 예외")
+    void invalidDirectoryNameTest() throws Exception {
+
+        //given -> when -> then
+        assertAll(
+                () -> assertThatThrownBy(() -> new Directory(null))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("Name must not be null or empty"),
+                () -> assertThatThrownBy(() -> new Directory(""))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessage("Name must not be null or empty")
+        );
     }
 }
