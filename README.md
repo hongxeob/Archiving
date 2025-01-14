@@ -10,6 +10,10 @@
 - [연관 관계가 Lazy Loading일 때, 해당 엔티티를 사용하는 메서드에 @Tx가 없다면?](https://github.com/hongxeob/Archiving/blob/main/Issues/%EC%97%B0%EA%B4%80%20%EA%B4%80%EA%B3%84%EA%B0%80%20Lazy%20Loading%EC%9D%BC%20%EB%95%8C%2C%20%ED%95%B4%EB%8B%B9%20%EC%97%94%ED%8B%B0%ED%8B%B0%EB%A5%BC%20%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94%20%EB%A9%94%EC%84%9C%EB%93%9C%EC%97%90%20%40Tx%EA%B0%80%20%EC%97%86%EB%8B%A4%EB%A9%B4%3F.md)
 - [JPA/DDD 관점에서의 직접 참조/간접 참조](https://github.com/hongxeob/Archiving/blob/main/Issues/JPA%2CDDD%20%EA%B4%80%EC%A0%90%EC%97%90%EC%84%9C%EC%9D%98%20%EC%A7%81%EC%A0%91%20%EC%B0%B8%EC%A1%B0%EC%99%80%20%EA%B0%84%EC%A0%91%20%EC%B0%B8%EC%A1%B0.md)
 
+## Book
+- [도메인 주도 개발 시작하기 (저 : 최범균)](https://github.com/hongxeob/Archiving/tree/main/Book/DDD%20START)
+- [리팩토링 1판](https://github.com/hongxeob/Archiving/tree/main/Book/refactoring)
+- [Real My SQL 1]()
 ## CS
 - [여러 디자인 패턴들](https://github.com/hongxeob/TIL/blob/main/CS/%EB%94%94%EC%9E%90%EC%9D%B8%20%ED%8C%A8%ED%84%B4.md)
 - [선언,함수형/객체지향/절차형 프로그래밍](https://github.com/hongxeob/TIL/blob/main/CS/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%ED%8C%A8%EB%9F%AC%EB%8B%A4%EC%9E%84.md)
