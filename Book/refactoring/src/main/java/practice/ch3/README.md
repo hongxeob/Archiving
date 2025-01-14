@@ -80,6 +80,8 @@ void printDetails(double amount)
 </div>
 </details>
 
+---
+
 ### Inline Method
 > 메서드 몸체가 메서드의 이름 만큼이나 명확할 때는 호출하는 곳에 메서드의 몸체를 넣고, 메서드를 삭제하라
 ```java
