@@ -2,7 +2,9 @@
 
 # 리팩토링 방법
 
-### Extract Method
+## 메서드 정리 (Composing Method)
+
+### 1. Extract Method
 > 그룹으로 함께 묶을 수 있는 코드 조각이 있으면 코드의 목적이 잘 드러나도록 메서드의 이름을 지어 별도의 메서드로 뽑아낸다.
 ``` java
 void printOwing(double amount)
@@ -56,21 +58,29 @@ void printDetails(double amount)
 
 ---
 
-### Inline Method
+### 2. Inline Method
 > 메서드 몸체가 메서드의 이름 만큼이나 명확할 때는 호출하는 곳에 메서드의 몸체를 넣고, 메서드를 삭제하라
 ```java
-int getRating()
-{
-  return (moreThanFiveLateDeliveries()) ? 2: 1;
-}
-boolean moreThanFiveLateDeliveries()
-{
-  return _numberOfLateDeliveries > 5;
+// Before: 불필요하게 분리된 메서드
+public class DeliveryRating {
+    private int numberOfLateDeliveries;
+
+    public int getRating() {
+        return moreThanFiveLateDeliveries() ? 2 : 1;
+    }
+
+    private boolean moreThanFiveLateDeliveries() {
+        return numberOfLateDeliveries > 5;
+    }
 }
 
-int getRating()
-{
-  return (_numberOfLateDeliveries > 5) ? 2 : 1;
+// After: 간단한 조건을 인라인으로 통합
+public class DeliveryRating {
+    private int numberOfLateDeliveries;
+
+    public int getRating() {
+        return numberOfLateDeliveries > 5 ? 2 : 1;
+    }
 }
 ```
 **🪄 동기**
@@ -101,16 +111,20 @@ int getRating()
 
 ---
 
-### Inline Temp
+### 3. Inline Temp
 > 간단한 수식의 결과값을 가지는 임시변수가 있고 그 임시변수가 다른 리팩토링을 하는데 방해가 된다면, 이 임시변수를 참조하는 부분을 원래의 수식으로 바꿔라
 
 ```java
-double basePrice = anOrder.basePrice();
-return (basePrice > 1000);
+// Before: 임시변수 사용
+public boolean isEligibleForDiscount(Order order) {
+    var basePrice = order.getBasePrice();
+    return basePrice > 1000;
+}
 
--------------------------------------
-        
-return (anOrder.basePrice() > 1000);
+// After: 임시변수를 인라인으로 변경
+public boolean isEligibleForDiscount(Order order) {
+    return order.getBasePrice() > 1000;
+}
 ```
 
 **🪄 동기**
@@ -135,3 +149,70 @@ return (anOrder.basePrice() > 1000);
 </details>
 
 ---
+
+### 4. Replace Temp with Query
+
+> 어떤 수식의 결과값을 저장하기 위해서 **임시변수**를 사용하고 있다면 수식을 뽑아내서 메서드로 만들고, 임시변수를 참조하는 곳을 찾아 모두 **메서드 호출**로 바꾼다. <br>
+> 새로 만든 메서드는 다른 메서드에서도 사용될 수 있다.
+
+```java
+// Before: 임시변수 사용
+private int quantity;
+private double itemPrice;
+
+public double calculateDiscount() {
+    var basePrice = quantity * itemPrice;
+    
+    if (basePrice > 1000) {
+        return basePrice * 0.95;
+    } else {
+        return basePrice * 0.98;
+    }
+}
+
+// After: 임시변수를 메서드로 추출
+private int quantity;
+private double itemPrice;
+
+public double calculateDiscount() {
+    if (getBasePrice() > 1000) {
+        return getBasePrice() * 0.95;
+    } else {
+        return getBasePrice() * 0.98;
+    }
+}
+
+private double getBasePrice() {
+    return quantity * itemPrice;
+}
+```
+
+**🪄 동기**
+
+1. 임시변수는 임시로 사용되고 특정 부분에서만 의미를 가지므로 문제가 된다.
+2. 임시변수는 그것이 사용되는 **메서드의 컨텍스트 안**에서만 볼 수 있으므로 임시변수가 사용되는 메서드는 보통 길이가 길어지는 경향이 있다.
+3. **임시변수를 질의 메서드(query method)로 바꿈**으로써 클래스 내의 어떤 메서드도 임시변수에 사용될 정보를 얻을 수 있다.
+4. `Replace Temp with Query`는 `Extract Method`를 적용하기 전의 필수 단계이다.
+5. 지역변수는 메서드의 추출을 어렵게하기 때문에 가능한 많은 지역변수를 질의 메서드로 바꾸는 것이 좋다.
+6. 이 리팩토링을 적용하는 데 있어 가장 간단한 경우는 임시변수에 값이 한번만 대입되고, 대입문(assignment)을 만드는 수식이 부작용을 초래하지 않는 경우이다.  
+7. `Split Temporary Variable`이나 `Separate Query from Modifier`를 먼저 적용하는 것이 쉬울 것이다.
+8. 만약 임시변수가 어떤 결과를 모으는 경우(루프를 돌면서 덧셈을 하는 경우와 같이) 질의 메서드 안으로 몇몇 로직을 복사할 필요가 있다.
+
+
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- 임시변수가 값이 한 번만 대입되는지를 확인한다.
+  - 임시변수에 값이 여러번 대입되는 경우에는 `Split Temporary Variable`을 먼저 적용한다.
+- 임시변수를 final로 선언한다. 
+- 컴파일한다.
+  - 이렇게 하여 임시변수에 값이 한번만 대입되는지 확인한다.
+- 대입문의 우변을 메서드로 추출한다. 
+  - 처음에는 메서드를 `private`로 선언한다. 나중에 다른 곳에서도 사용하는 것이 좋을 것 같으면 그 때 쉽게 접근 권한을 바꿀 수 있다. 
+  - 추출된 메서드에 부작용이 없는지(어느 객체의 속성을 바꾸거나 하면 안된다.)확인한다. 만약 부작용이 있는 경우에는 `Separate Query from Modifier`를 사용한다.
+- 컴파일과 테스트를 한다.
+- `Inline Temp`를 적용한다.
+
+</div>
+</details>
