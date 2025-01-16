@@ -32,3 +32,16 @@ MySQL 서버에서 MySQL 엔진은 하나지만 스토리지 엔진은 여러 �
 mysql> CREATE TABLE test_table (fd1 INT, fd2 INT) ENGINE=INNODB; //InnoDB 스토리지 엔진을 사용함.
 ```
 또한 각 스토리지 엔진은 성능 향상을 위해 키 캐시(MyISAM 스토리지 엔진)나 InnoDB 버퍼 풀(InnoDB 스토리지 엔진)과 같은 기능을 내장하고 있다.
+
+### 핸들러 API
+MySQL 엔진의 쿼리 실행기에서 데이터를 쓰거나 읽어야 할 때는 각 스토리지 엔진에 쓰기 또는 읽기를 요청하는데, 이러한 요청을 핸들러(Handler) 요청이라고 한다.<br>
+여기서 사용되는 API를 `API 핸들러`라고 한다.<br>
+InnoDB 스토리지 엔진 또한 이 핸들러 API를 이용해 MySQL 엔진과 데이터를 주고 받는다.
+![img.png](img/img2.png)
+
+### MySQL 스레딩 구조
+> MySQL 서버는 프로세스 기반이 아닌, 스레드 기반으로 동작한다. 크게 포그라운드(Foreground) 스레드와 백그라운드(Background) 스레드로 구분할 수 있다.
+
+![img.png](img.png)
+
+### 포그라운드 스레드(클라이언트 스레드)
