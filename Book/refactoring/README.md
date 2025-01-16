@@ -216,3 +216,67 @@ private double getBasePrice() {
 
 </div>
 </details>
+
+### 5. Introduce Explaining Variable
+> 복잡한 수식이 있는 경우에는 **수식의 결과**나 일부에 **자신의 목적을 달성하는 이름으로 된 임시변수**를 사용하라.
+```java
+public class BrowserCompatibilityChecker {
+    private final String platform;
+    private final String browser;
+    private boolean initialized;
+    private int resizeCount;
+
+    // Before: 복잡한 조건문
+    public boolean isCompatible() {
+        if ((platform.toUpperCase().contains("MAC")) &&
+            (browser.toUpperCase().contains("IE")) &&
+            (isInitialized() && resizeCount > 0)) {
+            // 작업...
+            return true;
+        }
+        return false;
+    }
+
+    // After: 설명 변수 도입
+    public boolean isCompatible() {
+        final boolean isMacOS = platform.toUpperCase().contains("MAC");
+        final boolean isIEBrowser = browser.toUpperCase().contains("IE");
+        final boolean wasResized = resizeCount > 0;
+
+        if (isMacOS && isIEBrowser && isInitialized() && wasResized) {
+            // 작업...
+            return true;
+        }
+        return false;
+    }
+}
+```
+**🪄 동기**
+
+1. 수식은 매우 복잡해져 알아보기가 어려워질 수 있다.
+2. 이런 경우 임시변수가 수식을 좀 더 다루기 쉽게 나누는데 도움이 될 수 있다.
+3. `Introduce Explaining Variable`은 특히 조건문에서 각각의 조건의 뜻을 잘 설명하는 이름의 변수로 만들어 사용할 때 유용하다.
+4. 다른 경우로 긴 알고리즘에서 각 단계의 계산 결과를 잘 지어진 임시변수로 설명할 수 있다.
+5. `Introduce Explaining Variable`은 매우 일반적인 리팩토링이지만 이것보다 `Extract Method`를 더 자주 사용한다.
+   1. 임시변수는 한 메서드의 컨텍스트 내에서만 유용하다!!
+   2. 그러나 메서드는 객체의 모든 부분에서 뿐만 아니라 다른 객체에서도 유용하다.
+   3. 하지만 때로는 지역변수 때문에 `Extract Method`를 사용하기 어려운 경우도 있는데, 이때 `Introduce Explaining Variable`를 사용할 때이다!
+
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- final 변수를 선언하고 복잡한 수식의 일부를 이 변수에 대입한다.
+- 원래 복잡한 수식에서 임시변수에 대입한 임시변수로 바꾼다.
+  - 만약 이 부분이 반복된다면 반복되는 부분을 하나씩 바꿀 수 있다.
+- 컴파일 & 테스트를 한다.
+- 수식의 다른 부분에 대해서도 위의 작업을 반복한다.
+
+</div>
+</details>
+
+`Introduce Explaining Variable`는 언제 사용되는가? => `Extract Method`를 사용하기가 더 어려울 때이다.
+- 만약 수많은 지역변수를 사용하는 알고리즘을 개발하고 있다면 `Extract Method`를 쉽게 사용할 수는 없을 것이다.
+- 코드를 이해하기 위해 `Introduce Explaining Variable`를 사용한다.
+- 꼬였던 로직이 좀 풀리면 나중에 `Replace Temp with Query`를 적용한다.
+- 만약 `Replace Method with Method Object`를 사용한다면 임시변수 또한 유용하다.
