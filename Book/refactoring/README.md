@@ -280,3 +280,59 @@ public class BrowserCompatibilityChecker {
 - 코드를 이해하기 위해 `Introduce Explaining Variable`를 사용한다.
 - 꼬였던 로직이 좀 풀리면 나중에 `Replace Temp with Query`를 적용한다.
 - 만약 `Replace Method with Method Object`를 사용한다면 임시변수 또한 유용하다.
+
+### 6) Split Temporary Variable
+
+> 루프안에 있는 변수나 `collecting temporary variable`도 아닌 임시 변수에 값을 여러번 대입하는 경우에는 각각의 대입에 대해서 따로 따로 임시변수를 만들어라.
+
+```java
+public class Rectangle {
+    private final double height;
+    private final double width;
+
+    public Rectangle(double height, double width) {
+        this.height = height;
+        this.width = width;
+    }
+
+    public void printDimensions() {
+        // Before: 하나의 임시변수를 여러 목적으로 사용
+        double temp = 2 * (height + width);
+        System.out.println("Perimeter: " + temp);
+        temp = height * width;
+        System.out.println("Area: " + temp);
+
+        // After: 각 계산 목적에 맞는 별도의 변수 사용
+        final double perimeter = 2 * (height + width);
+        System.out.println("Perimeter: " + perimeter);
+        
+        final double area = height * width;
+        System.out.println("Area: " + area);
+    }
+}
+```
+
+**🪄 동기**
+1. 임시변수는 여러 곳에서 다양하게 쓰일 수 있다.
+2. 어떤 경우에는 임시변수에 여러번 값을 대입하게 된다. 루프에 사용되는 변수는 한 번 돌때마다 값이 바귄다.
+3. `collecting temporary variable`은 메서드를 실행하는 동안 모이는 어떤 값을 모으는 변수다.
+4. 다른 많은 임시변수는 주로 긴 코드에서 계산한 결과값을 나중에 쉽게 참조하기 위해서 보관하는 용도로 사용된다.
+    - **이런 종류의 변수는 값이 한 번만 설정되어야 한다.**
+5. 만약 여러번 설정된다면 그 변수는 메서드 안에서 여러가지 용도로 사용되고 있다는 뜻이다.
+6. 어떤 변수든 여러가지 용도로 사용되는 경우에는 각각의 용도에 대해 따로 변수를 사용하도록 바꾸어야 한다.
+7. 하나의 임시변수를 두가지 용도로 사용하면 코드를 보는 사람은 매우 혼란스러울 수 있다.
+
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- 임시변수가 처음 **선언**된 곳과 임시 변수에 값이 처음 **대입**된 곳에서 변수의 이름을 바꾼다.
+  - 만약 임시변수에 값을 대입할 때 `i = i + (수식)` 과 같은 형태라면, 이것은 이 변수가 `collecting temporary variable`이라는 뜻으로 분리하면 안 된다.
+  - `collecting temporary variable`에 대한 연산은 보통 더하기, 문자열 연결(string concatenation), 스트림 쓰기, 컬렉션 요소(element)를 추가하기 등이다.
+- 새로 만든 임시변수를 final로 선언한다.
+- 임시변수에 두번째로 대입하는 곳의 직전까지 원래 임시변수를 참조하는 곳을 모두 바꾼다.
+- 임시변수에 두번쨰로 대입하는 곳에서 변수를 선언한다.
+- 컴파일 & 테스트를 한다.
+- 각 단계(임시변수가 선언되는 곳에서부터 시작하여)를 반복한다. 그리고 임시변수에 다음으로 대입하는 곳까지 참조를 바꾼다.
+</div>
+</details>
