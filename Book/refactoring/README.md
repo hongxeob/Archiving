@@ -392,3 +392,100 @@ public class PriceCalculator {
 - 컴파일 & 테스트를 한다.
 </div>
 </details>
+
+### 8. Replace Method with Method Object
+
+> 긴 메서드가 있는데 지역변수 때문에 Extract Method를 적용할 수 없는 경우에는<br>
+> 메서드를 그 자신을 위한 객체로 바꿔서 모든 지역변수가 그 객체의 필드가 되도록 한다.<br>
+> 이렇게 하면 메서드를 같은 객체안의 여러 메서드로 분해할 수 있다.
+
+```java
+// Before: 복잡한 메서드를 포함한 클래스
+public class Order {
+    public double calculateTotal(double basePrice) {
+        double discountRate;
+        double shippingCost;
+        
+        // 복잡한 할인율 계산
+        if (basePrice > 1000) {
+            discountRate = 0.95;
+        } else {
+            discountRate = 0.98;
+        }
+        
+        // 배송비 계산
+        if (basePrice > 2000) {
+            shippingCost = 0;
+        } else {
+            shippingCost = 5;
+        }
+        
+        return (basePrice * discountRate) + shippingCost;
+    }
+}
+
+// After: 메서드를 별도 클래스로 추출
+public class TotalPriceCalculator {
+    private final double basePrice;
+    private double discountRate;
+    private double shippingCost;
+
+    public TotalPriceCalculator(double basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public double compute() {
+        calculateDiscountRate();
+        calculateShippingCost();
+        return (basePrice * discountRate) + shippingCost;
+    }
+
+    private void calculateDiscountRate() {
+        if (basePrice > 1000) {
+            discountRate = 0.95;
+        } else {
+            discountRate = 0.98;
+        }
+    }
+
+    private void calculateShippingCost() {
+        if (basePrice > 2000) {
+            shippingCost = 0;
+        } else {
+            shippingCost = 5;
+        }
+    }
+}
+
+// 사용 예시
+public class Order {
+    public double calculateTotal(double basePrice) {
+        var calculator = new TotalPriceCalculator(basePrice);
+        return calculator.compute();
+    }
+}
+```
+**🪄 동기**
+1. 작은 메서드는 늘 아름답다.
+2. 거대한 메서드에서 작은 부분을 뽑아냄으로써 코드를 더 이해하기 쉽게 만든다.
+3. 지역변수는 메서드를 분해할 때 어려움을 준다.
+   - 즉 지역변수가 많으면 분해가 어려워질 수 있다.
+4. `Replace Temp with Query`는 이런 짐을 덜도록 도와주지만 때로는 쪼개야하는 메서드를 쪼갤 수 없는 경우가 생길 수 있다.
+5. 이런 경우에는 도구 상자의 깊숙한 부분에서 메서드 객체를 꺼내 사용한다.
+6. `Replace Temp with Query`를 사용하는 것은 이런 모든 지역변수를 메서드 객체의 필드로 바꿔버린다.
+7. 그런 다음에 이 새로운 객체에 `Extract Method`를 사용하여 원래의 메서드를 분해할 수 있다.
+
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- **(복잡한) 메서드의 이름을 따서 새로운 클래스를 만든다.**
+- 새로운 클래스에 원래 메서드가 있던 객체(소스 객체)를 보관하기 위한 final 필드를 하나 만들고 메서드에서 사용되는 임시변수와 파라미터를 위한 필드를 만들어준다.
+- 새로운 클래스에 소스 객체와 파라미터를 취하는 생성자를 만들어 준다.
+- 새로운 클래스에 `compute` (꼭X) 라는 이름의 메서드를 만들어준다.
+- 원래의 메서드를 `compute` 메서드로 복사한다.
+  - 원래의 객체에 있는 메서드를 사용하는 경우, 소스 객체 필드를 사용하도록 바꾼다.
+- 컴파일 & 테스트
+- 새로운 클래스의 객체를 만들고 원래 메서드를 새로 만든 객체의 `compute`메서드를 호출하도록 바꾼다.
+</div>
+</details>
