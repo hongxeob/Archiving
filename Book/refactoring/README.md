@@ -489,3 +489,71 @@ public class Order {
 - 새로운 클래스의 객체를 만들고 원래 메서드를 새로 만든 객체의 `compute`메서드를 호출하도록 바꾼다.
 </div>
 </details>
+
+### 9. Substitue Algorithm
+> 알고리즘을 보다 명확한것으로 바꾸고 싶을때는 메서드의 몸체를 새로운 알고리즘으로 바꾼다.
+
+```java
+public class PersonFinder {
+    // Before: 반복적인 if문을 사용한 검색
+    public String findPerson(String[] people) {
+        for (int i = 0; i < people.length; i++) {
+            if (people[i].equals("Don")) {
+                return "Don";
+            }
+            if (people[i].equals("John")) {
+                return "John";
+            }
+            if (people[i].equals("Kent")) {
+                return "Kent";
+            }
+        }
+        return "";  // 빈 문자열 반환 (공백 대신)
+    }
+
+    // After: 스트림 API와 집합을 사용한 현대적인 방식
+    public String findPerson(String[] people) {
+        var candidates = Set.of("Don", "John", "Kent");
+        
+        return Arrays.stream(people)
+                .filter(candidates::contains)
+                .findFirst()
+                .orElse("");
+    }
+
+    // 또는 for-each를 사용한 더 간단한 방식
+    public String findPerson2(String[] people) {
+        var candidates = Set.of("Don", "John", "Kent");
+        
+        for (String person : people) {
+            if (candidates.contains(person)) {
+                return person;
+            }
+        }
+        return "";
+    }
+}
+```
+
+**🪄 동기**
+1. 어떤 것을 할 때건 한 가지 이상의 방법이 있기 마련이다. 그 중 어떤 것은 분명 다른 것보다 쉬울 것이다.
+2. 알고리즘에서도 마찬가지 이다. 어떤 것을 할 때 더 명확한 방법을 찾게 되면 복잡한 것을 명확한 것으로 바꾸어야 한다.
+3. 리팩토링은 복잡한 것을 간단한 조각으로 분해하지만 때로는 전체 알고리즘을 간단한 것으로 바꾸어야 하는 시점에 도달하게 된다.
+4. 이런 상황은 문제에 대해서 더 많이 알게 되고 그것을 하기 위해 더 쉬운 방법이 있다는 것을 깨닫게 될 때 발생한다.
+5. 또한 여러분의 코드와 중복되는 기능지원하는 라이브러리를 사용하기 시작할 때에도 발생한다.
+6. 어떤 때에는 어떤일을 조금 다르게 처리하기 위해 알고리즘을 바꾸고 싶을 때가 있는데 원하는 변경을 하기 위해 먼저 **간단한 것으로 치환**하는 것이 더 쉽다.
+7. 이 단계를 거져야 할 때 가능한 많이 메서드를 분해해 두어야 한다.
+8. 아주 크고 복잡한 알고리즘을 치환 하는 것은 매우 어렵다.
+9. 따라서 알고리즘을 간단하게 해야 치환을 쉽게 할수 있다.
+
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- 대체 알고리즘을 준비한다. 적용하여 컴파일 한다.
+- 알고리즘을 테스트한다. 만약 결과가 같다면 작업은 끝난 것이다.
+- 만약 결과가 같지 않다면 테스트에서 비교하기 위해 예전의 알고리즘을 사용하여 디버깅한다.
+  - 예전 알고리즘과 새 알고리즘에 대해 각각의 테스트 케이스를 실행시키고 두 결과를 본다.
+  - 이것은 어떤 테스트 케이스가 어떤 문제를 일으키는지 찾는데 도움을 줄 것이다.
+</div>
+</details>
