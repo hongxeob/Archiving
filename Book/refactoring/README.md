@@ -2,7 +2,7 @@
 
 # 리팩토링 방법
 
-## 메서드 정리 (Composing Method)
+## 1) 메서드 정리 (Composing Method)
 
 ### 1. Extract Method
 > 그룹으로 함께 묶을 수 있는 코드 조각이 있으면 코드의 목적이 잘 드러나도록 메서드의 이름을 지어 별도의 메서드로 뽑아낸다.
@@ -557,3 +557,89 @@ public class PersonFinder {
   - 이것은 어떤 테스트 케이스가 어떤 문제를 일으키는지 찾는데 도움을 줄 것이다.
 </div>
 </details>
+
+## 2) 객체간의 기능 이동
+
+### 1. Move Method
+> 메서드가 자신이 정의된 클래스보다 다른 클래스의 기능을 더 많이 사용하고 있다면<br>
+> 이 메서드를 가장 많이 사용하고 있는 클래스에 비슷한 몸체를 가진 새로운 메서드를 만들어라.<br>
+> 그리고 이전 메서드는 간단한 위임으로 바꾸거나 완전히 제거하라.
+
+```java
+// Before: 잘못된 위치에 있는 메서드
+public class Account {
+    private AccountType accountType;
+    private double balance;
+    
+    public double calculateOverdraftCharge() {  // 이 메서드는 AccountType의 특성을 더 많이 사용
+        if (accountType.isPremium()) {
+            double baseCharge = 10;
+            if (daysOverdrawn() <= 7) {
+                return baseCharge;
+            } else {
+                return baseCharge + (daysOverdrawn() - 7) * 0.85;
+            }
+        } else {
+            return daysOverdrawn() * 1.75;
+        }
+    }
+    
+    private int daysOverdrawn() {
+        // 초과 인출 일수 계산 로직
+        return 5;  // 예시 값
+    }
+}
+
+public class AccountType {
+    private boolean premium;
+    
+    public boolean isPremium() {
+        return premium;
+    }
+}
+
+// After: 메서드를 적절한 클래스로 이동
+public class Account {
+    private AccountType accountType;
+    private double balance;
+    
+    public double calculateOverdraftCharge() {
+        return accountType.calculateOverdraftCharge(daysOverdrawn());
+    }
+    
+    private int daysOverdrawn() {
+        // 초과 인출 일수 계산 로직
+        return 5;  // 예시 값
+    }
+}
+
+public class AccountType {
+    private final boolean premium;
+    
+    public AccountType(boolean premium) {
+        this.premium = premium;
+    }
+    
+    public boolean isPremium() {
+        return premium;
+    }
+    
+    public double calculateOverdraftCharge(int daysOverdrawn) {
+        if (isPremium()) {
+            var baseCharge = 10.0;
+            if (daysOverdrawn <= 7) {
+                return baseCharge;
+            }
+            return baseCharge + (daysOverdrawn - 7) * 0.85;
+        }
+        return daysOverdrawn * 1.75;
+    }
+}
+```
+
+**🪄 동기**
+1. 메서드를 옮기는 것은 리팩토링에서 가장 중요하고 기본이 되는 것이다.
+2. 클래스가 너무 많은 동작을 가지고 있거나, 다른 클래스와 공동으로 일하는 부분이 많아서 단단히 결합되어 있을 때 메서드를 옮긴다.
+3. **메서드를 옮김으로써 클래스를 더 간단하게 할 수 있고 클래스는 맡고 있는 책임에 대해 더욱 명확한 구현을 가질 수 있게 된다.**
+4. 옮길만한 메서드를 발견하면, 이 메서드를 호출하는 메서드, 이 메서드가 호출하는 메서드, 그리고 상속 계층에서 이 메서드를 재정의하고 있는 메서드를 살펴본다.
+5. 그리고 옮기려고 하는 메서드와 상호작용을 더 많이 하고 있는 것처럼 보이는 클래스를 기초로 하여 계속 진행할지를 평가한다.
