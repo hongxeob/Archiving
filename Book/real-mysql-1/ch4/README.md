@@ -8,7 +8,8 @@
 이번 파트에서는 MySQL엔진과 MySQL 서버에서 기본으로 제공되는 `InnoDB` 스토리지 엔진, `MyISAM` 스토리지 엔진을 구분해서 살펴보자.
 
 ## 4.1 MySQL 엔진 아키텍처
-먼저 MySQL의 쿼리를 작성하고 튜닝할 때 필요한 기본적인 MySQL 엔진의 구조를 훑어보자.
+먼저 MySQL의 쿼리를 작성하고 튜닝할 때 필요한 기본적인 MySQL 엔진의 구조를 훑어보자.<br>
+
 ![img.png](img/img.png)
 
 MySQL은 일반 상용 RDBMS와 같이 대부분의 프로그래밍 언어로부터 접근 방법을 모두 지원한다.<br>
@@ -36,7 +37,8 @@ mysql> CREATE TABLE test_table (fd1 INT, fd2 INT) ENGINE=INNODB; //InnoDB 스토
 ### 핸들러 API
 MySQL 엔진의 쿼리 실행기에서 데이터를 쓰거나 읽어야 할 때는 각 스토리지 엔진에 쓰기 또는 읽기를 요청하는데, 이러한 요청을 핸들러(Handler) 요청이라고 한다.<br>
 여기서 사용되는 API를 `API 핸들러`라고 한다.<br>
-InnoDB 스토리지 엔진 또한 이 핸들러 API를 이용해 MySQL 엔진과 데이터를 주고 받는다.
+InnoDB 스토리지 엔진 또한 이 핸들러 API를 이용해 MySQL 엔진과 데이터를 주고 받는다.<br>
+
 ![img.png](img/img2.png)
 
 ### MySQL 스레딩 구조
