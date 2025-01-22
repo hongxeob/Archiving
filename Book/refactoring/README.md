@@ -643,3 +643,73 @@ public class AccountType {
 3. **메서드를 옮김으로써 클래스를 더 간단하게 할 수 있고 클래스는 맡고 있는 책임에 대해 더욱 명확한 구현을 가질 수 있게 된다.**
 4. 옮길만한 메서드를 발견하면, 이 메서드를 호출하는 메서드, 이 메서드가 호출하는 메서드, 그리고 상속 계층에서 이 메서드를 재정의하고 있는 메서드를 살펴본다.
 5. 그리고 옮기려고 하는 메서드와 상호작용을 더 많이 하고 있는 것처럼 보이는 클래스를 기초로 하여 계속 진행할지를 평가한다.
+
+### 2. Move Field
+> 필드가 자신이 정의된 클래스보다 다른 클래스의 기능을 더 많이 사용하고 있다면 타겟 클래스에 새로운 필드를 만들고 기존 필드를 사용하는 모든 부분을 변경하라.
+
+**🪄 동기**
+1. 어떤 필드가 자신이 속한 클래스보다 다른 클래스의 메서드에서 더 많이 사용되고 있는 것을 보면 그 필드를 옮기는 것을 고려한다.
+2. 그러는 한편 다른 클래스가 get/set메서드를 통해서 이 필드를 간접적으로 많이 사용하고 있을지도 모른다는 생각도 한다.
+```java
+// Before: 필드가 잘못된 클래스에 위치
+public class Account {
+    private AccountType accountType;
+    private double interestRate;  // 이 필드는 AccountType에 더 적합
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(double rate) {
+        this.interestRate = rate;
+    }
+
+    public double calculateInterest() {
+        return balance * interestRate;
+    }
+}
+
+public class AccountType {
+    private String typeName;
+    
+    public boolean isPremium() {
+        return "Premium".equals(typeName);
+    }
+}
+
+// After: 필드를 적절한 클래스로 이동
+public class Account {
+    private final AccountType accountType;
+    private double balance;
+
+    public Account(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public double calculateInterest() {
+        return balance * accountType.getInterestRate();
+    }
+}
+
+public class AccountType {
+    private final String typeName;
+    private double interestRate;  // 이자율은 계좌 타입의 특성이므로 여기에 더 적합
+
+    public AccountType(String typeName, double interestRate) {
+        this.typeName = typeName;
+        this.interestRate = interestRate;
+    }
+
+    public double getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(double rate) {
+        this.interestRate = rate;
+    }
+
+    public boolean isPremium() {
+        return "Premium".equals(typeName);
+    }
+}
+```
