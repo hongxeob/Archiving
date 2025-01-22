@@ -713,3 +713,118 @@ public class AccountType {
     }
 }
 ```
+
+### 3. Extract Class
+> 두개의 클래스가 해야 할 일을 하나의 클래스가 하고 있는 경우, 새로운 클래스를 만들어서 관련 있는 필드와 메서드를 예전 클래스에서 새로운 클래스로 옮겨라.
+**🪄 동기**
+1. 클래스는 분명하게 추상화되어야 하고, 몇 가지 명확한 책임을 가져야 한다는 말 또는 이와 비슷한 지침을 들었을 것이다.
+2. 실제로 클래스는 점점 커진다. 어떤 동작을 추가할 대도 있고 약간의 데이터를 추가할 때도 있다.
+3. 우리는 별도의 클래스로 만들만한 가치가 없다고 느끼는 책임을 기존 클래스에 추가한다.
+4. 클래스는 많은 메서드와 데이터를 가지고 있고 너무 커서 쉽게 이해할 수도 없다.
+5. 이제 우리는 그 클래스를 분리할 방법을 생각하고 클래스를 분리해야 한다.
+6. 데이터의 부분 집합과 메서드의 부분 집합이 같이 몰려다니는 것은 별도의 클래스로 분리할 수 있다는 좋은 신호이다.
+7. 보통 같이 변하거나 특별히 서로에게 의존적인 데이터의 부분 집합 또한 별도의 클래스로 분리할 수 있다는 좋은 신호이다.
+8. 만약 일부 데이터나 메서드를 제거한다면 다른 필드나 메서드가 의미없는 것이 될지를 자신에게 물어보는 것은 편리한 테스트 방법이다.
+9. 개발의 후반부에 종종 나타나는 신호중의 하나는 클래스가 서브타입이 되는 방법이다.
+10. 서브타이핑이 단지 몇몇 기능에만 영향에 미친다는 것을 알게 되거나 또는 어떤 부분은 이런 식으로 서브타입이 되어야 하고 다른 부분은 또 다른 방법으로 서브타입이 되어야 한다는 것을 알게 될 것이다
+
+```java
+// Before: 너무 많은 책임을 가진 큰 클래스
+public class Person {
+    private String name;
+    private String homePhone;
+    private String officePhone;
+    private String mobilePhone;
+    private String street;
+    private String city;
+    private String postalCode;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getHomePhone() {
+        return homePhone;
+    }
+    
+    public String getOfficePhone() {
+        return officePhone;
+    }
+    
+    public String getFullAddress() {
+        return street + ", " + city + " " + postalCode;
+    }
+    // ... 더 많은 메서드들
+}
+
+// After: 책임에 따라 분리된 클래스들
+public class Person {
+    private final String name;
+    private final PhoneNumbers phoneNumbers;
+    private final Address address;
+    
+    public Person(String name, PhoneNumbers phoneNumbers, Address address) {
+        this.name = name;
+        this.phoneNumbers = phoneNumbers;
+        this.address = address;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public PhoneNumbers getPhoneNumbers() {
+        return phoneNumbers;
+    }
+    
+    public Address getAddress() {
+        return address;
+    }
+}
+
+public class PhoneNumbers {
+    private final String homePhone;
+    private final String officePhone;
+    private final String mobilePhone;
+    
+    public PhoneNumbers(String homePhone, String officePhone, String mobilePhone) {
+        this.homePhone = homePhone;
+        this.officePhone = officePhone;
+        this.mobilePhone = mobilePhone;
+    }
+    
+    public String getHomePhone() {
+        return homePhone;
+    }
+    
+    public String getOfficePhone() {
+        return officePhone;
+    }
+    
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+}
+
+public class Address {
+    private final String street;
+    private final String city;
+    private final String postalCode;
+    
+    public Address(String street, String city, String postalCode) {
+        this.street = street;
+        this.city = city;
+        this.postalCode = postalCode;
+    }
+    
+    public String getFullAddress() {
+        return String.format("%s, %s %s", street, city, postalCode);
+    }
+    
+    public String getCity() {
+        return city;
+    }
+    
+    // ... 필요한 메서드들
+}
+```
