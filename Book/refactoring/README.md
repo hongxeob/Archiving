@@ -828,3 +828,79 @@ public class Address {
     // ... 필요한 메서드들
 }
 ```
+
+### 4. Inline Class
+> 클래스가 하는 일이 많지 않은 경우에는 그 클래스에 있는 모든 변수와 메서드를 다른 클래스로 옮기고 그 클래스를 제거하라.
+
+**🪄 동기**
+1. `Inline Class`는 `Extract Class`의 반대이다.
+2. 클래스가 더 이상 제 몫을 하지 못하고 더 이상 존재할 필요가 없다면 `Inline Class`를 사용한다.
+
+```java
+// Before: 너무 작은 책임을 가진 클래스들
+public class Person {
+    private final PersonalDetails details;
+    private final Address address;
+    
+    public String getName() {
+        return details.getName();
+    }
+    
+    public String getPhoneNumber() {
+        return details.getPhoneNumber();
+    }
+}
+
+public class PersonalDetails {
+    private final String name;
+    private final String phoneNumber;
+    
+    public PersonalDetails(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+}
+
+// After: 불필요한 클래스를 인라인하여 단순화
+public class Person {
+    private final String name;
+    private final String phoneNumber;
+    private final Address address;
+    
+    public Person(String name, String phoneNumber, Address address) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+}
+```
+
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- 흡수하는 클래스에 소스 클래스의 public 필드와 메서드를 선언한다.
+- 소스 클래스 메서드에 대한 인터페이스를 분리하는 것이 이치에 맞다면, 인라인화 하기 전에 `Extract Interface`를 사용하라.
+- 소스 클래스를 참조하고 있는 모든 부분을 흡수하는 클래스를 참조하도록 변경한다.
+- 패키지 밖에서 참조하는 부분(out-of-package 참조)을 없애기 위해서 소스 클래스를 `private`으로 선언하라. 또한 컴파일러가 소스 클래스에 대한 모든 죽은 참조(dangling reference) 찾도록 소스 클래스의 이름을 변경한다.
+- 컴파일 & 테스트 한다.
+- `Move Method`와 `Move Field`를 사용하여, 소스 클래스에 있는 모든 변수와 메서드를 흡수하는 클래스로 옮긴다.
+- **짧고 간단한 장례식을 거행한다.**
+</div>
+</details>
