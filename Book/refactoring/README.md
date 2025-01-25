@@ -650,6 +650,7 @@ public class AccountType {
 **🪄 동기**
 1. 어떤 필드가 자신이 속한 클래스보다 다른 클래스의 메서드에서 더 많이 사용되고 있는 것을 보면 그 필드를 옮기는 것을 고려한다.
 2. 그러는 한편 다른 클래스가 get/set메서드를 통해서 이 필드를 간접적으로 많이 사용하고 있을지도 모른다는 생각도 한다.
+
 ```java
 // Before: 필드가 잘못된 클래스에 위치
 public class Account {
@@ -716,6 +717,7 @@ public class AccountType {
 
 ### 3. Extract Class
 > 두개의 클래스가 해야 할 일을 하나의 클래스가 하고 있는 경우, 새로운 클래스를 만들어서 관련 있는 필드와 메서드를 예전 클래스에서 새로운 클래스로 옮겨라.
+
 **🪄 동기**
 1. 클래스는 분명하게 추상화되어야 하고, 몇 가지 명확한 책임을 가져야 한다는 말 또는 이와 비슷한 지침을 들었을 것이다.
 2. 실제로 클래스는 점점 커진다. 어떤 동작을 추가할 대도 있고 약간의 데이터를 추가할 때도 있다.
@@ -906,4 +908,140 @@ public class Person {
 </details>
 
 ### 5. Hide Delegate
->
+> 클라이언트가 객체의 위임 클래스를 직접 호출하고 있는 경우 서버에 메서드를 만들어 대리 객체(delegate)를 숨겨라.
+
+**🪄 동기**
+1. 캡슐화는 객체에서 가장 중요한 개념 가운데 하나이다.
+    - 캡슐화는 객체가 시스템의 다른 부분에 대해 적게 알아도 된다는 것을 의미한다.
+   - 캡슐화가 되어 있는 경우에는 어떤 것이 변경되었을 때 시스템의 다른 부분이 영향을 덜 받으므로 결과적으로 변경을 좀 더 쉽게 할 수 있게 한다.
+2. 자바는 필드가 public으로 선언되는 것을 허용하지만, 객체를 다루는 사람이라면 필드는 숨겨져야 한다는 것을 알고 있다.
+3. 여러분은 점점 세련되어 질수록 캡슐화 할 수 있다는 것이 더 많아진다는 것을 알게 된다.
+4. 클라이언트가 서버 객체의 필드에 들어있는 객체에 정의된 메서드를 호출한다면, 클라이언트는 대리객체(delegate)에 대해서 알아야 한다.
+5. 이와 같은 경우에 서버 객체에 간단한 위임 메서드를 두어 위임을 숨김으로서 이런 종속성을 제거할 수 있다.
+6. 서버의 일부 또는 모든 클라이언트에 대해서 Extract Class를 사용할 가치가 있다는 것을 발견할지도 모른다.
+7. 만약 모든 클라이언트에게 실제로 일을 처리하는 부분을 숨기고 있다면 서버의 인터페이스에서 위임과 관련된 모든 부분을 제거할 수 있다.
+
+```java
+// Before: 클라이언트가 위임 객체를 직접 접근
+public class Person {
+    private final Department department;
+    
+    public Person(Department department) {
+        this.department = department;
+    }
+    
+    public Department getDepartment() {
+        return department;
+    }
+}
+
+public class Department {
+    private final Employee manager;
+    
+    public Department(Employee manager) {
+        this.manager = manager;
+    }
+    
+    public Employee getManager() {
+        return manager;
+    }
+}
+
+// 클라이언트 코드
+public class Client {
+    public void someMethod() {
+        Person person = new Person(new Department(new Employee("John")));
+        // 클라이언트가 위임 객체를 직접 탐색 (Law of Demeter 위반)
+        Employee manager = person.getDepartment().getManager();
+    }
+}
+
+// After: 위임을 숨기는 메서드 추가
+public class Person {
+    private final Department department;
+    
+    public Person(Department department) {
+        this.department = department;
+    }
+    
+    // 위임을 숨기는 메서드 추가
+    public Employee getDepartmentManager() {
+        return department.getManager();
+    }
+}
+
+// 클라이언트 코드
+public class Client {
+    public void someMethod() {
+        Person person = new Person(new Department(new Employee("John")));
+        // 단순화된 인터페이스를 통해 접근
+        Employee manager = person.getDepartmentManager();
+    }
+}
+```
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- 대리 객체의 각각의 메서드에 대해, 서버에서 간단한 위임 메서드를 만든다.
+- 클라이언트가 서버를 호출하도록 바꾼다.
+  - 클라이언트가 서버와 같은 패키지에 있지 않다면 실제로 일을 처리하는 메서드의 접근 권한을 `package`로 변경하는 것을 고려하라.
+- 각각의 메서드를 알맞게 바꾸고 나서 컴파일 & 테스트를 한다.
+- 어떤 클라이언트에서도 더 이상 대리객체에 접근할 필요가 없다면, 서버 클래스에서 대리객체에 대한 접근자를 제거한다.
+</div>
+</details>
+
+#### The Law of Demeter (LoD)
+> "최소 지식 원칙"은 객체지향 설계의 중요한 원칙 중 하나이다.<br>
+> 각 객체는 자신과 직접적으로 관련된 객체와만 상호작용해야 한다는 원칙이다.
+
+```java
+// Law of Demeter 위반 예시
+public class Customer {
+    private Wallet wallet;
+    
+    public Wallet getWallet() {
+        return wallet;
+    }
+}
+
+public class Store {
+    public void purchaseItem(Customer customer, double itemPrice) {
+        // 나쁜 예: 다른 객체의 내부 구조를 너무 많이 알고 있음
+        if (customer.getWallet().getMoney() >= itemPrice) {
+            customer.getWallet().deductMoney(itemPrice);
+        }
+    }
+}
+
+// Law of Demeter 준수 예시
+public class Customer {
+    private Wallet wallet;
+    
+    public boolean canAfford(double amount) {
+        return wallet.hasSufficientFunds(amount);
+    }
+    
+    public void pay(double amount) {
+        wallet.deductMoney(amount);
+    }
+}
+
+public class Store {
+    public void purchaseItem(Customer customer, double itemPrice) {
+        // 좋은 예: 객체의 내부 구현에 대해 알 필요가 없음
+        if (customer.canAfford(itemPrice)) {
+            customer.pay(itemPrice);
+        }
+    }
+}
+```
+
+> LoD를 준수하는 방법
+> - 객체는 다음과 직접 대화해야 한다. 
+>   - 자신의 필드 
+>   - 메서드의 파라미터 
+>   - 자신이 생성한 객체 
+>   - 직접적인 컴포넌트 객체
+> - '한 단계'만 호출하기
+> - 체이닝 피하기
