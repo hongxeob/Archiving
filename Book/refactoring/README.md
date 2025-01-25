@@ -904,3 +904,6 @@ public class Person {
 - **짧고 간단한 장례식을 거행한다.**
 </div>
 </details>
+
+### 5. Hide Delegate
+>
