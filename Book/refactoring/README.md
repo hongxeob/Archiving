@@ -1045,3 +1045,84 @@ public class Store {
 >   - 직접적인 컴포넌트 객체
 > - '한 단계'만 호출하기
 > - 체이닝 피하기
+
+### 6. Remove Middle Man
+> 클래스가 간단한 위임을 너무 많이 하고 있는 경우에는 클라이언트가 대리객체(Delegate)를 직접 호출하도록 하라.
+
+**🪄 동기**
+1. `Hide Delegate`를 사용하는 동기를 이야기할 때 대리객체 사용을 캡술화 하는 것의 장점에 대해서 이야기 했다.
+   - 그러나 여기에는 그만한 대가를 치러야 한다.
+2. 클라이언트 대리객체의 새로운 메서드를 사용하려 할 때 마다 서버 클래스는 간단한 위임 메서드를 추가해야하는 것이다.
+   - 새로운 메서드를 추가하려면 추가 비용이 들게 된다.
+3. 서버 클래스는 단지 미들맨(Middle Man)에 지나지 않게 되는데 아마도 이때가 클라이언트로 하여금 대리객체를 직접 호출하도록 해야할 때일 것이다.
+4. 어느 정도를 숨기는 것이 적절한지 판단하는 것은 어렵다.
+5. 다행이도 Hide Delegate와 Remove Middle Man에서는 이것이 별로 중요하지 않다.
+6. 시간이 지나고 시스템이 변할수록 얼마나 숨겨야 하는지에 대한 원칙 또한 변경된다.
+
+```java
+// Before: 과도한 위임 메서드
+public class Person {
+    private final Department department;
+    
+    public Person(Department department) {
+        this.department = department;
+    }
+
+    // 단순 위임 메서드들이 너무 많음
+    public Employee getManager() {
+        return department.getManager();
+    }
+    
+    public List<Employee> getTeamMembers() {
+        return department.getTeamMembers();
+    }
+    
+    public String getDepartmentName() {
+        return department.getName();
+    }
+    
+    public Location getDepartmentLocation() {
+        return department.getLocation();
+    }
+    
+    public Budget getDepartmentBudget() {
+        return department.getBudget();
+    }
+}
+
+// After: 위임 객체를 직접 접근하도록 변경
+public class Person {
+    private final Department department;
+    
+    public Person(Department department) {
+        this.department = department;
+    }
+    
+    // 필요한 경우 department 직접 접근 허용
+    public Department getDepartment() {
+        return department;
+    }
+}
+
+// 클라이언트 코드
+public class Client {
+    public void someMethod(Person person) {
+        // 직접 department의 메서드 호출
+        Department dept = person.getDepartment();
+        Employee manager = dept.getManager();
+        List<Employee> team = dept.getTeamMembers();
+        String deptName = dept.getName();
+        Location location = dept.getLocation();
+        Budget budget = dept.getBudget();
+    }
+}
+```
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- 대리객체에 대한 접근자를 만든다.
+- 서버 클래스에 있는 위임 메서드를 사용하는 각각의 클라이언트에 대해 클라이언트가 대리객체의 메서드를 호출하도록 바꾸고 서버 클래스에 있는 메서드를 제거한다.
+- 각각의 메서드에 대한 작업을 마칠 때 마다 컴파일 & 테스트 한다. 
+</div>
+</details>
