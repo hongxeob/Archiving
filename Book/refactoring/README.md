@@ -1226,3 +1226,5 @@ public class DateUtils {
 
 </div>
 </details>
+
+### 8) Introduce Local Extension
