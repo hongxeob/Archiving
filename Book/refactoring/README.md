@@ -1126,3 +1126,103 @@ public class Client {
 - 각각의 메서드에 대한 작업을 마칠 때 마다 컴파일 & 테스트 한다. 
 </div>
 </details>
+
+### 7) Introduce Foreign Method
+> 사용하고 있는 서버 클래스에 부가적인 메서드가 필요하지만 클래스를 수정할 수 없는 경우에는 첫 번째 인자로 서버 클래스의 인스턴스를 받는 메서드를 클라이언트에 만들어라.
+
+**🪄 동기**
+1. 모든 서비스를 제공하는 정말로 멋진 클래스를 사용하고 있다.
+2. 그러나 꼭 필요하지만 그 클래스가 제공하지 않는 서비스가 하나 있다.
+3. 소스 코드를 변경할 수 없다면 부족한 메서드를 클라이언트 쪽에 만들어야한다.
+4. 클라이언트 클래스에서 필요한 메서드를 단지 한 번만 사용한다면 추가 코딩은 큰 문제가 아니고, 이런 경우에는 아마도 서버 클래스에 메서드를 추가할 필요가 없을 것이다.
+5. 새로 만드는 메서드를 외래 메서드(`Foreign method`)로 만들어서 이 메서드가 실제로는 서버 클래스에 있어야 하는 메서드라는 것을 명확하게 나타낼 수 있다.
+6. 만약 서버 클래스의 외래 메서드를 많이 만들어야 한다는 것을 깨닫게 되거나 많은 클래스가 동일한 외래 메서드를 필요로 한다는 것을 알게 된다면 `Introduce Local Extension` 대신 사용해야 한다.
+7. 외래 메서드는 임시 방편이라는 것을 잊지마라!
+8. 만약 할 수 있다면, 외래 메서드를 그들이 원래 있어야 하는 위치로 옮기는 것을 시도해 봐라.
+9. 코드 소유권이 문제가 된다면 외래 메서드를 서버 클래스의 소유자에게 보내고 그 소유자에게 그 메서드를 구현해 달라고 요청하라.
+```java
+// 수정할 수 없는 서버 클래스 (예: 라이브러리 클래스)
+public final class Date {
+    // 자바의 Date 클래스라고 가정
+    // 수정 불가능한 클래스
+}
+
+// Before: 클라이언트 코드에서 반복적인 날짜 계산
+public class DateReport {
+    public void someMethod() {
+        Date date = new Date();
+        
+        // 다음날을 구하는 로직이 여러 곳에서 반복됨
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 1);
+        Date nextDate = calendar.getTime();
+    }
+    
+    public void anotherMethod() {
+        Date date = new Date();
+        
+        // 같은 로직이 반복됨
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 1);
+        Date nextDate = calendar.getTime();
+    }
+}
+
+// After: Foreign Method 도입
+public class DateReport {
+    // Foreign Method - Date 클래스를 확장하는 것처럼 사용
+    public static Date nextDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 1);
+        return calendar.getTime();
+    }
+    
+    // 실제 사용
+    public void someMethod() {
+        Date date = new Date();
+        Date nextDate = nextDay(date);
+    }
+    
+    public void anotherMethod() {
+        Date date = new Date();
+        Date nextDate = nextDay(date);
+    }
+}
+================================================================================================
+// 더 현대적인 접근: 확장 함수 사용 (Kotlin)
+fun Date.nextDay(): Date {
+    val calendar = Calendar.getInstance()
+    calendar.time = this
+    calendar.add(Calendar.DATE, 1)
+    return calendar.time
+}
+
+// 또는 Java의 유틸리티 클래스 사용
+public class DateUtils {
+    private DateUtils() { } // 인스턴스화 방지
+    
+    public static Date nextDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 1);
+        return calendar.time;
+    }
+}
+```
+
+<details>
+<summary> ✅ 절차 </summary>
+<div markdown="1">
+
+- 필요한 작업을 하는 메서드를 클라이언트 클래스에 만든다.
+  - 그 메서드는 클라이언트 클래스의 어떤 부분에도 접근해서는 안 된다.
+  - 값이 필요하다면 값을 파라미터로 넘겨야 한다.
+- 첫 번째 파라미터로 서버 클래스의 인스턴스를 받도록 한다.
+- 메서드에 `'외래 메서드, 원래는 서버 클래스에 있어야 한다.'`와 같은 주석을 달아 놓는다.
+  - 이렇게 해두면 나중에 이들 메서드를 옮길 기회가 생겼을 때 텍스트 검색을 이용하여 외래 메서드를 쉽게 찾을 수 있다.
+
+</div>
+</details>
