@@ -1228,3 +1228,6 @@ public class DateUtils {
 </details>
 
 ### 8) Introduce Local Extension
+> 사용하고 있는 서버 클래스에 여러 개의 메서드를 추가할 필요가 있지만 서버 클래스를 수정할 수 없는 경우<br>
+> 필요한 추가 메서드를 포함하는 새로운 클래스를 만들어라.<br>
+> 이 확장 클래스를 원래 클래스의 서브 클래스 또한 래퍼(Wrapper) 클래스로 만들어라.<br>
