@@ -1228,6 +1228,145 @@ public class DateUtils {
 </details>
 
 ### 8) Introduce Local Extension
-> 사용하고 있는 서버 클래스에 여러 개의 메서드를 추가할 필요가 있지만 서버 클래스를 수정할 수 없는 경우<br>
-> 필요한 추가 메서드를 포함하는 새로운 클래스를 만들어라.<br>
+> 사용하고 있는 서버 클래스에 여러 개의 메서드를 추가할 필요가 있지만 서버 클래스를 수정할 수 없는 경우, 필요한 추가 메서드를 포함하는 새로운 클래스를 만들어라.<br>
 > 이 확장 클래스를 원래 클래스의 서브 클래스 또한 래퍼(Wrapper) 클래스로 만들어라.<br>
+
+**🪄 동기**
+1. 때로는 소스 코드를 수정할 수 없는 경우가 있다.
+2. 한 두개의 메서드가 필요하다면 `Introduce Foreign Method`를 사용할 수 있다.
+3. 객체지향 기술인 서브클래싱과 래핑(Wrapping)은 이런 작업을 하는 명확한 방법이다.
+4. 서브 클래스 또는 래퍼 클래스를 `Local Extension`이라 부른다.
+5. `Local Extension`을 사용함으로써 메서드와 데이터가 잘 정의된 단위로 묶어야 한다는 원칙을 지키는 것이다.
+6. 서브 클래스와 래퍼중 하나를 선택해야 할 때 보통 할 일이 적은 **서브클래스**를 선택한다. 
+7. 서브 클래스를 만들 때 가장 큰 장애물은 객체를 생성할 때에 적용해야 한다는 것이다.
+8. 서브 클래싱은 그 서브클래스의 새로운 객체를 만들도록 한다.
+   - 다른 객체가 예전 객체에 접근하고 있다면 원래의 데이터를 가진 두 개의 객체를 가지고 있는 것이 된다.
+9. 원래 객체가 불변성(immutable)이라면 문제가 없다. 안전하게 복사할 수 있다.
+10. 원래 객체가 가변성(mutable)이라면 문제가 있는데, 왜냐하면 한 객체에서의 변화가 다른 객체를 변경하지 않기 때문이다.
+    - 이런 경우 래퍼를 사용해야 한다.
+    - 래퍼를 사용하는 것은 `Local Extension`을 통해 변경된 사항이 원래 객체에 영향을 미칠 수 있게 하고 원래 객체를 통해 변경된 사항은 래퍼에 영향을 미치게 한다.
+
+**선택 기준**
+- 상속 사용:
+  - 기존 클래스가 final이 아닐 때
+  - 확장이 기존 클래스와 매우 밀접할 때
+  - 대부분의 기존 메서드를 그대로 사용할 때
+- 래퍼 사용
+  - 기존 클래스가 final일 때
+  - 더 유연한 확장이 필요할 때
+  - 일부 메서드만 선택적으로 노출하고 싶을 때
+  
+```java
+// 수정할 수 없는 서버 클래스
+public final class Date {
+    // Java의 레거시 Date 클래스라고 가정
+}
+
+// 방법 1: 상속을 통한 확장
+public class ExtendedDate extends Date {
+    public ExtendedDate(Date date) {
+        super(date.getTime());
+    }
+    
+    public ExtendedDate nextDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        calendar.add(Calendar.DATE, 1);
+        return new ExtendedDate(calendar.getTime());
+    }
+    
+    public ExtendedDate previousDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        calendar.add(Calendar.DATE, -1);
+        return new ExtendedDate(calendar.getTime());
+    }
+    
+    public boolean isWeekend() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
+    }
+}
+
+// 방법 2: 위임을 통한 확장 (Wrapper 클래스)
+public class DateWrapper {
+    private final Date originalDate;
+    
+    public DateWrapper(Date date) {
+        this.originalDate = date;
+    }
+    
+    // 원본 메서드 위임
+    public long getTime() {
+        return originalDate.getTime();
+    }
+    
+    // 확장 메서드들
+    public DateWrapper nextDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(originalDate);
+        calendar.add(Calendar.DATE, 1);
+        return new DateWrapper(calendar.getTime());
+    }
+    
+    public DateWrapper previousDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(originalDate);
+        calendar.add(Calendar.DATE, -1);
+        return new DateWrapper(calendar.getTime());
+    }
+    
+    public boolean isWeekend() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(originalDate);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY;
+    }
+    
+    // 원본 객체 반환 메서드
+    public Date getOriginalDate() {
+        return originalDate;
+    }
+}
+
+// 사용 예시
+public class Client {
+    public void useExtendedDate() {
+        // 상속을 통한 확장 사용
+        ExtendedDate date = new ExtendedDate(new Date());
+        ExtendedDate tomorrow = date.nextDay();
+        if (tomorrow.isWeekend()) {
+            // 주말 처리
+        }
+        
+        // 래퍼 클래스 사용
+        DateWrapper wrapper = new DateWrapper(new Date());
+        DateWrapper nextDay = wrapper.nextDay();
+        if (nextDay.isWeekend()) {
+            // 주말 처리
+        }
+    }
+}
+
+// 현대적인 방식: 레코드와 static 메서드 활용
+public record ModernDateWrapper(LocalDate date) {
+    public static ModernDateWrapper of(LocalDate date) {
+        return new ModernDateWrapper(date);
+    }
+    
+    public ModernDateWrapper nextDay() {
+        return new ModernDateWrapper(date.plusDays(1));
+    }
+    
+    public ModernDateWrapper previousDay() {
+        return new ModernDateWrapper(date.minusDays(1));
+    }
+    
+    public boolean isWeekend() {
+        return date.getDayOfWeek() == DayOfWeek.SATURDAY 
+            || date.getDayOfWeek() == DayOfWeek.SUNDAY;
+    }
+}
+```
