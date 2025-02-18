@@ -11,7 +11,7 @@ services:
       KAFKA_NUM_NETWORK_THREADS: 3
       KAFKA_NUM_IO_THREADS: 8
 
-      KAFKA_LOG_DIRS: /Users/dvwy/Documents/test/kafka_2_12-2_5_0/data
+      KAFKA_LOG_DIRS: /Users/hongxeob/Documents/test/kafka_2_12-2_5_0/data
       KAFKA_NUM_PARTITIONS: 3
       KAFKA_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
@@ -31,7 +31,7 @@ services:
     networks:
       - data
     volumes:
-      - "./log:/Users/dvwy/Documents/test/kafka_2_12-2_5_0/data"
+      - "./log:/Users/hongxeob/Documents/test/kafka_2_12-2_5_0/data"
 
   zookeeper:
     image: confluentinc/cp-zookeeper
