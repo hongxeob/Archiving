@@ -160,3 +160,48 @@
 | `linger.ms` | 배치를 전송하기전까지 기다리는 최소시간이다. 기본값은 0이다 |
 | `partitioner.class` | 레코드를 파티션에 전송할 때 적용하는 파티셔너 클래스를 지정한다. 기본값은<br>`org.apache.kafka.clients.producer.internals.DefaultPartioner` |
 | `transactional.id` | 프로듀서가 레코드를 전송할 때 레코드를 트랜잭션 단위로 묶음지 여부를 설정한다. 프로듀서의 고유한 트랜잭션 아이디를 설정할 수 있다. |
+
+#### 메시지 키를 가진 데이터를 전송하는 프로듀서
+```java
+// hong이 key가 들어갈 자리
+ProducerRecord<String,String> record = new ProducerRecord<>(TOPIC_NAME, "hong", messageValue);
+```
+파티션을 직접 넣고 싶다면 다음과 같이 설정하면 된다.
+```java
+int partitionNo = 0;
+ProducerRecord<String,String> record = new ProducerRecord<>(TOPIC_NAME, partitionNo, messageKey, messageValue);
+```
+
+#### 커스텀 파티셔너를 가지는 프로듀서
+프로듀서 사용 환경에 따라 특정 데이터를 가지는 레코드를 특정 파티션으로 보내야 할때가 있다.
+- 기본 설정 파티셔너를 사용할 경우 메시지 키의 **해시값**을 파티션에 매칭하여 데이터를 전송하므로 어느 파티션에 들어가는지 알 수 없다.
+- 이때 `Partitioner` 인터페이스를 사용하여 **사용자 정의 파티셔너**를 생성하면 특정값을 가진 메시지키에 대해서 무조건 정해진 파티션으로 데이터를 전송하도록 설정 가능
+```java
+public class CustomPartitioner implements Partitioner {
+    @Override
+    public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
+        if (keyBytes == null) {
+            throw new InvalidPartitionsException("Need Message Key");
+        }
+        // 특정 파티션 값으로 보내도록
+        if (((String) key).equals("hong")) {
+            return 0;
+        }
+        List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
+        int numPartitions = partitions.size();
+
+        // 기본 값
+        return Utils.toPositive(Utils.murmur2(keyBytes) % numPartitions);
+    }
+
+    @Override
+    public void close() {
+        /*  */
+    }
+
+    @Override
+    public void configure(Map<String, ?> map) {
+        /*  */
+    }
+}
+```
