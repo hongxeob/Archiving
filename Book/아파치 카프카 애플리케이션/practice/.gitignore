@@ -35,3 +35,12 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Kafka 로그 및 오프셋 파일 무시
+**/log/__consumer_offsets-*
+**/log/*.index
+**/log/*.log
+**/log/*.timeindex
+**/log/*.snapshot
+**/log/.kafka_cleanshutdown
+**/practice/log/
