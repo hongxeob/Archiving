@@ -251,4 +251,89 @@ public class CustomCallback implements Callback {
     }
 }
 ```
-- 비동기 처리로 데이터 처리를 빠르게 할 수 있지만 전송하는 데이터의 순서가 중요한 경우 사용하면 안 된다. 
+
+- 비동기 처리로 데이터 처리를 빠르게 할 수 있지만 전송하는 데이터의 순서가 중요한 경우 사용하면 안 된다.
+
+### 컨슈머 API
+> 브로커에 적재된 데이터를 가져와 필요한 처리를 함
+```java
+public class SimpleConsumer {
+    private final static Logger logger = LoggerFactory.getLogger(SimpleProducer.class);
+    private final static String TOPIC_NAME = "test";
+    private final static String BOOTSTRAP_SERVERS = "localhost:9092";
+    private final static String GROUP_ID = "test-group";
+
+    public static void main(String[] args) {
+        Properties configs = new Properties();
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        configs.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
+        configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(configs);
+        consumer.subscribe(Arrays.asList(TOPIC_NAME));
+
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(1));
+            for (ConsumerRecord<String, String> record : records) {
+                logger.info("{}", record);
+            }
+        }
+    }
+}
+```
+- ※ 컨슈머 그룹을 기준으로 오프셋을 관리하기 때문에 `subscribe()` 메서드를 사용하여 토픽을 구독하는 경우 컨슈머 그룹을 선언해야 됨
+### 컨슈머 주요 개념
+> 토픽의 파티션으로부터 데이터를 가져가기 위해 컨슈머를 운영하는 방법은 크게 2가지가 있다.
+
+![img.png](img.png) <br>
+[그림] **컨슈머 1개로 이루어진 컨슈머 그룹이 3개의 파티션에 할당**<br>
+
+- 1개 이상의 컨슈머로 이루어진 **컨슈머 그룹**을 운영 하는 것
+- **토픽의 특정 파티션만 구독**하는 컨슈머를 운영하는 것
+
+![img_1.png](img_1.png)<br>
+[그림] **컨슈머 2개, 컨슈머 3개인 경우**<br>
+> 컨슈머 그룹으로 묶인 컨슈머가 토픽을 구독해서 데이터를 가져갈 때, **1개의 파티션은 최대 1개의 컨슈머에 할당** 가능하다.<br>
+> 그리고 1개 컨슈머는 여러 개의 파티션에 할당될 수 있다. 이러한 특징으로 컨슈머 그룹의 컨슈머 개수는 가져가고자 하는 토픽의 파티션 개수보다 같거나 작아야 한다.<br>
+
+![img_2.png](img_2.png)<br>
+[그림] **컨슈머 1개가 놀고 있는 모습**<br>
+> 3개의 파티션을 가진 토픽을 효과적으로 처리하기 위해서는 3개 이하의 컨슈머 그룹으로 운영해야 한다.<br>
+> 만약 4개의 컨슈머로 이루어진 컨슈머 그룹으로 3개의 파티션을 가진 토픽에서 데이터를 가져가기 위해 할당하면 1개의 컨슈머는 파티션을 할당받지 못하고 유휴상태로 남게 된다.
+
+![img_3.png](img_3.png)<br>
+[그림] **동기 로직으로 돌아가는 에이전트 애플리케이션**<br>
+컨슈머 그룹은 다른 컨슈머 그룹과 격리되는 특징을 가지고 있다.
+
+![img_4.png](img_4.png)<br>
+[그림] **컨슈머 그룹으로 적재 로직을 분리하여 운영**
+
+#### 컨슈머 그룹의 컨슈머에 장애가 발생하면?
+- 장애가 발생한 컨슈머에 할당된 파티션은 장애가 발생하지 않은 컨슈머에 소유권이 넘어간다.
+- 이러한 과정을 `리밸런싱 (rebalancing)`이라고 한다.
+
+리밸런싱은 크게 두가지 상황에 일어난다.
+1. 컨슈머가 추가 되는 상황
+2. 컨슈머가 제외 되는 상황
+![img_5.png](img_5.png)<br>
+[그림] 컨슈머 장애 발생 시 리밸런싱 발생
+
+- 리밸런싱은 유용하지만 자주 일어나서는 안 된다!
+- 리밸런싱이 발생할 때 파티션의 소유권을 컨슈머로 재할당하는 과정에서 해당 컨슈머 그룹의 컨슈머들이 토픽의 데이터를 읽을 수 없기 때문이다.
+- 그룹 조정자(group coordinator)는 리밸런싱을 발동시키는 역할을 하는데 컨슈머 그룹의 컨슈머가 추가되거나 제외될 때마다 그룹 조정자가 리밸런싱을 발동시킨다.
+
+장애 발생 시 자동으로 리밸런싱되어 정상 컨슈머들끼리 데이터 처리를 재분배하여 운영됨으로 서비스 장애를 막을 수 있다.<br>
+그러므로 반드시 데이터 처리 중 발생한 리밸런싱에 대응하는 코드를 작성해야 한다.
+
+#### 컨슈머 오프셋 커밋
+> 컨슈머는 consumer_offset 에 카프카 브로커로부터 데이터를 어디까지 가져갔는지 커밋을 통해 기록한다.<br> 
+> 만약 데이터 처리 후 consumer_offset에 기록되지 않으면 중복으로 재처리될 수 있다. <br>
+> 그러므로 오프셋 커밋을 정상적으로 처리했는지 검증해야 된다.
+ 
+오프셋 커밋 방법 
+1. 명시적: 직접 데이터 처리 후 커밋하는 방법 (중복처리 가능성 없음)
+   - poll() 호출 후 반환받은 데이터 처리의 완료 후 `commitSync()`- 동기식, `commitAsync()` - 비동기식 메소드로 직접 커밋한다.
+   - 개별 레코드 단위 커밋을 원하는 경우 `commitSycn()` 메소드에 `Map<TopicPartition, OffsetAndMetadata>` 인스턴스를 파라미터로 넘기면 된다.
+2. 비명시적 : `enable.auto.commit = true` 옵션으로 일정 가격마다 자동 커밋하는 방법 (중복 처리 가능성 다소 있음)
+   - poll() 호출 이후 `auto.commit.interval.ms`에 설정된 값 이상이 지나면 그시점에 읽은 레코드의 오프셋을 커밋한다.
