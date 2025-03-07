@@ -337,3 +337,34 @@ public class SimpleConsumer {
    - 개별 레코드 단위 커밋을 원하는 경우 `commitSycn()` 메소드에 `Map<TopicPartition, OffsetAndMetadata>` 인스턴스를 파라미터로 넘기면 된다.
 2. 비명시적 : `enable.auto.commit = true` 옵션으로 일정 가격마다 자동 커밋하는 방법 (중복 처리 가능성 다소 있음)
    - poll() 호출 이후 `auto.commit.interval.ms`에 설정된 값 이상이 지나면 그시점에 읽은 레코드의 오프셋을 커밋한다.
+
+### 컨슈머 옵션
+#### 주요 옵션
+
+| 옵션 | 설명 |
+|------|------|
+| `bootstrap.servers` | 데이터 전송 대상 카프카 클러스터에 속한 브로커 호스트 이름 (2개 이상 입력 권장) |
+| `key.deserializer` | 메시지 키 역직렬화 클래스 지정 |
+| `value.deserializer` | 메시지 값 역직렬화 클래스 지정 |
+
+#### 선택 옵션
+
+| 옵션 | 설명                                                                                                                                                            |
+|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `group.id` | 컨슈머 그룹 아이디, subscribe() 메서드로 토픽 구독할 경우 반드시 선언 필요                                                                                                              |
+| `auto.offset.reset` | 저장된 오프셋이 없는 경우 어디서부터 읽을지 선택<br> (latest: 가장 최근에 넣은 오프셋부터, earliest: 가장 오래전에 넣은 오프셋부터, none: 컨슈머 그룹이 커밋한 기록을 확인해 없는 경우 에러 반환, 있으면 기존 커밋 이후 오프셋부터, 기본값: latest) |
+| `enable.auto.commit` | 자동 커밋 동작 여부                                                                                                                                                   |
+| `auto.commit.interval.ms` | 자동 커밋일 경우 커밋 간격 (기본값: 5000)                                                                                                                                   |
+| `max.poll.records` | poll() 호출 시 반환되는 레코드 개수                                                                                                                                       |
+| `session.timeout.ms` | 컨슈머와 브로커 연결이 끊기는 최대시간 (리밸런싱 발생 기준시간)                                                                                                                          |
+| `heartbeat.interval.ms` | 하트비트 전송 간격 시간                                                                                                                                                 |
+| `max.poll.interval.ms` | poll() 호출 간격의 최대 시간, poll 호출 이후 데이터 처리에 시간이 너무 많이 걸리는 경우 비정상으로 판단하여 리밸런싱함                                                                                     |
+| `isolation.level` | 트랜잭션 프로듀서가 레코드를 트랜잭션 단위로 보낼 경우 사용, read_committed(커밋 완료된 레코드만 읽음), read_uncommitted(커밋 상관없이 모든 레코드 읽음) 설정 가능(기본값: read_committed)                             |
+
+### 리밸런스 리스너
+> `poll()` 메서드를 통해 반환받은 데이터를 모두 처리하기 전에 리밸런스가 발생하면 데이터가 중복 처리 될 수 있다.<br>
+> 왜냐하면 데이터중 일부를 처리했으나 커밋을 하지 않았기 때문이다.
+- `ComsumerRebalanceListener` 인터페이스를 통해 리밸런싱을 감지할 수 있다.
+  - `onPartitionAsstigned()` (=리밸런스 완료 후 호출), 
+  - `onPartitionRevoked()` (=리밸런스 시작 전에 호출) 메서드를 통해서 처리할 수 있다. 
+- `onPartitionRevoked` 메소드에서 마지막 처리 기준으로 커밋을 수행시킴으로 중복처리를 방지할 수 있음
