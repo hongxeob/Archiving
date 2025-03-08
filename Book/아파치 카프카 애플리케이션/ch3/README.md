@@ -368,3 +368,14 @@ public class SimpleConsumer {
   - `onPartitionAsstigned()` (=리밸런스 완료 후 호출), 
   - `onPartitionRevoked()` (=리밸런스 시작 전에 호출) 메서드를 통해서 처리할 수 있다. 
 - `onPartitionRevoked` 메소드에서 마지막 처리 기준으로 커밋을 수행시킴으로 중복처리를 방지할 수 있음
+
+
+### 어드민 API
+```java
+Properties configs = new Properties();
+configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "my-kafka:9002");
+AdminClient admin = AdminClient.create(configs);
+```
+
+- 실제 운영 환경에서는 프로듀서, 컨슈머를 통해 데이터를 주고받는 것만큼 카프카에 설정된 내부 옵션을 설정하고 확인하는 것이 중요하다.
+- 이를 위해 AdminClient 클래스가 있다. 이 클래스를 통해 카프카 클러스터의 설정을 확인하고 변경할 수 있다.
