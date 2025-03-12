@@ -41,3 +41,18 @@ out/
 
 ### DS Store ###
 **/.DS_Store
+
+# Log files
+*.log
+log/
+logs/
+**/*.timeindex
+**/*.index
+**/*.snapshot
+**/practice/log/
+*-checkpoint
+*-offset-checkpoint
+leader-epoch-checkpoint
+cleaner-offset-checkpoint
+recovery-point-offset-checkpoint
+replication-offset-checkpoint
