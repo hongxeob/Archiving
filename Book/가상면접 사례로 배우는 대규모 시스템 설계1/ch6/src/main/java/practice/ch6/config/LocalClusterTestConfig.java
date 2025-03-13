@@ -7,6 +7,9 @@ import practice.ch6.cluster.Node;
 import practice.ch6.cluster.NodeManager;
 import practice.ch6.hash.ConsistentHash;
 
+import java.net.URL;
+import java.util.List;
+
 @Configuration
 public class LocalClusterTestConfig {
     @Value("${kvstore.cluster.nodeName}")
@@ -27,6 +30,10 @@ public class LocalClusterTestConfig {
     @Value("${kvstore.cluster.requestTimeoutMs}")
     private int requestTimeoutMs;
 
+    @Value("${server.port}")
+    private int serverPort;
+
+
     @Bean
     public ClusterConfig clusterConfig() {
         ClusterConfig config = new ClusterConfig();
@@ -43,16 +50,31 @@ public class LocalClusterTestConfig {
     public NodeManager nodeManager() {
         NodeManager manager = new NodeManager();
 
-        // 7개의 테스트 노드 생성
-        for (int i = 1; i <= 7; i++) {
-            Node node = new Node("localhost", 10000 + i);
-            node.setStatus(Node.NodeStatus.ACTIVE);
-            if (i <= 3) {
-                node.setRole(Node.NodeRole.PRIMARY);
-            } else {
-                node.setRole(Node.NodeRole.SECONDARY);
+        // 1. 현재 노드 정보 가져오기
+        String currentNodeName = clusterConfig().getNodeName();
+        int currentPort = serverPort; // @Value("${server.port}") 주입된 포트
+
+        // 2. 현재 노드 추가
+        Node currentNode = new Node(currentNodeName, currentPort); // 호스트 이름을 localhost가 아닌 컨테이너 이름으로
+        currentNode.setStatus(Node.NodeStatus.ACTIVE);
+        currentNode.setRole(Node.NodeRole.valueOf(clusterConfig().getNodeRole()));
+        manager.addNode(currentNode);
+
+        // 3. discoveryEndpoints를 사용하여 다른 노드 정보 추가
+        List<String> endpoints = clusterConfig().getDiscoveryEndpoints();
+        for (String endpoint : endpoints) {
+            try {
+                URL url = new URL(endpoint);
+                String host = url.getHost(); // 호스트 이름
+                int port = url.getPort() != -1 ? url.getPort() : 80;
+
+                Node node = new Node(host, port);
+                node.setStatus(Node.NodeStatus.ACTIVE);
+                node.setRole(Node.NodeRole.PRIMARY); // 기본값으로
+                manager.addNode(node);
+            } catch (Exception e) {
+                // URL 파싱 에러 처리
             }
-            manager.addNode(node);
         }
 
         return manager;

@@ -1,17 +1,17 @@
 server:
-  port: 8083
+  port: 8082
 
 kvstore:
   cluster:
-    nodeName: node1
+    nodeName: node2
     nodeRole: PRIMARY
-    discoveryEndpoints: http://localhost:8081,http://localhost:8082
+    discoveryEndpoints: http://node1:8081,http://node3:8083
     replicationFactor: 3
     readQuorum: 2
     writeQuorum: 2
     requestTimeoutMs: 3000
   storage:
-    type: memory  # 'memory' ?? 'rocksdb'
+    type: memory
+    dataDirectory: /app/data
     maxSizeInMb: 1024
-    dataDirectory: ./data
     compactionIntervalMinutes: 60

@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # 첫 번째 노드 (8081 포트)
+  node1:
+    build: .
+    container_name: kvstore-node1
+    ports:
+      - "8081:8081"
+    environment:
+      - SERVER_PORT=8081
+      - SPRING_PROFILES_ACTIVE=node1
+      - KVSTORE_CLUSTER_NODENAME=node1
+      - KVSTORE_CLUSTER_NODEROLE=PRIMARY
+      - KVSTORE_CLUSTER_REPLICATIONFACTOR=3
+      - KVSTORE_CLUSTER_READQUORUM=2
+      - KVSTORE_CLUSTER_WRITEQUORUM=2
+      - KVSTORE_CLUSTER_REQUESTTIMEOUTMS=3000
+      - KVSTORE_CLUSTER_DISCOVERYENDPOINTS=http://node2:8082,http://node3:8083
+    networks:
+      - kvstore-network
+    volumes:
+      - node1-data:/app/data
+
+  # 두 번째 노드 (8082 포트)
+  node2:
+    build: .
+    container_name: kvstore-node2
+    ports:
+      - "8082:8082"
+    environment:
+      - SERVER_PORT=8082
+      - SPRING_PROFILES_ACTIVE=node2
+      - KVSTORE_CLUSTER_NODENAME=node2
+      - KVSTORE_CLUSTER_NODEROLE=PRIMARY
+      - KVSTORE_CLUSTER_REPLICATIONFACTOR=3
+      - KVSTORE_CLUSTER_READQUORUM=2
+      - KVSTORE_CLUSTER_WRITEQUORUM=2
+      - KVSTORE_CLUSTER_REQUESTTIMEOUTMS=3000
+      - KVSTORE_CLUSTER_DISCOVERYENDPOINTS=http://node1:8081,http://node3:8083
+    networks:
+      - kvstore-network
+    volumes:
+      - node2-data:/app/data
+
+  # 세 번째 노드 (8083 포트)
+  node3:
+    build: .
+    container_name: kvstore-node3
+    ports:
+      - "8083:8083"
+    environment:
+      - SERVER_PORT=8083
+      - SPRING_PROFILES_ACTIVE=node3
+      - KVSTORE_CLUSTER_NODENAME=node3
+      - KVSTORE_CLUSTER_NODEROLE=PRIMARY
+      - KVSTORE_CLUSTER_REPLICATIONFACTOR=3
+      - KVSTORE_CLUSTER_READQUORUM=2
+      - KVSTORE_CLUSTER_WRITEQUORUM=2
+      - KVSTORE_CLUSTER_REQUESTTIMEOUTMS=3000
+      - KVSTORE_CLUSTER_DISCOVERYENDPOINTS=http://node1:8081,http://node2:8082
+    networks:
+      - kvstore-network
+    volumes:
+      - node3-data:/app/data
+
+networks:
+  kvstore-network:
+    driver: bridge
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:
