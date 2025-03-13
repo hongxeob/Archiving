@@ -1,0 +1,10 @@
+kvstore:
+  cluster:
+    nodeName: node1
+    nodeRole: PRIMARY
+    replicationFactor: 3
+    readQuorum: 2
+    writeQuorum: 2
+    requestTimeoutMs: 5000
+    heartbeatIntervalMs: 10000
+    autoSyncEnabled: true
