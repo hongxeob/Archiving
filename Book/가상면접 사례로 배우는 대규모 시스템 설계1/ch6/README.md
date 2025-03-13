@@ -16,3 +16,6 @@
 
 ## 시스템 아키텍처
 ![img.png](img.png)
+
+## 시스템 흐름도
+![img_1.png](img_1.png)
