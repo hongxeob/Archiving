@@ -1,17 +1,16 @@
 server:
-  port: 8083
+  port: 8089
 
 kvstore:
   cluster:
-    nodeName: node1
+    nodeName: local-node
     nodeRole: PRIMARY
-    discoveryEndpoints: http://localhost:8081,http://localhost:8082
-    replicationFactor: 3
-    readQuorum: 2
-    writeQuorum: 2
+    discoveryEndpoints: [ ]
+    replicationFactor: 1  # 중요: 복제 인수를 1로 설정
+    readQuorum: 1        # 중요: 읽기 쿼럼을 1로 설정
+    writeQuorum: 1       # 중요: 쓰기 쿼럼을 1로 설정
     requestTimeoutMs: 3000
   storage:
-    type: memory  # 'memory' ?? 'rocksdb'
+    type: memory
     maxSizeInMb: 1024
     dataDirectory: ./data
-    compactionIntervalMinutes: 60
