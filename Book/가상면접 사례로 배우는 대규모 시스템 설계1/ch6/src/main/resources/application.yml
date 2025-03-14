@@ -6,9 +6,9 @@ kvstore:
     nodeName: local-node
     nodeRole: PRIMARY
     discoveryEndpoints: [ ]
-    replicationFactor: 1  # 중요: 복제 인수를 1로 설정
-    readQuorum: 1        # 중요: 읽기 쿼럼을 1로 설정
-    writeQuorum: 1       # 중요: 쓰기 쿼럼을 1로 설정
+    replicationFactor: 1  # 복제 인수를 1로 설정
+    readQuorum: 1        # 읽기 쿼럼을 1로 설정
+    writeQuorum: 1       # 쓰기 쿼럼을 1로 설정
     requestTimeoutMs: 3000
   storage:
     type: memory
