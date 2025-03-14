@@ -200,7 +200,25 @@ public class NodeClient {
      * @return 완성된 URL
      */
     private String buildUrl(Node node, String path) {
-        return String.format("http://%s:%d%s", node.getAddress().getHostString(), node.getAddress().getPort(), path);
+        // 단일 노드 모드에서는 항상 localhost 사용
+        String host = "localhost";
+        int port = node.getAddress().getPort();
+
+        // 로컬 테스트인지 Docker 환경인지 확인하는 로직은 유지
+        // 나중에 다중 노드 환경으로 확장할 때 필요할 수 있음
+        boolean isDockerEnvironment = System.getenv("DOCKER_ENV") != null;
+
+        if (isDockerEnvironment) {
+            // Docker 환경: 노드 ID에서 컨테이너 이름 추출 (node1:8081-xxx -> node1)
+            String nodeId = node.getNodeId();
+            if (nodeId.contains(":")) {
+                host = nodeId.substring(0, nodeId.indexOf(":"));
+            } else {
+                host = nodeId;
+            }
+        }
+
+        return String.format("http://%s:%d%s", host, port, path);
     }
 
     /**

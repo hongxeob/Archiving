@@ -68,11 +68,9 @@ public class QuorumManager {
 
         // 병렬로 모든 노드에 읽기 요청 전송
         List<CompletableFuture<StorageResponse<VersionedValue>>> futures = targetNodes.stream()
-        .map(nodeId -> CompletableFuture.<StorageResponse<VersionedValue>>supplyAsync(
-            () -> nodeClient.get(nodeId, key)))
-        .toList();
-
-
+                .map(nodeId -> CompletableFuture.<StorageResponse<VersionedValue>>supplyAsync(
+                        () -> nodeClient.get(nodeId, key)))
+                .toList();
 
         try {
             // 쿼럼에 도달할 때까지 대기
