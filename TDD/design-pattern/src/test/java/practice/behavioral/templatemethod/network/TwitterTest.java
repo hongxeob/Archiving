@@ -41,4 +41,13 @@ class TwitterTest {
         assertThat(result).isEqualTo(true);
     }
 
+    @Test
+    @DisplayName("데이터를 보낼 수 있다")
+    void sendDataSuccessTest() throws Exception {
+        //when
+        boolean result = twitter.sendData(message.getBytes());
+
+        //then
+        assertThat(result).isEqualTo(true);
+    }
 }
