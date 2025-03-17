@@ -2,16 +2,15 @@ package practice.behavioral.templatemethod.network;
 
 import java.util.logging.Logger;
 
-public class Twitter extends Network {
-    private Logger log = Logger.getLogger(Twitter.class.getName());
+public class Facebook extends Network {
+    private Logger log = Logger.getLogger(Facebook.class.getName());
 
-    public Twitter(String userName, String password) {
+    public Facebook(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
 
-    @Override
-    boolean logIn(String userName, String password) {
+    public boolean logIn(String userName, String password) {
         log.info("=== 유저 로그인 정보 체크 ===");
         log.info("=== 유저 이름 : " + this.userName);
         System.out.print("Password: ");
@@ -19,23 +18,22 @@ public class Twitter extends Network {
             System.out.print("*");
         }
         simulateNetworkLatency();
-        log.info("=== 트위터 로그인 성공 ===");
+        log.info("=== 페이스북 로그인 성공 ===");
         return true;
     }
 
-    @Override
-    void logOut() {
-        System.out.println("=== 로그아웃 성공 ===");
-    }
-
-    @Override
-    boolean sendData(byte[] data) {
+    public boolean sendData(byte[] data) {
         boolean messagePosted = true;
         if (messagePosted) {
-            System.out.println("=== 메시지: '" + new String(data) + "' 트위터에 게시 성공 ===");
+            System.out.println("메시지: '" + new String(data) + "' 페이스북에 게시 성공");
             return true;
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    public void logOut() {
+        System.out.println("User: '" + userName + "' was logged out from FaceBook");
     }
 
     private void simulateNetworkLatency() {
@@ -44,7 +42,7 @@ public class Twitter extends Network {
             System.out.println();
             while (i < 10) {
                 System.out.print(".");
-                Thread.sleep(100);
+                Thread.sleep(500);
                 i++;
             }
         } catch (InterruptedException ex) {
