@@ -23,11 +23,16 @@ public class Twitter extends Network {
 
     @Override
     void logOut() {
-
+        System.out.println("=== 로그아웃 성공 ===");
     }
 
     @Override
     boolean sendData(byte[] data) {
+        boolean messagePosted = true;
+        if (messagePosted) {
+            System.out.println("=== 메시지: '" + new String(data) + "' 트위터에 게시 성공 ===");
+            return true;
+        }
         return false;
     }
 
@@ -37,7 +42,7 @@ public class Twitter extends Network {
             System.out.println();
             while (i < 10) {
                 System.out.print(".");
-                Thread.sleep(500);
+                Thread.sleep(100);
                 i++;
             }
         } catch (InterruptedException ex) {
