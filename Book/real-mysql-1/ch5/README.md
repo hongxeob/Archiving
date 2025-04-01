@@ -52,3 +52,40 @@ InnoDB는 **레코드 기반의 잠금 방식** 때문에 MyISAM 보다는 훨�
 - 적용 범위: 인덱스 레코드와 그 이전 갭을 함께 잠금
 - 목적: 팬텀 로우 방지와 복제 일관성 보장
 - 기본 동작: REPEATABLE READ 격리 수준의 기본 잠금 방식
+
+#### 넥스트-키 락 작동 메커니즘
+
+넥스트-키 락은 다음 두 가지 락이 결합된 형태이다.
+- 레코드 락(Record Lock): 인덱스 레코드 자체에 대한 락
+- 갭 락(Gap Lock): 인덱스 레코드 사이의 간격에 대한 락
+```
+인덱스 범위: ... | 40 | 50 | 60 | ...
+                   ^    ^    ^
+                   |    |    |
+                   갭   레코드  갭
+```
+```sql
+-- 기본적인 SELECT FOR UPDATE 구문
+SELECT * FROM employee WHERE emp_no = 50 FOR UPDATE;
+```
+`emp_no = 50`인 레코드에 대한 넥스트-키 락은 해당 레코드와 그 앞뒤의 갭을 모두 잠그게 된다.
+
+---
+### 격리 수준에 따른 락 획득 차이
+중요한 점은 트랜잭션 격리 수준에 따라 락의 종류와 범위가 다르게 적용된다는 것!
+
+1. `READ COMMITTED` 격리 수준
+```sql 
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
+```
+- 이 경우 SELECT FOR UPDATE는 **레코드 락(Record Lock)** 만 획득
+- 실제 조회된 레코드만 잠그므로 팬텀 리드 방지 불가능
+
+
+2. `REPEATABLE READ` 격리 수준 (MySQL InnoDB 기본값):
+```sql
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+```
+- 이 경우 `SELECT FOR UPDATE`는 **넥스트-키 락(Next-Key Lock)** 을 획득
+- 조회 조건에 해당하는 레코드와 해당 범위의 갭에 대한 락 모두 설정
+---
