@@ -129,3 +129,11 @@ MySQL에서는 자동 증가하는 숫자값을 추출(채번)하기 위해 `AUT
 - `READ COMMITTED`: 배타 락 사용, 커밋된 데이터만 읽기 가능
 - `REPEATABLE READ`: 공유 락과 갭 락 사용으로 일관된 읽기 보장
 - `SERIALIZABLE`: 모든 SELECT에 공유 락 사용, 완전한 직렬화 보장
+
+## 5.4 MySQL의 격리 수준
+![img.png](img.png)
+> 격리 수준이 높아질수록 MySQL 서버의 처리 성능이 많이 떨어질 것으로 생각하는데, 사실 `SERIALIZABLE` 격리 수준이 아니라면 크게 성능의 개선이나 저하는 발생하지 않는다.
+
+- `REPEATABLE READ` 격리 수준에서는 팬텀 리드가 발생할 수 있지만, InnoDB에서는 독특한 특성 때문에 REPEATABLE READ 격리 수준에서도 팬텀리드가 발생하지 않는다.  
+- 오라클은 주로 `READ COMMITED` 수준을 많이 사용한다.
+- MySQL은 주로 `REPEATABLE READ`를 주로 사용한다.
