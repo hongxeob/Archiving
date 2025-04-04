@@ -137,3 +137,23 @@ MySQL에서는 자동 증가하는 숫자값을 추출(채번)하기 위해 `AUT
 - `REPEATABLE READ` 격리 수준에서는 팬텀 리드가 발생할 수 있지만, InnoDB에서는 독특한 특성 때문에 REPEATABLE READ 격리 수준에서도 팬텀리드가 발생하지 않는다.  
 - 오라클은 주로 `READ COMMITED` 수준을 많이 사용한다.
 - MySQL은 주로 `REPEATABLE READ`를 주로 사용한다.
+
+### 1) READ UNCOMMITTED
+READ UNCOMMITTED 격리 수준에서는 각 트랜잭션에서의 변경 내용이 COMMIT이나 ROLLBACK 여부에 상관없이 다른 트랜잭션에서 보인다.
+
+![img_1.png](img_1.png)
+
+> 1. A가 emp_no가 500000이고 first_name이 "Lara"인 새로운 사원을 Insert한다.
+> 2. 사용자 B가 변경된 내용을 커밋 하기도 전에 B는 emp_no=500000인 사원을 검색하고 있다.
+> 3. 하지만 B는 A가 INSERT한 사원의 정보를 커밋되지 않은 상태에서도 조회할 수 있다.
+> 4. 문제는 사용자 A가 처리 도중 알 수 없는 문제가 발생해 INSERT된 내용을 롤백한다고 하더라도 여전히 B는 "Lara"가 정상적인 사원이라고 생각하고 계속 처리할 것이다.
+
+이처럼 어떤 트랜잭션에서 처리한 작업이 완료되지 않았는데도 다른 트랜잭션에서 볼 수 있는 현상을 **더티 리드(Dirty Read)**라고 한다.<br>
+더티 리드가 허용되는 격리 수준이 READ UN-COMMITTED다.<br>
+그래서 MySQL을 사용한다면 최소한 READ-COMMITED 이상의 격리 수준을 사용할 것을 권장한다.
+
+### 2) READ COMMITTED
+온라인 서비스에서 가장 많이 선택되는 격리 수준이다.<br>
+이 레벨에서는 위에서 언급한 더티 리드 같은 현생은 발생하지 않는다.<br>
+어떤 트랜잭션에서 데이터를 변경했더라도 `COMMIT`이 완료된 데이터만 다른 트랜잭션에서 조회할 수 있기 때문이다.
+![img_2.png](img_2.png)
