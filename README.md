@@ -1,7 +1,6 @@
 # 💾 Archiving
 
-[![Blog](https://img.shields.io/badge/Blog-Be_Water,_My_Friend-blue.svg)](https://hongseob.tistory.com) [![ㅁㄴㅇㄹ](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fhongxeob%2FArchiving&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
+[![Blog](https://img.shields.io/badge/Blog-Be_Water,_My_Friend-blue.svg)](https://hongseob.tistory.com) 
 ## Issues & Idea
 - [JPA 사용시 update 후 save 호출?](https://github.com/hongxeob/Archiving/blob/main/Issues/JPA%20%EC%82%AC%EC%9A%A9%EC%8B%9C%20update%20%ED%9B%84%20save%20%ED%98%B8%EC%B6%9C%3F.md)
 - [비동기 사용시 왜 한 트랜잭션에서 적용이 안될까?](https://github.com/hongxeob/Archiving/blob/main/Issues/%EB%B9%84%EB%8F%99%EA%B8%B0%20%EC%82%AC%EC%9A%A9%EC%8B%9C%20%EC%99%9C%20%ED%95%9C%20%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EC%97%90%EC%84%9C%20%EC%A0%81%EC%9A%A9%EC%9D%B4%20%EC%95%88%EB%90%A0%EA%B9%8C%3F.md)
