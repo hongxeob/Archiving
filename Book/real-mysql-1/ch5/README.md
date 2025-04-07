@@ -250,4 +250,4 @@ InnoDB 스토리지 엔진은 트랜잭션이 RollBack 될 가능성에 대비�
 > **즉 한 트랜잭션에서 읽고 쓰는 레코드를 다른 트랜잭션에서 절대 접근할 수 없는 것!**
 
 위 때문에 SERIALIZABLE 격리 수준에서는 **팬텀 리드**가 일어나지 않는다.<br>
-하지만 R**EPEATABLE READ 에서** **갭 락과 넥스트 키 락** 덕분에 REPEATABLE READ 격리 수준에서도 팬텀 리드가 발생하지 않는다.<br>
+하지만 **REPEATABLE READ 에서** **갭 락과 넥스트 키 락** 덕분에 REPEATABLE READ 격리 수준에서도 팬텀 리드가 발생하지 않는다.<br>
