@@ -168,7 +168,7 @@ MySQL에서는 자동 증가하는 숫자값을 추출(채번)하기 위해 `AUT
 
 ## 5.4 MySQL의 격리 수준
 
-![img.png](img.png)
+![img.png](img/img.png)
 > 격리 수준이 높아질수록 MySQL 서버의 처리 성능이 많이 떨어질 것으로 생각하는데, 사실 `SERIALIZABLE` 격리 수준이 아니라면 크게 성능의 개선이나 저하는 발생하지 않는다.
 
 - `REPEATABLE READ` 격리 수준에서는 팬텀 리드가 발생할 수 있지만, InnoDB에서는 독특한 특성 때문에 REPEATABLE READ 격리 수준에서도 팬텀리드가 발생하지 않는다.
@@ -179,7 +179,7 @@ MySQL에서는 자동 증가하는 숫자값을 추출(채번)하기 위해 `AUT
 
 READ UNCOMMITTED 격리 수준에서는 각 트랜잭션에서의 변경 내용이 COMMIT이나 ROLLBACK 여부에 상관없이 다른 트랜잭션에서 보인다.
 
-![img_1.png](img_1.png)
+![img_1.png](img/img_1.png)
 
 > 1. A가 emp_no가 500000이고 first_name이 "Lara"인 새로운 사원을 Insert한다.
 > 2. 사용자 B가 변경된 내용을 커밋 하기도 전에 B는 emp_no=500000인 사원을 검색하고 있다.
@@ -196,7 +196,7 @@ READ UNCOMMITTED 격리 수준에서는 각 트랜잭션에서의 변경 내용�
 이 레벨에서는 위에서 언급한 더티 리드 같은 현생은 발생하지 않는다.<br>
 어떤 트랜잭션에서 데이터를 변경했더라도 `COMMIT`이 완료된 데이터만 다른 트랜잭션에서 조회할 수 있기 때문이다.
 
-![img_2.png](img_2.png)
+![img_2.png](img/img_2.png)
 
 > 1. A 는 emp_no=500000인 사원의 first_name을 "Lara" 에서 "Toto" 로 변경했다.
 > 2. 이때 새로운 값인 "Toto" 는 employees 테이블에 즉시 기록되고 이전 값인 "Lara" 는 언두 영역으로 백업된다.
@@ -226,7 +226,7 @@ InnoDB 스토리지 엔진은 트랜잭션이 RollBack 될 가능성에 대비�
 모든 InnoDB의 트랜잭션은 고유한 트랜잭션 번호(순차적으로 증가하는 값)를 가지며, 언두 영역에 백업된 모든 레코드에는 변경을 발생시킨 트랜잭션의 번호가 포함돼 있다.<br>
 그리고 언두 영역의 백업된 데이터는 InnoDB 스토리지 엔진이 불필요하다고 판단하는 시점에 주기적으로 삭제한다.<br>
 
-![img_3.png](img_3.png)
+![img_3.png](img/img_3.png)
 > 사용자 A의 트랜잭션 번호는 12 였으며 사용자 B의 트랜잭션의 번호는 10이었다.
 > 1. 이때 사용자 A는 사원의 이름을 "Toto"로 변경하고 커밋을 수행했다.
 > 2. 그런데 A 트랜잭션이 변경을 수행하고 커밋을 했지만, 사용자 B가 emp_no=500000인 사원을 A트랜잭션의 변경 전후 각각 한 번씩 SELECT 했는데 결과는 항상 "Tara"라는값을 가져온다.
@@ -235,7 +235,7 @@ InnoDB 스토리지 엔진은 트랜잭션이 RollBack 될 가능성에 대비�
 
 #### 팬텀 리드 발생
 
-![img_4.png](img_4.png)
+![img_4.png](img/img_4.png)
 
 - `SELECT•·· FOR UPDATE` 쿼리는 SELECT 하는 레코드에 쓰기 잠금을 걸어야 하는데, 언두 레코드에는 잠금을 걸 수 없다.
 - 그래서 `SELECT•·· FOR UPDATE`나 `SELECT ... LOCK IN SHARE MODE` 로 조회되는 레코드는 **언두 영역의 변경 전 데이터를 가져오는 것이 아니라 현재 레코드의 값을
