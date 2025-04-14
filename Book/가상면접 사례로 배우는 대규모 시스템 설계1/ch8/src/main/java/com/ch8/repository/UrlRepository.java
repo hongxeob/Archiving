@@ -1,9 +1,10 @@
 package com.ch8.repository;
 
 import com.ch8.model.UrlMapping;
+import org.springframework.stereotype.Repository;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class UrlRepository {
@@ -32,5 +33,35 @@ public class UrlRepository {
         idToUrlMap.put(urlMapping.id(), urlMapping);
         shortToUrlMap.put(urlMapping.shortUrl(), urlMapping);
         longToUrlMap.put(urlMapping.originalUrl(), urlMapping);
+    }
+
+    /**
+     * ID로 url 조회
+     *
+     * @param id 조회할 ID
+     * @return
+     */
+    public UrlMapping findById(Long id) {
+        return idToUrlMap.get(id);
+    }
+
+    /**
+     * 단축 URL로 url 조회
+     *
+     * @param shortUrl 조회할 단축 URL
+     * @return
+     */
+    public UrlMapping findByShortUrl(String shortUrl) {
+        return shortToUrlMap.get(shortUrl);
+    }
+
+    /**
+     * 원본 URL로 url 조회
+     *
+     * @param longUrl 조회할 원본 URL
+     * @return
+     */
+    public UrlMapping findByLongUrl(String longUrl) {
+        return longToUrlMap.get(longUrl);
     }
 }
