@@ -2,6 +2,7 @@ package com.ch8.service;
 
 import com.ch8.model.UrlMapping;
 import com.ch8.repository.UrlRepository;
+import com.ch8.util.Base62Encode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequiredArgsConstructor
 public class UrlShortenerService {
     private final UrlRepository urlRepository;
+    private final Base62Encode base62Encode;
 
     private final AtomicLong counter = new AtomicLong(1000);
 
