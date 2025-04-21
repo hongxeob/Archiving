@@ -30,7 +30,6 @@ public class UrlShortenerService {
         String shortUrl = base62Encode.encode(id);
 
         // URL 매핑 저장
-
         urlRepository.save(new UrlMapping(id, shortUrl, originUrl));
 
         return shortUrl;
