@@ -3,12 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	light := "red"
+	temp := 33
 
-	if light == "red" {
-		fmt.Println("It's red!")
+	if temp > 28 {
+		fmt.Println("에어컨을 키다")
+	} else if temp <= 3 {
+		fmt.Println("히터를 켠다")
 	} else {
-		fmt.Println("It's not red!")
+		fmt.Println("대기한다")
 	}
-
 }
