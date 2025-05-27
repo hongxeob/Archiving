@@ -2,14 +2,16 @@ package main
 
 import "fmt"
 
-func main() {
-	temp := 33
+var cnt int = 33
 
-	if temp > 28 {
-		fmt.Println("에어컨을 키다")
-	} else if temp <= 3 {
-		fmt.Println("히터를 켠다")
-	} else {
-		fmt.Println("대기한다")
+func IncreaseAndReturn() int {
+	fmt.Println("increaseAndReturn()", cnt)
+	cnt++
+	return cnt
+}
+
+func main() {
+	if false && IncreaseAndReturn() < 5 {
+		fmt.Println("1 increase")
 	}
 }
