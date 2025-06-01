@@ -1,0 +1,3 @@
+module baseball
+
+go 1.24.3
