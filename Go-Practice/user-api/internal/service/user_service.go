@@ -9,29 +9,29 @@ import (
 	"user-api/internal/repository"
 )
 
-type userService struct {
+type UserService struct {
 	userRepo repository.UserRepository
 	logger   *zap.Logger
 }
 
-func NewUserService(userRepo repository.UserRepository, logger *zap.Logger) *userService {
-	return &userService{
+func NewUserService(userRepo repository.UserRepository, logger *zap.Logger) *UserService {
+	return &UserService{
 		userRepo: userRepo,
 		logger:   logger,
 	}
 }
 
-func (s *userService) GetAllUsers(ctx context.Context) ([]domain.User, error) {
+func (s *UserService) GetAllUsers(ctx context.Context) ([]domain.User, error) {
 	s.logger.Info("GetAllUsers")
 	return s.userRepo.GetAll(ctx)
 }
 
-func (s *userService) GetUserById(ctx context.Context, id int) (*domain.User, error) {
+func (s *UserService) GetUserById(ctx context.Context, id int) (*domain.User, error) {
 	s.logger.Info("GetUserById", zap.Int("id", id))
 	return s.userRepo.GetByID(ctx, id)
 
 }
-func (s *userService) CreateUser(ctx context.Context, req domain.CreateUserRequest) (*domain.User, error) {
+func (s *UserService) CreateUser(ctx context.Context, req domain.CreateUserRequest) (*domain.User, error) {
 	s.logger.Info("service: creating user", zap.String("email", req.Email))
 
 	// 비즈니스 로직: 이메일 중복 확인
@@ -57,7 +57,7 @@ func (s *userService) CreateUser(ctx context.Context, req domain.CreateUserReque
 	return s.userRepo.Create(ctx, user)
 }
 
-func (s *userService) UpdateUser(ctx context.Context, id int, req domain.UpdateUserRequest) (*domain.User, error) {
+func (s *UserService) UpdateUser(ctx context.Context, id int, req domain.UpdateUserRequest) (*domain.User, error) {
 	s.logger.Info("service: updating user", zap.Int("id", id))
 
 	// 기존 사용자 조회
@@ -88,11 +88,11 @@ func (s *userService) UpdateUser(ctx context.Context, id int, req domain.UpdateU
 	return s.userRepo.Update(ctx, *user)
 }
 
-func (s *userService) DeleteUser(ctx context.Context, id int) error {
+func (s *UserService) DeleteUser(ctx context.Context, id int) error {
 	s.logger.Info("service: deleting user", zap.Int("id", id))
 	return s.userRepo.Delete(ctx, id)
 }
 
-func (s *userService) validateEmail(reqEmail *string, userEmail string) bool {
+func (s *UserService) validateEmail(reqEmail *string, userEmail string) bool {
 	return reqEmail != nil && *reqEmail != userEmail
 }
