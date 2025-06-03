@@ -1,4 +1,5 @@
 # sqlc.yaml - SQLC 설정 파일
+
 version: "2"
 sql:
   - engine: "mysql"
@@ -11,6 +12,7 @@ sql:
         sql_package: "database/sql"
         emit_json_tags: true
         emit_db_tags: true
+        # emit_prepared_queries : sqlc에게 준비된 명령문과 함께 작동하는 코드를 생성하도록 지시한다. 즉, 최적화 작업이므로 false설정하도록 한다.
         emit_prepared_queries: false
         emit_interface: true
         emit_exact_table_names: false
