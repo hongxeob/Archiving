@@ -1,8 +1,11 @@
 # sqlc.yaml - SQLC 설정 파일
-
+# name : 생성될 golang 파일의 패키지를 어떤 것으로 선택할 지 의미한다. 여러개가 있어도 된다.
+# path : 생성할 golang 코드 파일을 어디에 저장할 지 선택한다.
+# emit_json_tags : sqlc가 생성된 구조체에 json태그를 추가하고 싶을 때 true로 설정한다.
 version: "2"
 sql:
   - engine: "mysql"
+    # queries: sql 쿼리 파일을 찾을 위치를 sqlc에 알려주는 옵션
     queries: "./sql/queries/"
     schema: "./sql/migrations/"
     gen:
