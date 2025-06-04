@@ -7,6 +7,7 @@ sql:
   - engine: "mysql"
     # queries: sql 쿼리 파일을 찾을 위치를 sqlc에 알려주는 옵션
     queries: "./sql/queries/"
+    # schema: 데이터베이스 스키마 또는 마이그레이션 파일이 포함된 폴더를 가리킨다.
     schema: "./sql/migrations/"
     gen:
       go:
