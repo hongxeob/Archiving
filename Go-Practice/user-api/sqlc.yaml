@@ -1,7 +1,6 @@
 # sqlc.yaml - SQLC 설정 파일
 # name : 생성될 golang 파일의 패키지를 어떤 것으로 선택할 지 의미한다. 여러개가 있어도 된다.
 # path : 생성할 golang 코드 파일을 어디에 저장할 지 선택한다.
-# emit_json_tags : sqlc가 생성된 구조체에 json태그를 추가하고 싶을 때 true로 설정한다.
 version: "2"
 sql:
   - engine: "mysql"
@@ -14,6 +13,7 @@ sql:
         package: "db"
         out: "./internal/db"
         sql_package: "database/sql"
+        # emit_json_tags : sqlc가 생성된 구조체에 json태그를 추가하고 싶을 때 true로 설정한다.
         emit_json_tags: true
         emit_db_tags: true
         # emit_prepared_queries : sqlc에게 준비된 명령문과 함께 작동하는 코드를 생성하도록 지시한다. 즉, 최적화 작업이므로 false설정하도록 한다.
