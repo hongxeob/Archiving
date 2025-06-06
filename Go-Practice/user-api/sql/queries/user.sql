@@ -18,7 +18,8 @@ SELECT id, name, email, created_at, updated_at
 FROM users
 WHERE email = ?;
 
--- name: CreateUser :execresult
+-- name: CreateUser :exec
+-- :exec은 실행만하고 반환값은 없다는 의미이다.
 -- 사용자 생성 (MySQL의 LAST_INSERT_ID() 활용)
 INSERT INTO users (name, email)
 VALUES (?, ?);
