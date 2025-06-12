@@ -8,11 +8,11 @@ import (
 )
 
 type UserHandler struct {
-	usersService service.UserService
+	usersService *service.UserService
 	logger       *zap.Logger
 }
 
-func NewUserHandler(usersService service.UserService, logger *zap.Logger) *UserHandler {
+func NewUserHandler(usersService *service.UserService, logger *zap.Logger) *UserHandler {
 	return &UserHandler{
 		usersService: usersService,
 		logger:       logger,
