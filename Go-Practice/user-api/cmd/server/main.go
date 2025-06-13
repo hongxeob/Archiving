@@ -18,13 +18,13 @@ func main() {
 		//fx.Provide(db.NewPostgres()),
 		// 비즈니스 로직 모듈
 		fx.Provide(
-			repository.NewUserRepository(),
+			repository.NewUserRepository,
 			service.NewUserService,
 			handler.NewUserHandler,
 		),
 
 		// 서버 모듈
-		fx.Provide(server.Server{}),
+		fx.Provide(server.NewServer),
 		fx.Invoke(server.Run),
 	)
 
