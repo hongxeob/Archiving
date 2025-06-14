@@ -3,6 +3,7 @@ package main
 import (
 	"go.uber.org/fx"
 	"user-api/internal/config"
+	"user-api/internal/db"
 	"user-api/internal/handler"
 	"user-api/internal/repository"
 	"user-api/internal/server"
@@ -18,6 +19,7 @@ func main() {
 		//fx.Provide(db.NewPostgres()),
 		// 비즈니스 로직 모듈
 		fx.Provide(
+			db.New,
 			repository.NewUserRepository,
 			service.NewUserService,
 			handler.NewUserHandler,
