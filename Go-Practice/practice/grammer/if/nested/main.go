@@ -12,6 +12,8 @@ func GetFriendCount() int {
 
 func main() {
 	price := 600
+	var i *int = &price
+	fmt.Println("========", i)
 
 	if price > 700 {
 		if HasRichFriend() {

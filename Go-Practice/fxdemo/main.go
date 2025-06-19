@@ -26,15 +26,6 @@ func main() {
 			),
 			AsRoute(NewEchoHandler),
 			AsRoute(NewHelloHandler),
-			//fx.Annotate(
-			//	NewEchoHandler,
-			//	fx.As(new(Route)),
-			//	fx.ResultTags(`name:"echo"`),
-			//),
-			//fx.Annotate(
-			//	NewHelloHandler,
-			//	fx.As(new(Route)),
-			//	fx.ResultTags(`name:"hello"`)),
 			zap.NewExample,
 		),
 		// fx.Invoke()는 fx.New()에 전달된 함수를 실행하여 애플리케이션의 생명 주기 동안 특정 시점에 실행될 콜백 함수를 등록한다.
@@ -86,7 +77,6 @@ func (h *HelloHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "failed to write response", http.StatusInternalServerError)
 		return
 	}
-
 }
 
 // NewServeMux 는 EchoHandler를 사용하여 HTTP 요청을 처리하는 ServeMux를 생성한다.
