@@ -9,7 +9,12 @@ import (
 )
 
 func main() {
-	fx.New().Run()
+	fx.New(
+		// fx.Provide()는 fx.New()에 전달된 함수가 fx 애플리케이션의 의존성 주입 컨테이너에 제공될 수 있도록 한다.
+		fx.Provide(NewHTTPServer),
+		// fx.Invoke()는 fx.New()에 전달된 함수를 실행하여 애플리케이션의 생명 주기 동안 특정 시점에 실행될 콜백 함수를 등록한다.
+		fx.Invoke(func(s *http.Server) {}),
+	).Run()
 }
 
 // NewHTTPServer Lifecycle interface: 앱의 생명 주기 동안 특정 시점에 실행될 콜백 함수를 등록하도록 하는 인터페이스 (서버 시작과 종료, 리소스 초기화, 해제)
