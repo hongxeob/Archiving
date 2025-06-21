@@ -4,7 +4,8 @@ import "fmt"
 
 func main() {
 	v := 1024
-	fmt.Println(v, &v)
+	p := &v
+	fmt.Println(v, &v, *p)
 
 	callByValue(v)
 	fmt.Println(v, &v)
