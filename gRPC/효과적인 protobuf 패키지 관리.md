@@ -1,5 +1,6 @@
 # MSA + gRPC 환경에서 효과적인 protobuf 스킴 관리
 
+## 역할 -> 도메인 기반
 ```shell
 DDD
 root/proto/
@@ -65,7 +66,7 @@ root/proto/
 
 ---
 
-# Root Proto Package Structure
+# 플랫한 DDD 형태의 구조
 
 ## 📁 디렉토리 구조
 
@@ -103,11 +104,11 @@ root/proto/
 ## 📋 패키지 네이밍 규칙
 
 ### gRPC Service 패키지명
-- **형식**: `order-api.root.in/order.v1.OrderService/MethodName`
+- **형식**: `order-api.root.com/order.v1.OrderService/MethodName`
 - **예시**:
-    - `order-api.root.in/order.v1.OrderService/GetOrderList`
-    - `payment-api.root.in/payment.v1.PaymentService/ProcessPayment`
-    - `product-api.root.in/product.v1.ProductService/GetProductDetail`
+    - `order-api.root.com/order.v1.OrderService/GetOrderList`
+    - `payment-api.root.com/payment.v1.PaymentService/ProcessPayment`
+    - `product-api.root.com/product.v1.ProductService/GetProductDetail`
 
 ### Proto 패키지 선언
 ```protobuf
@@ -118,7 +119,7 @@ option go_package = "root/gen/go/order/v1;orderv1";
 
 ## 🏗️ 파일별 역할
 
-### 1. `status.proto` - 공통 상태 정의
+### 1. `status.proto` - 공통 상태 정의 (Optional)
 ```protobuf
 syntax = "proto3";
 package root;
@@ -398,17 +399,6 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
 ```
 
-### VS Code 확장
-- **vscode-proto3**: Proto 파일 구문 하이라이트
-- **Buf**: Proto 파일 린팅 및 포맷팅
-
-## 📞 문의 및 지원
-- **Proto 구조 관련**: Backend Team Lead
-- **코드 생성 이슈**: DevOps Team
-- **API 설계 가이드**: Architecture Team
-
----
-*이 문서는 Root Proto 패키지 구조 v1.0 기준으로 작성되었습니다.*
 
 ## 장점
 - 명확한 도메인 분리: 각 도메인이 독립적으로 관리됨
