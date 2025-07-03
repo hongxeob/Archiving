@@ -24,6 +24,7 @@
 
 ## gRPC
 - [여러 protobuf 패키지(스킴) 관리법](https://github.com/hongxeob/Archiving/blob/main/gRPC/%ED%9A%A8%EA%B3%BC%EC%A0%81%EC%9D%B8%20protobuf%20%ED%8C%A8%ED%82%A4%EC%A7%80%20%EA%B4%80%EB%A6%AC.md)
+- [gRPC 공통 메타데이터로 뭐가 좋을까?](https://github.com/hongxeob/Archiving/blob/main/gRPC/gRPC%20%EA%B3%B5%ED%86%B5%20metadata.md)
 
 ## Kafka
 - [컨슈머 그룹 설계 및 문제점](https://github.com/hongxeob/Archiving/blob/main/Kafka/%EC%BB%A8%EC%8A%88%EB%A8%B8%20%EA%B7%B8%EB%A3%B9%20%EC%84%A4%EA%B3%84%20%EB%B0%8F%20%EB%AC%B8%EC%A0%9C%EC%A0%90.md)
