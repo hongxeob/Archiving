@@ -4,7 +4,9 @@ go 1.24
 
 require (
 	github.com/confluentinc/confluent-kafka-go/v2 v2.0.2
+	github.com/gojekfarm/xrun v0.4.0
 	github.com/gojekfarm/xtools/xkafka v0.10.0
+	github.com/gojekfarm/xtools/xkafka/middleware/zerolog v0.10.0
 	github.com/rs/xid v1.6.0
 	github.com/rs/zerolog v1.34.0
 	github.com/urfave/cli/v2 v2.27.7
