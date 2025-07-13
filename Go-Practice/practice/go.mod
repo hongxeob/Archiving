@@ -10,6 +10,7 @@ require (
 	github.com/rs/xid v1.6.0
 	github.com/rs/zerolog v1.34.0
 	github.com/urfave/cli/v2 v2.27.7
+	golang.org/x/exp v0.0.0-20190121172915-509febef88a4
 )
 
 require (
