@@ -3,12 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
-	"go.uber.org/fx"
-	"go.uber.org/fx/fxevent"
-	"go.uber.org/zap"
 	"io"
 	"net"
 	"net/http"
+
+	"go.uber.org/fx"
+	"go.uber.org/fx/fxevent"
+	"go.uber.org/zap"
 )
 
 func main() {
@@ -81,6 +82,7 @@ func (h *HelloHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // NewServeMux 는 EchoHandler를 사용하여 HTTP 요청을 처리하는 ServeMux를 생성한다.
 // ServeMux는 HTTP 요청을 여러 핸들러로 라우팅하는 데 사용되는 멀티플렉서이다.
+// todo : mux 학습
 func NewServeMux(routes []Route) *http.ServeMux {
 	mux := http.NewServeMux()
 	// HandleFunc()는 HTTP 요청을 처리할 핸들러를 등록한다.
