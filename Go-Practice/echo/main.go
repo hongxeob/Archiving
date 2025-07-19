@@ -3,8 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	gnet "github.com/panjf2000/gnet/v2"
 	"log"
+
+	"github.com/panjf2000/gnet/v2"
 )
 
 type echoServer struct {
