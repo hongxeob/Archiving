@@ -10,7 +10,7 @@ import (
 func publishMessages(messages []*xkafka.Message) {
 	producer, err := xkafka.NewProducer(
 		"test-seq-producer",
-		xkafka.Brokers{brokers},
+		xkafka.Brokers{"localhost:9200"},
 		xkafka.ErrorHandler(func(err error) error {
 			log.Error().Err(err).Msg("")
 			return err

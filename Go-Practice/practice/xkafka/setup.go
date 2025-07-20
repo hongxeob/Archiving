@@ -10,7 +10,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-var brokers = []string{"localhost:9092"}
+var Brokers = []string{"localhost:9092"}
 
 func createTopic(partitions int) string {
 	name := "xkafka-" + xid.New().String()
