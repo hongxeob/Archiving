@@ -1,4 +1,4 @@
-# Go Connect (Connect-Go): 차세대 RPC 프레임워크 완벽 가이드
+# Go Connect (Connect-Go)
 
 ## 🚀 Connect-Go란?
 
