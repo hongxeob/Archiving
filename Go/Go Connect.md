@@ -57,16 +57,16 @@ package greet.v1;
 
 option go_package = "connect-example/gen/greet/v1;greetv1";
 
-message GreetRequest {
+message HelloRequest {
   string name = 1;
 }
 
-message GreetResponse {
+message HelloResponse {
   string greeting = 1;
 }
 
-service GreetService {
-  rpc Greet(GreetRequest) returns (GreetResponse) {}
+service HelloService {
+  rpc Hello(HelloRequest) returns (HelloResponse) {}
 }
 ```
 
@@ -85,16 +85,16 @@ import (
 )
 
 // 서비스 구현
-type GreetServer struct{}
+type HelloServer struct{}
 
-func (s *GreetServer) Greet(
+func (s *HelloServer) Hello(
     ctx context.Context,
-    req *connect.Request[greetv1.GreetRequest],
-) (*connect.Response[greetv1.GreetResponse], error) {
+    req *connect.Request[greetv1.HelloRequest],
+) (*connect.Response[greetv1.HelloResponse], error) {
     log.Printf("Request headers: %v", req.Header())
     
-    res := connect.NewResponse(&greetv1.GreetResponse{
-        Greeting: "Hello, " + req.Msg.Name + "!",
+    res := connect.NewResponse(&greetv1.HelloResponse{
+        Hello: "Hello, " + req.Msg.Name + "!",
     })
     res.Header().Set("Greet-Version", "v1")
     
@@ -102,11 +102,11 @@ func (s *GreetServer) Greet(
 }
 
 func main() {
-    greeter := &GreetServer{}
+    greeter := &HelloServer{}
     mux := http.NewServeMux()
     
     // Connect 핸들러 등록
-    path, handler := greetv1connect.NewGreetServiceHandler(greeter)
+    path, handler := greetv1connect.NewHelloServiceHandler(greeter)
     mux.Handle(path, handler)
     
     log.Println("Server listening on :8080")
@@ -129,22 +129,22 @@ import (
 )
 
 func main() {
-    client := greetv1connect.NewGreetServiceClient(
+    client := greetv1connect.NewHelloServiceClient(
         http.DefaultClient,
         "http://localhost:8080",
     )
     
-    req := connect.NewRequest(&greetv1.GreetRequest{
+    req := connect.NewRequest(&greetv1.HelloRequest{
         Name: "Connect-Go",
     })
     req.Header().Set("User-Agent", "connect-go-client")
     
-    res, err := client.Greet(context.Background(), req)
+    res, err := client.Hello(context.Background(), req)
     if err != nil {
         log.Fatalf("request failed: %v", err)
     }
     
-    log.Printf("Response: %s", res.Msg.Greeting)
+    log.Printf("Response: %s", res.Msg.Helloing)
     log.Printf("Response headers: %v", res.Header())
 }
 ```
@@ -164,7 +164,7 @@ func loggingInterceptor() connect.UnaryInterceptorFunc {
 }
 
 // 서버에 인터셉터 적용
-path, handler := greetv1connect.NewGreetServiceHandler(
+path, handler := greetv1connect.NewHelloServiceHandler(
     greeter,
     connect.WithInterceptors(loggingInterceptor()),
 )
@@ -172,9 +172,9 @@ path, handler := greetv1connect.NewGreetServiceHandler(
 
 ### 2. 스트리밍 지원
 ```go
-func (s *GreetServer) StreamGreet(
+func (s *HelloServer) StreamHello(
     ctx context.Context,
-    stream *connect.BidiStream[greetv1.GreetRequest, greetv1.GreetResponse],
+    stream *connect.BidiStream[greetv1.HelloRequest, greetv1.HelloResponse],
 ) error {
     for {
         req, err := stream.Receive()
@@ -182,8 +182,8 @@ func (s *GreetServer) StreamGreet(
             return err
         }
         
-        res := &greetv1.GreetResponse{
-            Greeting: "Hello, " + req.Name + "!",
+        res := &greetv1.HelloResponse{
+            Helloing: "Hello, " + req.Name + "!",
         }
         
         if err := stream.Send(res); err != nil {
@@ -196,14 +196,14 @@ func (s *GreetServer) StreamGreet(
 ### 3. 프로토콜 선택
 ```go
 // gRPC 프로토콜 사용
-client := greetv1connect.NewGreetServiceClient(
+client := greetv1connect.NewHelloServiceClient(
     http.DefaultClient,
     "http://localhost:8080",
     connect.WithGRPC(), // gRPC 프로토콜 사용
 )
 
 // gRPC-Web 프로토콜 사용
-client := greetv1connect.NewGreetServiceClient(
+client := greetv1connect.NewHelloServiceClient(
     http.DefaultClient,
     "http://localhost:8080",
     connect.WithGRPCWeb(), // gRPC-Web 프로토콜 사용
@@ -224,7 +224,7 @@ func main() {
     mux := http.NewServeMux()
     
     // 여러 서비스를 쉽게 등록
-    registerGreetService(mux)
+    registerHelloService(mux)
     registerUserService(mux)
     registerNotificationService(mux)
     
@@ -240,27 +240,27 @@ func main() {
 
 ### 3. 테스트 친화적 설계
 ```go
-func TestGreetService(t *testing.T) {
+func TestHelloService(t *testing.T) {
     // 메모리 내 서버 생성
     mux := http.NewServeMux()
-    path, handler := greetv1connect.NewGreetServiceHandler(&GreetServer{})
+    path, handler := greetv1connect.NewHelloServiceHandler(&HelloServer{})
     mux.Handle(path, handler)
     
     server := httptest.NewServer(mux)
     defer server.Close()
     
     // 테스트 클라이언트 생성
-    client := greetv1connect.NewGreetServiceClient(
+    client := greetv1connect.NewHelloServiceClient(
         server.Client(),
         server.URL,
     )
     
     // 테스트 실행
-    req := connect.NewRequest(&greetv1.GreetRequest{Name: "Test"})
-    res, err := client.Greet(context.Background(), req)
+    req := connect.NewRequest(&greetv1.HelloRequest{Name: "Test"})
+    res, err := client.Hello(context.Background(), req)
     
     assert.NoError(t, err)
-    assert.Equal(t, "Hello, Test!", res.Msg.Greeting)
+    assert.Equal(t, "Hello, Test!", res.Msg.Helloing)
 }
 ```
 
@@ -276,7 +276,7 @@ func TestGreetService(t *testing.T) {
 ### 2. 디버깅 및 모니터링
 ```bash
 # Connect Protocol은 표준 HTTP 도구 사용 가능
-curl -X POST http://localhost:8080/greet.v1.GreetService/Greet \
+curl -X POST http://localhost:8080/greet.v1.HelloService/Hello \
   -H "Content-Type: application/json" \
   -d '{"name": "Debug"}' | jq
 ```
