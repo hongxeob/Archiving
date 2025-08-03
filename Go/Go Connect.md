@@ -71,81 +71,85 @@ service GreetService {
 ```
 
 ### 3. 서버 구현
+
 ```go
 package main
 
 import (
-    "context"
-    "log"
-    "net/http"
-    
-    "connectrpc.com/connect"
-    greetv1 "connect-example/gen/greet/v1"
-    "connect-example/gen/greet/v1/greetv1connect"
+	"context"
+	"log"
+	"net/http"
+
+	greetv1 "connect-example/gen/greet/v1"
+	"connect-example/gen/greet/v1/greetv1connect"
+
+	"connectrpc.com/connect"
 )
 
 // 서비스 구현
 type GreetServer struct{}
 
 func (s *GreetServer) Greet(
-    ctx context.Context,
-    req *connect.Request[greetv1.GreetRequest],
+	ctx context.Context,
+	req *connect.Request[greetv1.GreetRequest],
 ) (*connect.Response[greetv1.GreetResponse], error) {
-    log.Printf("Request headers: %v", req.Header())
-    
-    res := connect.NewResponse(&greetv1.GreetResponse{
-        Greeting: "Hello, " + req.Msg.Name + "!",
-    })
-    res.Header().Set("Greet-Version", "v1")
-    
-    return res, nil
+	log.Printf("Request headers: %v", req.Header())
+
+	res := connect.NewResponse(&greetv1.GreetResponse{
+		Greeting: "Hello, " + req.Msg.Name + "!",
+	})
+	res.Header().Set("Greet-Version", "v1")
+
+	return res, nil
 }
 
 func main() {
-    greeter := &GreetServer{}
-    mux := http.NewServeMux()
-    
-    // Connect 핸들러 등록
-    path, handler := greetv1connect.NewGreetServiceHandler(greeter)
-    mux.Handle(path, handler)
-    
-    log.Println("Server listening on :8080")
-    http.ListenAndServe(":8080", mux)
+	greeter := &GreetServer{}
+	mux := http.NewServeMux()
+
+	// Connect 핸들러 등록
+	path, handler := greetv1connect.NewGreetServiceHandler(greeter)
+	mux.Handle(path, handler)
+
+	log.Println("Server listening on :8080")
+	http.ListenAndServe(":8080", mux)
 }
 ```
 
 ### 4. 클라이언트 구현
+
 ```go
 package main
 
 import (
-    "context"
-    "log"
-    "net/http"
-    
-    "connectrpc.com/connect"
-    greetv1 "connect-example/gen/greet/v1"
-    "connect-example/gen/greet/v1/greetv1connect"
+	"context"
+	"log"
+	"net/http"
+
+	greetv1 "connect-example/gen/greet/v1"
+	"connect-example/gen/greet/v1/greetv1connect"
+
+	"connectrpc.com/connect"
 )
 
 func main() {
-    client := greetv1connect.NewGreetServiceClient(
-        http.DefaultClient,
-        "http://localhost:8080",
-    )
-    
-    req := connect.NewRequest(&greetv1.GreetRequest{
-        Name: "Connect-Go",
-    })
-    req.Header().Set("User-Agent", "connect-go-client")
-    
-    res, err := client.Greet(context.Background(), req)
-    if err != nil {
-        log.Fatalf("request failed: %v", err)
-    }
-    
-    log.Printf("Response: %s", res.Msg.Greeting)
-    log.Printf("Response headers: %v", res.Header())
+	client := greetv1connect.NewGreetServiceClient(
+		http.DefaultClient,
+		"http://localhost:8080",
+	)
+
+	req := connect.NewRequest(&greetv1.GreetRequest{
+		Name: "Connect-Go",
+	})
+	req.Header().Set("User-Agent", "connect-go-client")
+
+	res, err := client.Greet(context.Background(), req)
+	if err != nil {
+		log.Fatalf("request failed: %v", err)
+	}
+
+	log.Printf("Response: %s", res.Msg.Greeting)
+	log.Printf("Response headers: %v", res.Header())
 }
 ```
 
