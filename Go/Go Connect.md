@@ -1,6 +1,6 @@
 # Go Connect (Connect-Go)
 
-## 🚀 Connect-Go란?
+## 🚀 Connect-Go란
 
 Connect-Go는 Buf에서 개발한 혁신적인 RPC 프레임워크로, **Protocol Buffers와 Go 표준 라이브러리 `net/http`를 기반**으로 합니다. gRPC의 복잡성을 대폭 줄이면서도 완벽한 호환성을 유지하는 것이 핵심 철학입니다.
 
