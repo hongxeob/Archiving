@@ -33,7 +33,10 @@ func (h *UserHandler) respondWithJSON(w http.ResponseWriter, code int, payload i
 	response, _ := json.Marshal(payload)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(code)
-	w.Write(response)
+	write, err := w.Write(response)
+	if err != nil {
+		return write
+	}
 }
 
 func (h *UserHandler) respondWithError(w http.ResponseWriter, code int, message string, err error) {
