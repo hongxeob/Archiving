@@ -268,35 +268,6 @@ func registerHooks(
 	})
 }
 
-// 미들웨어 함수들
-
-// loggingMiddleware는 HTTP 요청을 로깅
-// Spring Boot의 logging.level.web과 유사한 기능
-//func loggingMiddleware(logger *zap.Logger) mux.MiddlewareFunc {
-//	return func(next http.Handler) http.Handler {
-//		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-//			start := time.Now()
-//
-//			// 응답 래퍼로 상태 코드 캡처
-//			wrapped := &http.ResponseWriter{ResponseWriter: w, statusCode: http.StatusOK}
-//
-//			next.ServeHTTP(wrapped, r)
-//
-//			duration := time.Since(start)
-//
-//			logger.Info("HTTP request",
-//				zap.String("method", r.Method),
-//				zap.String("path", r.URL.Path),
-//				zap.String("query", r.URL.RawQuery),
-//				zap.Int("status", wrapped.statusCode),
-//				zap.Duration("duration", duration),
-//				zap.String("user_agent", r.UserAgent()),
-//				zap.String("remote_addr", r.RemoteAddr),
-//			)
-//		})
-//	}
-//}
-
 // corsMiddleware는 CORS 헤더를 설정
 // Spring Boot의 @CrossOrigin과 유사한 기능
 func corsMiddleware(next http.Handler) http.Handler {
