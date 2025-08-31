@@ -5,7 +5,7 @@
 -- Go의 타입 시스템 고려: BIGSERIAL은 int64, SERIAL은 int32로 매핑됨
 CREATE TABLE IF NOT EXISTS posts
 (
-    id         BIGSERIAL PRIMARY KEY,
+    id         BIGSERIAL PRIMARY KEY, -- int64로 매핑 (대용량 데이터 고려)
     title      VARCHAR(255) NOT NULL,
     content    TEXT,
     author     VARCHAR(100) NOT NULL,
@@ -29,10 +29,7 @@ CREATE INDEX IF NOT EXISTS idx_posts_created_at ON posts (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_comments_post_id ON comments (post_id);
 
 -- 트리거 함수: updated_at 자동 업데이트
-CREATE
-OR
-REPLACE
-FUNCTION update_updated_at_column()
+CREATE OR REPLACE FUNCTION update_updated_at_column()
     RETURNS TRIGGER AS
 $$
 BEGIN
@@ -46,7 +43,7 @@ CREATE TRIGGER update_posts_updated_at
     BEFORE UPDATE
     ON posts
     FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
+EXECUTE FUNCTION update_updated_at_column();
 
 -- 샘플 데이터 삽입
 INSERT INTO posts (title, content, author)
