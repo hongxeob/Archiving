@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS posts
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- 댓글 테이블 (추후 확장용)
+-- 댓글 테이블
 CREATE TABLE IF NOT EXISTS comments
 (
     id         SERIAL PRIMARY KEY,
@@ -29,7 +29,10 @@ CREATE INDEX IF NOT EXISTS idx_posts_created_at ON posts (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_comments_post_id ON comments (post_id);
 
 -- 트리거 함수: updated_at 자동 업데이트
-CREATE OR REPLACE FUNCTION update_updated_at_column()
+CREATE
+OR
+REPLACE
+FUNCTION update_updated_at_column()
     RETURNS TRIGGER AS
 $$
 BEGIN
@@ -43,7 +46,7 @@ CREATE TRIGGER update_posts_updated_at
     BEFORE UPDATE
     ON posts
     FOR EACH ROW
-EXECUTE FUNCTION update_updated_at_column();
+    EXECUTE FUNCTION update_updated_at_column();
 
 -- 샘플 데이터 삽입
 INSERT INTO posts (title, content, author)
