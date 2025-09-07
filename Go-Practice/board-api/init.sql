@@ -28,26 +28,6 @@ CREATE TABLE IF NOT EXISTS comments
 CREATE INDEX IF NOT EXISTS idx_posts_created_at ON posts (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_comments_post_id ON comments (post_id);
 
--- 트리거 함수: updated_at 자동 업데이트
-CREATE
-OR
-REPLACE
-FUNCTION update_updated_at_column()
-    RETURNS TRIGGER AS
-$$
-BEGIN
-    NEW.updated_at = CURRENT_TIMESTAMP;
-    RETURN NEW;
-END;
-$$ language 'plpgsql';
-
--- 트리거 생성
-CREATE TRIGGER update_posts_updated_at
-    BEFORE UPDATE
-    ON posts
-    FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
-
 -- 샘플 데이터 삽입
 INSERT INTO posts (title, content, author)
 VALUES ('Go 언어 학습하기', 'Go 언어의 기본 개념과 특징을 알아봅시다.', 'gopher'),
