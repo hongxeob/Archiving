@@ -314,7 +314,3 @@ curl -X POST http://localhost:8080/greet.v1.GreetService/Greet \
 3. **분산 시스템 패턴**: 마이크로서비스 아키텍처 적용
 
 Connect-Go는 Go 언어의 철학을 완벽히 구현한 도구로, 복잡한 RPC 개발을 단순하고 명확하게 만들어줍니다. 기존 gRPC의 복잡성에 지치셨다면, Connect-Go를 통해 더 나은 개발 경험을 만나보세요!
-
----
-
-*"Simple, reliable, interoperable: Protobuf RPC that works."* - Connect-Go 공식 슬로건처럼, 단순함 속에서 진정한 가치를 발견하게 될 것입니다.
