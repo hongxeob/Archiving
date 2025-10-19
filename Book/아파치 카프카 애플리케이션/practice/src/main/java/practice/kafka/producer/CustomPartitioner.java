@@ -15,7 +15,7 @@ public class CustomPartitioner implements Partitioner {
         if (keyBytes == null) {
             throw new InvalidPartitionsException("Need Message Key");
         }
-        if (((String) key).equals("key")) {
+        if (((String) key).equals("hong")) {
             return 0;
         }
         List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
