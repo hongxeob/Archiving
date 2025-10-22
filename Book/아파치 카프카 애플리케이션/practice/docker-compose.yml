@@ -42,7 +42,7 @@ services:
       ZOOKEEPER_INIT_LIMIT: 5
       ZOOKEEPER_SYNC_LIMIT: 2
     ports:
-      - 2181:2181
+      - "2181:2181"
     networks:
       - data
 
