@@ -51,6 +51,3 @@ services:
       dockerfile: ./Dockerfile
     networks:
       - data
-
-networks:
-  data:
