@@ -195,7 +195,7 @@ public class CustomPartitioner implements Partitioner {
             throw new InvalidPartitionsException("Need Message Key");
         }
         // 특정 파티션 값으로 보내도록
-        if (((String) key).equals("hong")) {
+        if (((String) key).equals("key")) {
             return 0;
         }
         List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
