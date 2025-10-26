@@ -207,7 +207,7 @@ public class CustomPartitioner implements Partitioner {
 
     @Override
     public void close() {
-        /*  */
+        /*...  */
     }
 
     @Override
