@@ -212,7 +212,7 @@ public class CustomPartitioner implements Partitioner {
 
     @Override
     public void configure(Map<String, ?> map) {
-        /*  */
+        /* ..  */
     }
 }
 ```
