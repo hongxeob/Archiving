@@ -226,7 +226,6 @@ public class CustomPartitioner implements Partitioner {
 ```java
 ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC_NAME, messageValue);
 RecordMetadata metadata = producer.send(record).get();
-logger.
 
 info(metadata.toString());
 ```
